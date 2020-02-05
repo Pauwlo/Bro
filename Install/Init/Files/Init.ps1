@@ -182,9 +182,6 @@ if ($ShouldInstallTweaks) {
     reg import $TweaksFilePath 2>&1 | Out-Null
 }
 
-# Disable hybrid sleep
-powercfg -h off
-
 # Set user home folder icon
 $DesktopIniFile = @'
 [.ShellClassInfo]
