@@ -58,7 +58,7 @@ Open an Explorer Window (`Win`+`E`) then expand "This PC" in the sidebar.
 
 Rename the hard drives. If I have only one (called C:), I usually call it "Local Disk".
 
-If I have a SSD and HDD, I usually call them "SSD" and "HDD".
+If I have an SSD and HDD, I usually call them "SSD" and "HDD".
 
 ### Windows settings
 
@@ -110,7 +110,7 @@ Hide unwanted icons from the system tray (Bluetooth, or Intel Graphics for examp
 
 ### Windows Defender
 
-Enable **Tamper protection** if is has been disabled. I don't know which update is disabling it.
+Enable **Tamper protection** if it has been disabled. I don't know which update is disabling it.
 
 Dismiss account protection and OneDrive warnings, if any.
 
@@ -118,9 +118,9 @@ Disable notifications about recent activity and scan results.
 
 ### Certificates
 
-Install personnal/professionnal certificates, if any.
+Install personal/professional certificates, if any.
 
-Store location : **Local Machine**
+Store location: **Local Machine**
 
 Place all certificates in the following store: **Trusted Root Certification Authorities**
 
@@ -250,7 +250,7 @@ Save & Close, then close Notepad++.
 
 ### Office
 
-Don't install :
+Don't install:
 
 - OneNote
 - OneDrive
@@ -278,11 +278,11 @@ If Acrobat's icon in Start menu is broken (happens when ImageGlass is installed)
 
 ### HDD Folders
 
-If the SSD capacity is limited, create a `Programs` folder in `D:\` with icon: `C:\Windows\System32\shell32.dll,162`. Install future non-critic programs in this folder instead of regular `C:\Program Files\`.
+If the SSD capacity is limited, create a `Programs` folder in `D:\` with icon: `C:\Windows\System32\shell32.dll,162`. Install future non-critical programs in this folder instead of regular `C:\Program Files\`.
 
 If needed, create a `# Path Shortcuts` folder in `C:\Program Files\` (or `D:\Programs`), and add it to Path (System).
 
-If needed, create a `Games` folder in `D:\` with icon: `C:\Windows\System32\imageres.dll,177`. Install future non-critic games in this folder instead of regular `C:\Program Files\`.
+If needed, create a `Games` folder in `D:\` with icon: `C:\Windows\System32\imageres.dll,177`. Install future non-critical games in this folder instead of regular `C:\Program Files\`.
 
 ### Desktop
 
