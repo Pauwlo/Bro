@@ -305,6 +305,12 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Control Panel\Keyboard]
 "InitialKeyboardIndicators"="2"
 
+; Disable keyboard layout switch hotkeys
+[HKEY_CURRENT_USER\Keyboard Layout\Toggle]
+"Language Hotkey"="3"
+"Hotkey"="3"
+"Layout Hotkey"="3"
+
 ; Disable F1 Help
 [HKEY_CURRENT_USER\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32]
 @=""
@@ -328,5 +334,5 @@ Windows Registry Editor Version 5.00
 ;"Attributes"=dword:00000002
 
 ; Disable RDP Warning
-; [HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client]
-; "AuthenticationLevelOverride"=dword:00000000
+;[HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client]
+;"AuthenticationLevelOverride"=dword:00000000
