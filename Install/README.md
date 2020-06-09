@@ -192,7 +192,7 @@ For each file, right-click -> Properties -> Change... -> Select `7-Zip\7zFM.exe`
 
 Download the latest version of [mpv](https://sourceforge.net/projects/mpv-player-windows/files/latest/download).
 
-Extract the two files in a new `Progrma Files\mpv` folder.
+Extract the two files in a new `Program Files\mpv` folder.
 
 Run `updater.bat` as administrator.
 
