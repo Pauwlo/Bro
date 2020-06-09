@@ -28,9 +28,9 @@ Install Windows 10. Your computer will restart and show you the OOBE.
 
 Select region and keyboard layout(s).
 
-Make sure you're still offline, and create a local account. With a password, please!
+Make sure you stay offline (click on `I don't have internet` then `Continue with limited setup`), so you can create a local account. With a password, please!
 
-Use secret questions if you feel like needing them. I don't. I usually just type some long and random suite of letters and numbers.
+Use secret questions if you feel like needing them. I don't. I usually just type some long and random string of letters and numbers.
 
 Decline all "recommended" settings, such as activity history, Cortana, speech recognition, location, etc.
 
@@ -74,12 +74,6 @@ Disable automatic rules.
 
 Do not show what I can snap next to it.
 
-#### Accounts
-
-##### Sign-in options
-
-Do not reopen my apps after an update or restart.
-
 #### Personalization
 
 ##### Colors
@@ -118,7 +112,7 @@ Disable notifications about recent activity and scan results.
 
 ### Certificates
 
-Install personal/professional certificates, if any.
+Install self-signed certificates, if any.
 
 Store location: **Local Machine**
 
@@ -152,7 +146,7 @@ Search: Remove other **One-Click** search engines.
 
 Privacy: Use **Strict mode**, always **"Do Not Track"** and disable **Firefox Data Collection**.
 
-If using custom certificates, set `security.enterprise_roots.enabled` to `true`. *(Go to about:config)*
+If using self-signed certificates, set `security.enterprise_roots.enabled` to `true`. *(Go to about:config)*
 
 Install **uBlock Origin**. Allow it to run in Private Windows.
 
@@ -194,23 +188,19 @@ This script will create dummy files on your desktop so you can easily set 7-Zip 
 
 For each file, right-click -> Properties -> Change... -> Select `7-Zip\7zFM.exe` -> OK -> Delete.
 
-### MPC-HC
+### mpv
 
-Install [MPC-HC](https://mpc-hc.org/).
+Download the latest version of [mpv](https://sourceforge.net/projects/mpv-player-windows/files/latest/download).
 
-Don't create a desktop shortcut.
+Extract the two files in a new `Progrma Files\mpv` folder.
 
-Start MPC-HC.
+Run `updater.bat` as administrator.
 
-Allow automatic check for updates.
+Proceed with downloading for both mpv and youtube-dl.
 
-Open settings. (Press `O`)
+Go into the `installer` folder, and run `mpv-install.bat` as administrator.
 
-Go to **Player** > **Formats**, then click **Run as administrator**.
-
-Select all formats, then click OK twice and close MPC-HC.
-
-Set as default application for music and videos.
+Set mpv as default player for music and videos.
 
 ### ImageGlass
 
@@ -224,21 +214,9 @@ Close ImageGlass.
 
 Set as default application for pictures.
 
-### NVIDIA GeForce Experience
-
-*Only if you have a dedicated NVIDIA GPU.*
-
-Log into your NVIDIA account.
-
-Do not optimize games automatically.
-
-Ignore tour.
-
-Install latest drivers.
-
 ### Notepad++
 
-Download and install Notepad++.
+Download and install [Notepad++](https://notepad-plus-plus.org/downloads/).
 
 Don't install themes.
 
@@ -258,13 +236,13 @@ Don't install:
 - Skype Entreprise
 - Teams
 
-For an Office 365 installation, Teams might install automatically after next reboot. To prevent that, uninstall **Teams Machine-Wide Installer** from Windows Settings.
+During an Office 365 installation, Teams might install automatically after next reboot. To prevent that, uninstall **Teams Machine-Wide Installer** from Windows Settings.
 
 Set Outlook as default Email application, if needed.
 
 ### Adobe Acrobat Reader DC
 
-Download, install and start Acrobat Reader DC.
+Download, install and start [Acrobat Reader DC](https://get.adobe.com/reader).
 
 Set as default application for PDF files.
 
