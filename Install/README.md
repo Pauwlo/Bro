@@ -20,7 +20,7 @@ Brand | BIOS Setup / Booting options | Select Boot Media
 ----- | ---------------------------- | -----------------
 Asus  | Del                          | F8
 Dell  | F12                          | N/A
-MSI   | Del                          | N/A
+MSI   | Del                          | F11
 
 Format the drive you want to install Windows on. Remove recovery partitions if you know what you're doing.
 
