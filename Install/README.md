@@ -36,6 +36,8 @@ Decline all "recommended" settings, such as activity history, Cortana, speech re
 
 ## Run Init
 
+Close the Edge pop-up from the taskbar.
+
 Copy the Init script folder and its shortcut `Start Init.lnk` on a USB drive. The one you used to install Windows 10, for example.
 
 Insert the USB drive into the computer, then select "Open folder" when prompted.
@@ -81,8 +83,6 @@ Do not show what I can snap next to it.
 Set default Windows mode to Dark, if it was set to Light.
 
 ##### Start
-
-Do not show recently opened items in Jump Lists and Quick Access.
 
 Choose which folders appear on Start: Settings only.
 
