@@ -202,17 +202,17 @@ Go into the `installer` folder, and run `mpv-install.bat` as administrator.
 
 Set mpv as default player for music and videos.
 
-### ImageGlass
+### Photos
 
-Install [ImageGlass](https://imageglass.org/).
+Open Windows Photos app.
 
-Start ImageGlass, follow the First-Launch Configurations.
+Close the Sign in and introduction windows.
 
-Install **Windows 10 Dark HiDPI theme**.
+Remove the Pictures folder from sources.
 
-Close ImageGlass.
+Disable automatically generated albums.
 
-Set as default application for pictures.
+Don't show a notification when new albums are available.
 
 ### Notepad++
 

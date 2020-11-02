@@ -182,7 +182,6 @@ if ($ShouldUninstallUselessApps) {
         'Microsoft.Print3D',
         'Microsoft.SkypeApp',
         'Microsoft.Wallet',
-        'Microsoft.Windows.Photos',
         'Microsoft.WindowsFeedbackHub',
         'Microsoft.WindowsMaps',
         'Microsoft.Xbox.TCUI',
