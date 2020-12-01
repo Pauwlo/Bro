@@ -142,11 +142,13 @@ Delete default **Getting started** and **Mozilla Firefox** bookmarks.
 
 #### Options
 
+General: Don't recommend extensions or features as you browse.
+
 Home: Only keep **Web Search** on Firefox Home Content.
 
-Search: Remove other **One-Click** search engines.
+Search: Remove alternative search engines.
 
-Privacy: Use **Strict mode**, always **"Do Not Track"** and disable **Firefox Data Collection**.
+Privacy: Use **Strict mode**, always **"Do Not Track"**, hide **Top sites** in address bar and disable **Firefox Data Collection**.
 
 If using self-signed certificates, set `security.enterprise_roots.enabled` to `true`. *(Go to about:config)*
 
