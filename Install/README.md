@@ -104,11 +104,13 @@ Hide unwanted icons from the system tray (Bluetooth, or Intel Graphics for examp
 
 ### Windows Defender
 
-Enable **Tamper protection** if it has been disabled. I don't know which update is disabling it.
+Enable **Tamper protection** if it has been disabled. I don't know what is disabling it.
 
 Dismiss account protection and OneDrive warnings, if any.
 
 Disable notifications about recent activity and scan results.
+
+The hosts file will get flagged as *SettingsModifier:Win32/HostsFileHijack*. Allow it anyway, or Windows will erase it.
 
 ### Certificates
 
