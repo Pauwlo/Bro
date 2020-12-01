@@ -167,7 +167,8 @@ if ($ShouldUninstallUselessApps) {
     Write-Host 'Uninstalling useless apps...'
 
     $UselessApps = @(
-        'Microsoft.BingWeather',
+        'Microsoft.549981C3F5F10',
+        'Microsoft.Advertising.Xaml',
         'Microsoft.GetHelp',
         'Microsoft.Getstarted',
         'Microsoft.Messaging',
