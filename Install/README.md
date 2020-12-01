@@ -192,19 +192,13 @@ This script will create dummy files on your desktop so you can easily set 7-Zip 
 
 For each file, right-click -> Properties -> Change... -> Select `7-Zip\7zFM.exe` -> OK -> Delete.
 
-### mpv
+### VLC
 
-Download the latest version of [mpv](https://sourceforge.net/projects/mpv-player-windows/files/latest/download).
+Download, install and start [VLC](https://www.videolan.org/vlc/).
 
-Extract the two files in a new `Program Files\mpv` folder.
+Don't allow network access to metadata.
 
-Run `updater.bat` as administrator.
-
-Proceed with downloading for both mpv and youtube-dl.
-
-Go into the `installer` folder, and run `mpv-install.bat` as administrator.
-
-Set mpv as default player for music and videos.
+Never show media change popups.
 
 ### Photos
 
