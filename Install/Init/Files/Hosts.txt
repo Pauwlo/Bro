@@ -348,6 +348,7 @@
 0.0.0.0 wns.notify.windows.com.akadns.net
 0.0.0.0 www.msedge.net
 0.0.0.0 www.msftncsi.com
+
 # Microsoft Office
 0.0.0.0 e1723.g.akamaiedge.net
 0.0.0.0 e584.g.akamaiedge.net
@@ -361,6 +362,7 @@
 0.0.0.0 vip5.afdorigin-prod-ln02.afdogw.com
 0.0.0.0 vip5.afdorigin-prod-sg02.afdogw.com
 0.0.0.0 vip5.afdorogin-prod-hk02.afdogw.com
+
 # NVIDIA
 0.0.0.0 events-dc1.gfe.nvidia.com
 0.0.0.0 gfe.nvidia.com
@@ -368,6 +370,7 @@
 0.0.0.0 ssl.google-analytics.com
 0.0.0.0 telemetry-dce.gfe.nvidia.com
 0.0.0.0 telemetry.nvidia.com
+
 # Skype
 0.0.0.0 128-70-85-141.broadband.corbina.ru
 0.0.0.0 177-185-42-72.gci.net
