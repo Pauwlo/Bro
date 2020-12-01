@@ -70,6 +70,7 @@ $ShouldInstallTweaks = $true
 $ShouldSetUserHomeFolderIcon = $true
 $ShouldPinFoldersToQuickAccess = $true
 $ShouldRemoveEdgeShortcutFromDesktop = $true
+$ShouldRenameComputer = $true
 
 # Init integrity checks
 if (!(Test-Path $HostsFilePath)) {
@@ -93,6 +94,10 @@ if (!(Test-Path $TweaksFilePath)) {
     $ShouldInstallTweaks = $false
 }
 
+if ($env:COMPUTERNAME -eq $ComputerName) {
+    $ShouldRenameComputer = $false
+}
+
 Clear-Host
 $Host.UI.RawUI.WindowTitle = 'Init - Working, please wait...'
 Get-Logo
@@ -108,7 +113,11 @@ if ($ShouldCleanTaskbarAndStartMenu) {
 
     foreach ($Registry in @('HKLM', 'HKCU')) {
         $KeyPath = $Registry + ':\Software\Policies\Microsoft\Windows\Explorer'
-        New-Item $KeyPath | Out-Null
+
+        if (!(Test-Path $KeyPath)) {
+            New-Item $KeyPath | Out-Null
+        }
+
         Set-ItemProperty $KeyPath -Name 'LockedStartLayout' -Value 1
         Set-ItemProperty $KeyPath -Name 'StartLayoutFile' -Value $TempLayoutPath
     }
@@ -222,8 +231,18 @@ if ($ShouldBlockMicrosoftTelemetry) {
 }
 
 if ($ShouldInstallHosts) {
-    Write-Host 'Patching hosts...'
-    Get-Content $HostsFilePath | Add-Content "$env:WINDIR\System32\drivers\etc\hosts"
+
+    $WindowsHostsFilePath = "$env:WINDIR\System32\drivers\etc\hosts"
+    $WindowsHosts = Get-Content $WindowsHostsFilePath
+
+    if ($WindowsHosts -match 'telemetry') {
+        Write-Host -ForegroundColor Yellow 'It seems that the hosts file was already patched in the past.'
+        Write-Host -ForegroundColor Yellow 'In order to prevent loosing user modifications, and to avoid duplicates, it will not be patched again by Init.'
+        Pause
+    } else {
+        Write-Host 'Patching hosts...'
+        Get-Content $HostsFilePath | Add-Content $WindowsHostsFilePath
+    }
 }
 
 # Import registry tweaks
@@ -234,6 +253,7 @@ if ($ShouldInstallTweaks) {
 
 # Set user home folder icon
 if ($ShouldSetUserHomeFolderIcon) {
+    Write-Host 'Setting user home folder icon...'
 
     $DesktopIniFile = @'
 [.ShellClassInfo]
@@ -249,6 +269,8 @@ IconResource=C:\Windows\System32\imageres.dll,117
 
 # Pin folders to Quick Access
 if ($ShouldPinFoldersToQuickAccess) {
+    Write-Host 'Pinning user folders to Quick Access...'
+
     $ShellAppObject = New-Object -ComObject Shell.Application
     $ShellAppObject.Namespace('shell:::{679F85CB-0220-4080-B29B-5540CC05AAB6}').Items() | ForEach-Object {
         $_.InvokeVerb('unpinfromhome')
@@ -285,10 +307,15 @@ if ($ShouldRemoveEdgeShortcutFromDesktop) {
     }
 }
 
+# Rename computer
+if ($ShouldRenameComputer) {
+    Write-Host 'Renaming computer...'
+    Rename-Computer -NewName $ComputerName -WarningAction SilentlyContinue
+}
+
 # Final clean-up
 Set-Location '..'
 Remove-Item $InitFolderPath -Recurse -Force
 Remove-Item 'Start Init.lnk'
 
-# Rename computer
-Rename-Computer -NewName $ComputerName -Restart
+Restart-Computer
