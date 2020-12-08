@@ -425,6 +425,7 @@ Windows Registry Editor Version 5.00
 ; Disable Modern Sleep (aka. Connected Sleep)
 ;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
 ;"CsEnabled"=dword:00000000
+;"PlatformAoAcOverride"=dword:00000000
 
 ; Fix L2TP/IPsec
 ;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent]
