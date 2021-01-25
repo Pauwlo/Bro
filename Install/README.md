@@ -18,6 +18,7 @@ Boot from USB, in UEFI mode when available.
 
 Brand | BIOS Setup / Booting options | Select Boot Media
 ----- | ---------------------------- | -----------------
+Acer  | F2                           | F12 (if enabled in BIOS)
 Asus  | Del                          | F8
 Dell  | F12                          | N/A
 MSI   | Del                          | F11
@@ -110,7 +111,7 @@ Dismiss account protection and OneDrive warnings, if any.
 
 Disable notifications about recent activity and scan results.
 
-The hosts file will get flagged as *SettingsModifier:Win32/HostsFileHijack*. Allow it anyway, or Windows will erase it.
+The hosts file will get flagged as *SettingsModifier:Win32/HostsFileHijack*, because Microsoft doesn't like their users to tweak with telemetry and data collection to improve their privacy. Allow it anyway, add an exclusion for `C:\Windows\System32\drivers\etc\hosts`, or Windows will erase it eventually.
 
 ### Certificates
 
