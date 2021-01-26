@@ -207,7 +207,7 @@ if ($ShouldUninstallUselessApps) {
 
     foreach ($App in $UselessApps) {
         $ProPackageFullName = (Get-AppxProvisionedPackage -Online | Where-Object { $_.Displayname -eq $App }).PackageName
-    
+
         if ($ProPackageFullName) {
             Remove-AppxProvisionedPackage -Online -PackageName $ProPackageFullName | Out-Null -ErrorAction SilentlyContinue
         }
@@ -215,9 +215,9 @@ if ($ShouldUninstallUselessApps) {
 
     foreach ($App in $UselessApps) {
         $PackageFullName = (Get-AppxPackage $App).PackageFullName
-    
-        if ($PackageFullName) {
-            Remove-AppxPackage -Package $PackageFullName -ErrorAction SilentlyContinue
+
+        foreach($Package in $PackageFullName) {
+            Remove-AppxPackage -Package $Package -ErrorAction SilentlyContinue
         }
     }
 }
