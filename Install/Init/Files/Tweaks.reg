@@ -178,13 +178,6 @@ Windows Registry Editor Version 5.00
 "PublishUserActivities"=dword:00000000
 "UploadUserActivities"=dword:00000000
 
-; Disable clipboard history
-[HKEY_CURRENT_USER\Software\Microsoft\Clipboard]
-"EnableClipboardHistory"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
-"AllowClipboardHistory"=dword:00000000
-
 ; Disable clipboard synchronization
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
 "AllowCrossDeviceClipboard"=dword:00000000
@@ -421,6 +414,15 @@ Windows Registry Editor Version 5.00
 @=""
 [HKEY_CURRENT_USER\Software\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64]
 @=""
+
+; Optional tweaks - uncomment (remove ;) to enable
+
+; Disable clipboard history
+;[HKEY_CURRENT_USER\Software\Microsoft\Clipboard]
+;"EnableClipboardHistory"=dword:00000000
+
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+;"AllowClipboardHistory"=dword:00000000
 
 ; Disable Modern Sleep (aka. Connected Sleep)
 ;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
