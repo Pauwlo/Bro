@@ -149,7 +149,7 @@ Home: Only keep **Web Search** on Firefox Home Content.
 
 Search: Remove alternative search engines.
 
-Privacy: Use **Strict mode**, always **"Do Not Track"**, hide **Top sites** in address bar and disable **Firefox Data Collection**.
+Privacy: Use **Strict mode**, always **"Do Not Track"**, hide **Top sites** and **Search engines** in address bar and disable **Firefox Data Collection**.
 
 If using self-signed certificates, set `security.enterprise_roots.enabled` to `true`. *(Go to about:config)*
 
