@@ -155,6 +155,8 @@ If using self-signed certificates, set `security.enterprise_roots.enabled` to `t
 
 Install **uBlock Origin**. Allow it to run in Private Windows.
 
+Set Firefox as default app for .pdf.
+
 ### TeamViewer
 
 Download, install and start [TeamViewer](https://www.teamviewer.com/) (Default installation).
@@ -238,18 +240,6 @@ Don't install:
 During an Office 365 installation, Teams might install automatically after next reboot. To prevent that, uninstall **Teams Machine-Wide Installer** from Windows Settings.
 
 Set Outlook as default Email application, if needed.
-
-### Adobe Acrobat Reader DC
-
-Download, install and start [Acrobat Reader DC](https://get.adobe.com/reader).
-
-Set as default application for PDF files.
-
-Collapse Tools and Sign-in cards.
-
-Close Acrobat Reader DC.
-
-If Acrobat's icon in Start menu is broken (happens when ImageGlass is installed), run script: `Fix Adobe Acrobat Reader DC icon in Start menu`. Copy the 2 files from this repo in **Software/Adobe Acrobat Reader DC** on your computer, and double-click the shortcut. Remove the files afterwards.
 
 ## Misc
 
