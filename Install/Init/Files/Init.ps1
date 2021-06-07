@@ -233,6 +233,8 @@ if ($ShouldBlockMicrosoftTelemetry) {
 
 if ($ShouldInstallHosts) {
 
+    Add-MpPreference -ExclusionPath 'C:\Windows\System32\drivers\etc\hosts'
+
     $WindowsHostsFilePath = "$env:WINDIR\System32\drivers\etc\hosts"
     $WindowsHosts = Get-Content $WindowsHostsFilePath
 
