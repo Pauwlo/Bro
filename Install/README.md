@@ -97,6 +97,8 @@ Sometimes, Windows will detect that you're now connected to the internet and wil
 
 Run Windows Update until you're up to date. You will probably have to restart your computer several times. If you have errors, wait 5-10 minutes, and try again. Some updates are installing in background, and Windows Update app won't show them.
 
+Open Microsoft Store and Get updates.
+
 Activate Windows if needed.
 
 Synchronize time & date.
