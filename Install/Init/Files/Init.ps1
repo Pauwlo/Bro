@@ -153,7 +153,8 @@ if ($ShouldUninstallOneDrive) {
 
     if (Test-Path $OneDrive_x64) {
         Start-Process $OneDrive_x64 /uninstall -Wait
-    } elseif (Test-Path $OneDrive_x86) {
+    }
+    elseif (Test-Path $OneDrive_x86) {
         Start-Process $OneDrive_x86 /uninstall -Wait
     }
 
@@ -216,7 +217,7 @@ if ($ShouldUninstallUselessApps) {
     foreach ($App in $UselessApps) {
         $PackageFullName = (Get-AppxPackage $App).PackageFullName
 
-        foreach($Package in $PackageFullName) {
+        foreach ($Package in $PackageFullName) {
             Remove-AppxPackage -Package $Package -ErrorAction SilentlyContinue
         }
     }
@@ -239,7 +240,8 @@ if ($ShouldInstallHosts) {
         Write-Host -ForegroundColor Yellow 'It seems that the hosts file was already patched in the past.'
         Write-Host -ForegroundColor Yellow 'In order to prevent loosing user modifications, and to avoid duplicates, it will not be patched again by Init.'
         Pause
-    } else {
+    }
+    else {
         Write-Host 'Patching hosts...'
         Get-Content $HostsFilePath | Add-Content $WindowsHostsFilePath
     }
