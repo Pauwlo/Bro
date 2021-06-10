@@ -161,18 +161,6 @@ Install **uBlock Origin**. Allow it to run in Private Windows.
 
 Set Firefox as the default application for PDF files.
 
-### TeamViewer
-
-Download, install and start [TeamViewer](https://www.teamviewer.com/) (Default installation).
-
-Go to **Extra** -> **Options**.
-
-Remote control: Uncheck **Remove remote wallpaper**.
-
-Advanced: Check **Automatically minimize local TeamViewer panel**.
-
-Close TeamViewer.
-
 ### 7-Zip
 
 Download, install and start [7-Zip](https://www.7-zip.org/).
