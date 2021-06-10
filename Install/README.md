@@ -135,13 +135,15 @@ Download [Firefox](https://www.mozilla.org/firefox/all/) from your other compute
 
 Install and start Firefox.
 
-Pin to taskbar.
-
 Set as default browser.
 
-Show bookmarks toolbar.
+Remove default **Getting started** and **Mozilla Firefox** bookmarks.
 
-Delete default **Getting started** and **Mozilla Firefox** bookmarks.
+Always show bookmarks toolbar.
+
+Remove the "Import bookmarks..." button from the toolbar.
+
+Remove Pocket from the toolbar.
 
 #### Options
 
@@ -151,13 +153,13 @@ Home: Only keep **Web Search** on Firefox Home Content.
 
 Search: Remove alternative search engines.
 
-Privacy: Use **Strict mode**, always **"Do Not Track"**, hide **Top sites** and **Search engines** in address bar and disable **Firefox Data Collection**.
+Privacy: Use **Strict mode**, don't suggest **Shortcuts** and **Search engines** in address bar and disable **Firefox Data Collection**.
 
 If using self-signed certificates, set `security.enterprise_roots.enabled` to `true`. *(Go to about:config)*
 
 Install **uBlock Origin**. Allow it to run in Private Windows.
 
-Set Firefox as default app for .pdf.
+Set Firefox as the default application for PDF files.
 
 ### TeamViewer
 
