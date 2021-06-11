@@ -221,8 +221,6 @@ Set Outlook as default Email application, if needed.
 
 If the SSD capacity is limited, create a `Programs` folder in `D:\` with icon: `C:\Windows\System32\shell32.dll,162`. Install future non-critical programs in this folder instead of regular `C:\Program Files\`.
 
-If needed, create a `# Path Shortcuts` folder in `C:\Program Files\` (or `D:\Programs`), and add it to Path (System).
-
 If needed, create a `Games` folder in `D:\` with icon: `C:\Windows\System32\imageres.dll,177`. Install future non-critical games in this folder instead of regular `C:\Program Files\`.
 
 ### Desktop
