@@ -211,7 +211,7 @@ Don't install:
 
 During an Office 365 installation, Teams might install automatically after next reboot. To prevent that, uninstall **Teams Machine-Wide Installer** from Windows Settings.
 
-Save to Computer by default.
+Start Word, go to Options > Save > Check "Save to Computer by default".
 
 Set Outlook as default Email application, if needed.
 
