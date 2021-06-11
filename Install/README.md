@@ -165,19 +165,7 @@ Set Firefox as the default application for PDF files.
 
 Download, install and start [7-Zip](https://www.7-zip.org/).
 
-Go to **Tools** -> **Options** -> **7-Zip** tab.
-
-Only check the following context menu items:
-
-- Extract files...
-- Extract here
-- Extract to <Folder>
-- Add to archive...
-- Add to <Archive>.zip
-
-Click OK and close 7-Zip.
-
-Run script: `Create dummy files & add 7z to Path`. Copy the 2 files from this repo in **Software/7-Zip** on your computer, and double-click the shortcut. Remove the files afterwards.
+Run script: `Configure 7z & create dummy files`. Copy the 2 files from this repo in **Software/7-Zip** on your computer, and double-click the shortcut. Remove the files afterwards.
 
 This script will create dummy files on your desktop so you can easily set 7-Zip as the default application for:
 
