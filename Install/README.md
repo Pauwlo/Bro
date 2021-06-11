@@ -199,14 +199,6 @@ Don't show a notification when new albums are available.
 
 Download and install [Notepad++](https://notepad-plus-plus.org/downloads/).
 
-Don't install themes.
-
-Run script: `Import Material theme`. Copy the 3 files from this repo in **Software/Notepad++** on your computer, and double-click the shortcut. Remove the files afterwards.
-
-Start Notepad++, and select theme `Material` (**Settings** -> **Style Configurator...**).
-
-Save & Close, then close Notepad++.
-
 ### Office
 
 Don't install:
