@@ -43,10 +43,45 @@ while (($ComputerName.Length -gt 15) -or ($ComputerName -notmatch '^[A-z0-9\-]+$
     $ComputerName = Read-Host -Prompt 'Computer name'
 }
 
+function New-Shortcut {
+
+    Param(
+        [Parameter(Mandatory=$true)]
+        [String]
+        $Path,
+        
+        [Parameter(Mandatory=$true)]
+        [String]
+        $Target,
+        
+        [Parameter()]
+        [String]
+        $Arguments,
+        
+        [Parameter()]
+        [String]
+        $Icon
+    )
+
+    $WShellObject = New-Object -ComObject WScript.Shell
+    $Shortcut = $WShellObject.CreateShortcut($Path)
+    $Shortcut.TargetPath = $Target
+
+    if ($Arguments) {
+        $Shortcut.Arguments = $Arguments
+    }
+
+    if ($Icon) {
+        $Shortcut.IconLocation = $Icon
+    }
+
+    $Shortcut.Save()
+}
+
 # Check if OneDrive setup is running
 $OneDriveSetup = Get-Process OneDriveSetup -ErrorAction SilentlyContinue
 if ($OneDriveSetup) {
-    Write-Host -ForegroundColor Yellow '`nOneDrive setup is still running. You probably started Init too early after installing Windows 10. Please wait 30 seconds, or more if you have a slow computer, and try again.'
+    Write-Host -ForegroundColor Yellow "`nOneDrive setup is still running. You probably started Init too early after installing Windows 10. Please wait 30 seconds, or more if you have a slow computer, and try again."
     Pause
     Exit
 }
@@ -316,6 +351,12 @@ if ($ShouldRenameComputer) {
     Write-Host 'Renaming computer...'
     Rename-Computer -NewName $ComputerName -WarningAction SilentlyContinue
 }
+
+# Copy post install script
+$ScriptPath = "$DesktopPath\post-install.ps1"
+Copy-Item 'post-install.ps1' $ScriptPath
+(Get-Item $ScriptPath).Attributes += 'Hidden'
+New-Shortcut "$DesktopPath\Post install.lnk" 'powershell' '-ExecutionPolicy Bypass -File ".\post-install.ps1"'
 
 # Final clean-up
 Set-Location '..'

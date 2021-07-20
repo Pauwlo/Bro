@@ -113,8 +113,6 @@ Dismiss account protection and OneDrive warnings, if any.
 
 Disable notifications about recent activity and scan results.
 
-The hosts file will get flagged as *SettingsModifier:Win32/HostsFileHijack*, because Microsoft doesn't like their users to tweak with telemetry and data collection to improve their privacy. Allow it anyway, add an exclusion for `C:\Windows\System32\drivers\etc\hosts`, or Windows will erase it eventually.
-
 ### Certificates
 
 Install self-signed certificates, if any.
@@ -129,13 +127,15 @@ If the SSD capacity is limited, move **Documents**, **Pictures**, **Music** and 
 
 ## Programs
 
+### Chocolatey
+
+Run the `Post intall` script on the Desktop.
+
 ### Mozilla Firefox
 
-Download [Firefox](https://www.mozilla.org/firefox/all/) from your other computer and put the setup on a USB drive. The one you used to install Windows 10, for example.
+Start Firefox.
 
-Install and start Firefox.
-
-Set as default browser.
+Pin to taskbar, make default browser and select theme.
 
 Remove default **Getting started** and **Mozilla Firefox** bookmarks.
 
@@ -159,15 +159,13 @@ If using self-signed certificates, set `security.enterprise_roots.enabled` to `t
 
 Install **uBlock Origin**. Allow it to run in Private Windows.
 
-Set Firefox as the default application for PDF files.
+This script has created a dummy file on your desktop so you can easily set Firefox as the default application for .pdf files.
+
+Right-click the shortcut -> Properties -> Change... -> Select Firefox -> OK -> Delete.
 
 ### 7-Zip
 
-Download, install and start [7-Zip](https://www.7-zip.org/).
-
-Run script: `Configure 7z & create dummy files`. Copy the 2 files from this repo in **Software/7-Zip** on your computer, and double-click the shortcut. Remove the files afterwards.
-
-This script will create dummy files on your desktop so you can easily set 7-Zip as the default application for:
+This script has created dummy files on your desktop so you can easily set 7-Zip as the default application for:
 
 - .7z
 - .rar
@@ -177,7 +175,7 @@ For each file, right-click -> Properties -> Change... -> Select `7-Zip\7zFM.exe`
 
 ### VLC
 
-Download, install and start [VLC](https://www.videolan.org/vlc/).
+Start VLC.
 
 Don't allow network access to metadata.
 
@@ -194,10 +192,6 @@ Remove the Pictures folder from sources.
 Disable automatically generated albums.
 
 Don't show a notification when new albums are available.
-
-### Notepad++
-
-Download and install [Notepad++](https://notepad-plus-plus.org/downloads/).
 
 ### Office
 
