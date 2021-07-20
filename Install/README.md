@@ -161,7 +161,7 @@ Install **uBlock Origin**. Allow it to run in Private Windows.
 
 This script has created a dummy file on your desktop so you can easily set Firefox as the default application for .pdf files.
 
-Right-click the shortcut -> Properties -> Change... -> Select Firefox -> OK -> Delete.
+Right-click the file -> Properties -> Change... -> Select Firefox -> OK -> Delete.
 
 ### 7-Zip
 
