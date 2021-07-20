@@ -87,6 +87,10 @@ Set default Windows mode to Dark, if it was set to Light.
 
 Choose which folders appear on Start: Settings only.
 
+#### Gaming
+
+Disable Xbox Game Bar.
+
 ### Connect to the Internet
 
 Connect your computer to the internet.
