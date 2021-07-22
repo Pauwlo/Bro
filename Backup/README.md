@@ -5,6 +5,7 @@
 Backup main folders:
 
 - `~`
+- Desktop
 - Documents
 - Downloads
 - Pictures
