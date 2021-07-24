@@ -109,6 +109,8 @@ Synchronize time & date.
 
 Hide unwanted icons from the system tray (Bluetooth, or Intel Graphics for example).
 
+Install system drivers, generally from the PC manufacturer support website.
+
 ### Windows Defender
 
 Enable **Tamper protection** if it has been disabled. I don't know what is disabling it.
