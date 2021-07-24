@@ -1,46 +1,21 @@
 # Init
 
 # Self-elevate
-[bool]$IsElevated = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+$IsElevated = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if (!$IsElevated) {
-    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-        $CommandLine = '-ExecutionPolicy Bypass -File "' + $MyInvocation.MyCommand.Path + '" ' + $MyInvocation.UnboundArguments
-        Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine
-        Exit
-    }
+    $CommandLine = '-ExecutionPolicy Bypass -File "' + $MyInvocation.MyCommand.Path + '" ' + $MyInvocation.UnboundArguments
+    Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine
+    Exit
 }
 
 function Get-Logo {
-    Write-Host " _____       _ _   "
-    Write-Host "|_   _|     (_) |  "
-    Write-Host "  | |  _ __  _| |_ "
+    Write-Host ' _____       _ _   '
+    Write-Host '|_   _|     (_) |  '
+    Write-Host '  | |  _ __  _| |_ '
     Write-Host "  | | | '_ \| | __|"
-    Write-Host " _| |_| | | | | |_ "
-    Write-Host "|_____|_| |_|_|\__|  (c) 2021 Pauwlo"
+    Write-Host ' _| |_| | | | | |_ '
+    Write-Host '|_____|_| |_|_|\__|  (c) 2021 Pauwlo'
     Write-Host ''
-}
-
-$Host.UI.RawUI.WindowTitle = 'Init'
-Get-Logo
-Write-Host 'Welcome to Init.'
-
-$ComputerName = Read-Host -Prompt 'Computer name'
-
-while (($ComputerName.Length -gt 15) -or ($ComputerName -notmatch '^[A-z0-9\-]+$') -or ($ComputerName -match '^[0-9]+$')) {
-    
-    if ($ComputerName.Length -gt 15) {
-        Write-Host -ForegroundColor Yellow 'The computer name is limited to 15 characters.'
-    }
-    
-    if ($ComputerName -notmatch '^[A-z0-9\-]+$') {
-        Write-Host -ForegroundColor Yellow 'The computer name contains invalid characters. (Only A-z, 0-9 and -)'
-    }
-    
-    if ($ComputerName -match '^[0-9]+$') {
-        Write-Host -ForegroundColor Yellow 'The computer name may not consist entirely of digits.'
-    }
-
-    $ComputerName = Read-Host -Prompt 'Computer name'
 }
 
 function New-Shortcut {
@@ -78,6 +53,10 @@ function New-Shortcut {
     $Shortcut.Save()
 }
 
+$Host.UI.RawUI.WindowTitle = 'Init'
+Get-Logo
+Write-Host 'Welcome to Init.'
+
 # Check if OneDrive setup is running
 $OneDriveSetup = Get-Process OneDriveSetup -ErrorAction SilentlyContinue
 if ($OneDriveSetup) {
@@ -95,6 +74,7 @@ $DesktopPath = [Environment]::GetFolderPath('Desktop')
 $LayoutModificationFilePath = 'LayoutModification.xml'
 $HostsFilePath = 'Hosts.txt'
 $TweaksFilePath = 'Tweaks.reg'
+$PostInstallFilePath = 'Post install.ps1'
 
 $ShouldCleanTaskbarAndStartMenu = $true
 $ShouldUninstallOneDrive = $true
@@ -106,31 +86,64 @@ $ShouldSetUserHomeFolderIcon = $true
 $ShouldPinFoldersToQuickAccess = $true
 $ShouldRemoveEdgeShortcutFromDesktop = $true
 $ShouldRenameComputer = $true
+$ShouldCopyPostInstallScript = $true
 
 # Init integrity checks
-if (!(Test-Path $HostsFilePath)) {
+if ($ShouldInstallHosts -and !(Test-Path $HostsFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$HostsFilePath is missing."
     Write-Host -ForegroundColor Yellow "Hosts file won't be modified."
     Pause
     $ShouldInstallHosts = $false
 }
 
-if (!(Test-Path $LayoutModificationFilePath)) {
+if ($ShouldCleanTaskbarAndStartMenu -and !(Test-Path $LayoutModificationFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$LayoutModificationFilePath is missing."
     Write-Host -ForegroundColor Yellow "Taskbar and start menu won't be cleaned."
     Pause
     $ShouldCleanTaskbarAndStartMenu = $false
 }
 
-if (!(Test-Path $TweaksFilePath)) {
+if ($ShouldInstallTweaks -and !(Test-Path $TweaksFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$TweaksFilePath is missing."
     Write-Host -ForegroundColor Yellow "Registry tweaks won't be applied. (not recommended)"
     Pause
     $ShouldInstallTweaks = $false
 }
 
-if ($env:COMPUTERNAME -eq $ComputerName) {
-    $ShouldRenameComputer = $false
+if ($ShouldCopyPostInstallScript -and !(Test-Path $PostInstallFilePath)) {
+    Write-Host -ForegroundColor Yellow "`nFiles\$PostInstallFilePath is missing."
+    Write-Host -ForegroundColor Yellow "Post install script won't be copied to the desktop."
+    Pause
+    $ShouldCopyPostInstallScript = $false
+}
+
+if ($ShouldRenameComputer) {
+    Write-Host ""
+    $ComputerName = Read-Host -Prompt 'Computer name'
+
+    while (($ComputerName.Length -gt 15) -or ($ComputerName -notmatch '^[A-z0-9\-]+$') -or ($ComputerName -match '^[0-9]+$')) {
+        
+        if ($ComputerName.Length -gt 15) {
+            Write-Host -ForegroundColor Yellow 'The computer name is limited to 15 characters.'
+        }
+        
+        if ($ComputerName -notmatch '^[A-z0-9\-]+$') {
+            Write-Host -ForegroundColor Yellow 'The computer name contains invalid characters. (Only A-z, 0-9 and -)'
+        }
+        
+        if ($ComputerName -match '^[0-9]+$') {
+            Write-Host -ForegroundColor Yellow 'The computer name may not consist entirely of digits.'
+        }
+    
+        Write-Host ""
+        $ComputerName = Read-Host -Prompt 'Computer name'
+    }
+
+    if ($env:COMPUTERNAME -eq $ComputerName) {`
+        Write-Host -ForegroundColor Yellow "`nComputer name is already set to $ComputerName."
+        Pause
+        $ShouldRenameComputer = $false
+    }
 }
 
 Clear-Host
@@ -353,10 +366,12 @@ if ($ShouldRenameComputer) {
 }
 
 # Copy post install script
-$ScriptPath = "$DesktopPath\post-install.ps1"
-Copy-Item 'post-install.ps1' $ScriptPath
-(Get-Item $ScriptPath).Attributes += 'Hidden'
-New-Shortcut "$DesktopPath\Post install.lnk" 'powershell' '-ExecutionPolicy Bypass -File ".\post-install.ps1"'
+if ($ShouldCopyPostInstallScript) {
+    Copy-Item $PostInstallFilePath $DesktopPath
+    (Get-Item "$DesktopPath\$PostInstallFilePath").Attributes += 'Hidden'
+
+    New-Shortcut "$DesktopPath\Post install.lnk" 'powershell' "-ExecutionPolicy Bypass -File `".\$PostInstallFilePath`""
+}
 
 # Final clean-up
 Set-Location '..'

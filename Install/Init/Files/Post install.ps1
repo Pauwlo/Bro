@@ -1,22 +1,20 @@
 # Init - Post install
 
 # Self-elevate
-[bool]$IsElevated = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+$IsElevated = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if (!$IsElevated) {
-    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-        $CommandLine = '-ExecutionPolicy Bypass -File "' + $MyInvocation.MyCommand.Path + '" ' + $MyInvocation.UnboundArguments
-        Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine
-        Exit
-    }
+    $CommandLine = '-ExecutionPolicy Bypass -File "' + $MyInvocation.MyCommand.Path + '" ' + $MyInvocation.UnboundArguments
+    Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine
+    Exit
 }
 
 function Get-Logo {
-    Write-Host " _____       _ _   "
-    Write-Host "|_   _|     (_) |  "
-    Write-Host "  | |  _ __  _| |_ "
+    Write-Host ' _____       _ _   '
+    Write-Host '|_   _|     (_) |  '
+    Write-Host '  | |  _ __  _| |_ '
     Write-Host "  | | | '_ \| | __|"
-    Write-Host " _| |_| | | | | |_   Post install"
-    Write-Host "|_____|_| |_|_|\__|  (c) 2021 Pauwlo"
+    Write-Host ' _| |_| | | | | |_   Post install'
+    Write-Host '|_____|_| |_|_|\__|  (c) 2021 Pauwlo'
     Write-Host ''
 }
 
@@ -26,7 +24,7 @@ Get-Logo
 # Check internet connectivity
 $HasInternet = [bool](Get-NetRoute | Where-Object DestinationPrefix -eq '0.0.0.0/0' | Get-NetIPInterface | Where-Object ConnectionState -eq 'Connected')
 if (!$HasInternet) {
-    Write-Host -ForegroundColor Yellow "`nYou must be connected to the internet to run the post install script. Please connect and try again."
+    Write-Host -ForegroundColor Yellow "You must be connected to the internet to run the post install script. Please connect and try again."
     Pause
     Exit
 }
