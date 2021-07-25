@@ -93,6 +93,12 @@ Choose which folders appear on Start: Settings only.
 
 Disable Xbox Game Bar.
 
+#### Ease of Access
+
+##### Keyboard
+
+Don't allow the shortcut keys to start Sticky Keys, Toggle Keys and Filter Keys.
+
 ### Connect to the Internet
 
 Connect your computer to the internet.
