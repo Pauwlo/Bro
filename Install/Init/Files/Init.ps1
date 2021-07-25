@@ -112,7 +112,7 @@ if ($ShouldInstallTweaks -and !(Test-Path $TweaksFilePath)) {
 
 if ($ShouldCopyPostInstallScript -and !(Test-Path $PostInstallFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$PostInstallFilePath is missing."
-    Write-Host -ForegroundColor Yellow "Post install script won't be copied to the desktop."
+    Write-Host -ForegroundColor Yellow "Post install script won't be copied to the desktop. (not recommended)"
     Pause
     $ShouldCopyPostInstallScript = $false
 }
@@ -369,6 +369,11 @@ if ($ShouldRenameComputer) {
 if ($ShouldCopyPostInstallScript) {
     Copy-Item $PostInstallFilePath $DesktopPath
     (Get-Item "$DesktopPath\$PostInstallFilePath").Attributes += 'Hidden'
+
+    if ($ShouldInstallTweaks) {
+        Copy-Item $TweaksFilePath $DesktopPath
+        (Get-Item "$DesktopPath\$TweaksFilePath").Attributes += 'Hidden'
+    }
 
     New-Shortcut "$DesktopPath\Post install.lnk" 'powershell' "-ExecutionPolicy Bypass -File `".\$PostInstallFilePath`""
 }

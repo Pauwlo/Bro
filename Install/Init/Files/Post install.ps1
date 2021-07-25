@@ -35,6 +35,7 @@ $InitFolderPath = (Get-Item $InitPath -Force).Directory.FullName
 Set-Location $InitFolderPath
 
 $DummyFileName = 'Dummy (right-click - Properties - Change...)'
+$TweaksFilePath = 'Tweaks.reg'
 
 $ShouldInstallChocolatey = $true
 $ShouldInstallFirefox = $true
@@ -50,6 +51,13 @@ if (!$ShouldInstallChocolatey -and ($ShouldInstallFirefox -or $ShouldInstallVLC 
     Exit
 }
 
+# Reinstall registry tweaks in case Windows Updates overrode some
+if (Test-Path $TweaksFilePath) {
+    reg import $TweaksFilePath 2>&1 | Out-Null
+    Remove-Item $TweaksFilePath -Force
+}
+
+# Install software via Chocolatey package manager
 if ($ShouldInstallChocolatey) {
     Set-ExecutionPolicy Bypass -Scope Process -Force
     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
