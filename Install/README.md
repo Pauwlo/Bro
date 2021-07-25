@@ -14,7 +14,7 @@ Make sure the computer is **not** connected to the internet.
 
 Boot from USB, in UEFI mode when available.
 
-**Common keys for BIOS and Select Boot Media menus**
+Common keys for BIOS and Select Boot Media menus:
 
 Brand | BIOS Setup / Booting options | Select Boot Media
 ----- | ---------------------------- | -----------------
@@ -113,7 +113,7 @@ Install system drivers, generally from the PC manufacturer support website.
 
 ### Windows Defender
 
-Enable **Tamper protection** if it has been disabled. I don't know what is disabling it.
+Enable **Tamper protection** if it is disabled. I don't know what is disabling it.
 
 Dismiss account protection and OneDrive warnings, if any.
 
@@ -135,7 +135,7 @@ If the SSD capacity is limited, move **Documents**, **Pictures**, **Music** and 
 
 ### Chocolatey
 
-Run the `Post intall` script on the Desktop.
+Run the `Post install` script on the Desktop.
 
 ### Mozilla Firefox
 
