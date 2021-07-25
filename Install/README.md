@@ -127,14 +127,6 @@ Dismiss account protection and OneDrive warnings, if any.
 
 Disable notifications about recent activity and scan results.
 
-### Certificates
-
-Install self-signed certificates, if any.
-
-Store location: **Local Machine**
-
-Place all certificates in the following store: **Trusted Root Certification Authorities**
-
 ### Explorer
 
 If the SSD capacity is limited, move **Documents**, **Pictures**, **Music** and **Videos** to `D:\`.
