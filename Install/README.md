@@ -231,7 +231,7 @@ Find a nice wallpaper on the internet. I usually save it to `Pictures\Saved Pict
 
 ### Start menu
 
-Clean `%ProgramData%\Microsoft\Windows\Start Menu\Programs` and `%AppData%\Microsoft\Windows\Start Menu`.
+Clean `%ProgramData%\Microsoft\Windows\Start Menu` and `%AppData%\Microsoft\Windows\Start Menu`.
 
 Hide software folders in `~` and `D:\Documents`, if any.
 
