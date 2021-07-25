@@ -203,7 +203,6 @@ Don't show a notification when new albums are available.
 
 Don't install:
 
-- OneNote
 - OneDrive
 - OneDrive for Business
 - Skype Entreprise
