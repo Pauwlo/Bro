@@ -37,6 +37,8 @@ Decline all "recommended" settings, such as activity history, Cortana, speech re
 
 ## Run Init
 
+If you want to import certificates with Init, place them in the `.\Init\Files\Certificates` folder. They will be imported in Local Machine\Trusted Root Certification Authorities.
+
 Close the Edge pop-up from the taskbar.
 
 Copy the Init script folder and its shortcut `Start Init.lnk` on a USB drive. The one you used to install Windows 10, for example.

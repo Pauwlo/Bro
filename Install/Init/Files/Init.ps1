@@ -74,6 +74,7 @@ $DesktopPath = [Environment]::GetFolderPath('Desktop')
 $LayoutModificationFilePath = 'LayoutModification.xml'
 $HostsFilePath = 'Hosts.txt'
 $TweaksFilePath = 'Tweaks.reg'
+$CertificatesFolderPath = 'Certificates'
 $PostInstallFilePath = 'Post install.ps1'
 
 $ShouldCleanTaskbarAndStartMenu = $true
@@ -82,6 +83,7 @@ $ShouldUninstallUselessApps = $true
 $ShouldBlockMicrosoftTelemetry = $true
 $ShouldInstallHosts = $true
 $ShouldInstallTweaks = $true
+$ShouldImportCertificates = $true
 $ShouldSetUserHomeFolderIcon = $true
 $ShouldPinFoldersToQuickAccess = $true
 $ShouldRemoveEdgeShortcutFromDesktop = $true
@@ -108,6 +110,13 @@ if ($ShouldInstallTweaks -and !(Test-Path $TweaksFilePath)) {
     Write-Host -ForegroundColor Yellow "Registry tweaks won't be applied. (not recommended)"
     Pause
     $ShouldInstallTweaks = $false
+}
+
+if ($ShouldImportCertificates -and !(Test-Path $CertificatesFolderPath)) {
+    Write-Host -ForegroundColor Yellow "`nFiles\$CertificatesFolderPath folder is missing."
+    Write-Host -ForegroundColor Yellow "Certificates won't be imported."
+    Pause
+    $ShouldImportCertificates = $false
 }
 
 if ($ShouldCopyPostInstallScript -and !(Test-Path $PostInstallFilePath)) {
@@ -301,6 +310,15 @@ if ($ShouldInstallHosts) {
 if ($ShouldInstallTweaks) {
     Write-Host 'Installing registry tweaks...'
     reg import $TweaksFilePath 2>&1 | Out-Null
+}
+
+# Import certificates
+if ($ShouldImportCertificates) {
+    Write-Host 'Importing certificates...'
+
+    Get-ChildItem -Path $CertificatesFolderPath -Filter *.crt | ForEach-Object {
+        Import-Certificate -FilePath $_.FullName -CertStoreLocation Cert:\LocalMachine\Root | Out-Null
+    }
 }
 
 # Set user home folder icon
