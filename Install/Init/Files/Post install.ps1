@@ -37,6 +37,7 @@ Set-Location $InitFolderPath
 $DummyFileName = 'Dummy (right-click - Properties - Change...)'
 $TweaksFilePath = 'Tweaks.reg'
 
+$ShouldUninstallTeams = $true
 $ShouldInstallChocolatey = $true
 $ShouldInstallFirefox = $true
 $ShouldInstallVLC = $true
@@ -55,6 +56,21 @@ if (!$ShouldInstallChocolatey -and ($ShouldInstallFirefox -or $ShouldInstallVLC 
 if (Test-Path $TweaksFilePath) {
     reg import $TweaksFilePath 2>&1 | Out-Null
     Remove-Item $TweaksFilePath -Force
+}
+
+# Uninstall Microsoft Teams
+if ($ShouldUninstallTeams) {
+    $App = 'MicrosoftTeams'
+    $ProPackageFullName = (Get-AppxProvisionedPackage -Online | Where-Object { $_.Displayname -eq $App }).PackageName
+    $PackageFullName = (Get-AppxPackage $App).PackageFullName
+
+    if ($ProPackageFullName) {
+        Remove-AppxProvisionedPackage -Online -PackageName $ProPackageFullName | Out-Null -ErrorAction SilentlyContinue
+    }
+
+    foreach ($Package in $PackageFullName) {
+        Remove-AppxPackage -Package $Package -ErrorAction SilentlyContinue
+    }
 }
 
 # Install software via Chocolatey package manager

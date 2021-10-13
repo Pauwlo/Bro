@@ -21,11 +21,11 @@ function Get-Logo {
 function New-Shortcut {
 
     Param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]
         $Path,
         
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]
         $Target,
         
@@ -234,8 +234,13 @@ if ($ShouldUninstallUselessApps) {
     Write-Host 'Uninstalling useless apps...'
 
     $UselessApps = @(
+        'MicrosoftTeams',
+        'MicrosoftWindows.Client.WebExperience', # Widgets
         'Microsoft.549981C3F5F10',
         'Microsoft.Advertising.Xaml',
+        'Microsoft.BingNews',
+        'Microsoft.BingWeather',
+        'Microsoft.GamingApp',
         'Microsoft.GetHelp',
         'Microsoft.Getstarted',
         'Microsoft.Messaging',
@@ -247,9 +252,12 @@ if ($ShouldUninstallUselessApps) {
         'Microsoft.Office.OneNote',
         'Microsoft.OneConnect',
         'Microsoft.People',
+        'Microsoft.PowerAutomateDesktop',
         'Microsoft.Print3D',
         'Microsoft.SkypeApp',
+        'Microsoft.Todos',
         'Microsoft.Wallet',
+        #'microsoft.windowscommunicationsapps', # Mail and Calendar
         'Microsoft.WindowsFeedbackHub',
         'Microsoft.WindowsMaps',
         'Microsoft.Xbox.TCUI',
@@ -327,7 +335,7 @@ if ($ShouldSetUserHomeFolderIcon) {
 
     $DesktopIniFile = @'
 [.ShellClassInfo]
-IconResource=C:\Windows\System32\imageres.dll,117
+IconResource=C:\Windows\System32\SHELL32.dll,170
 '@
 
     $DesktopIniFilePath = "$env:USERPROFILE\desktop.ini"

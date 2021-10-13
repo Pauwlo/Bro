@@ -4,9 +4,9 @@
 
 ### Get Windows
 
-Get latest Windows 10 ISO with [Fido](https://github.com/pbatard/fido).
+Download the desired Windows ISO via [TechBench](https://tb.rg-adguard.net/).
 
-Create a bootable USB drive with [Rufus](https://rufus.ie).
+Create a bootable USB drive with [Rufus](https://rufus.ie/).
 
 ## Install Windows
 
@@ -25,7 +25,7 @@ MSI   | Del                          | F11
 
 Format the drive you want to install Windows on. Remove recovery partitions if you know what you're doing.
 
-Install Windows 10. Your computer will restart and show you the OOBE.
+Install Windows. Your computer will restart and show you the OOBE.
 
 Select region and keyboard layout(s).
 
@@ -39,9 +39,7 @@ Decline all "recommended" settings, such as activity history, Cortana, speech re
 
 If you want to import certificates with Init, place them in the `.\Init\Files\Certificates` folder. They will be imported in Local Machine\Trusted Root Certification Authorities.
 
-Close the Edge pop-up from the taskbar.
-
-Copy the Init script folder and its shortcut `Start Init.lnk` on a USB drive. The one you used to install Windows 10, for example.
+Copy the Init script folder and its shortcut `Start Init.lnk` on a USB drive. The one you used to install Windows, for example.
 
 Insert the USB drive into the computer, then select "Open folder" when prompted.
 
@@ -57,13 +55,7 @@ The script will do its job then reboot the computer.
 
 ### Explorer settings
 
-Hide agenda setup from taskbar.
-
-Open an Explorer Window (`Win`+`E`) then expand "This PC" in the sidebar.
-
-Rename the hard drives. If I have only one (called C:), I usually call it "Local Disk".
-
-If I have an SSD and HDD, I usually call them "SSD" and "HDD".
+Open a Windows Explorer window (`Win`+`E`) and expand "This PC" in the sidebar.
 
 ### Windows settings
 
@@ -75,37 +67,17 @@ Open Windows settings (`Win`+`I`).
 
 Disable automatic rules.
 
-##### Multitasking
-
-Do not show what I can snap next to it.
-
-#### Personalization
-
-##### Colors
-
-Set default Windows mode to Dark, if it was set to Light.
-
-##### Start
-
-Choose which folders appear on Start: Settings only.
-
 #### Gaming
 
-Disable Xbox Game Bar.
-
-#### Ease of Access
-
-##### Keyboard
-
-Don't allow the shortcut keys to start Sticky Keys, Toggle Keys and Filter Keys.
+Don't open Xbox Game Bar using a button on a controller.
 
 ### Connect to the Internet
 
 Connect your computer to the internet.
 
-Choose if you want to enable network discovery on the sidebar (Yes or No). Recommended if you trust your network.
+Set the network as Private if you trust it.
 
-Sometimes, Windows will detect that you're now connected to the internet and will show you a new prompt for using a Microsoft account (like OOBE). If so, click OK, then "Ignore for now".
+Windows may show you various prompts for using a Microsoft account instead of a local account. Always decline these *not-intrusive-at-all* messages.
 
 Run Windows Update until you're up to date. You will probably have to restart your computer several times. If you have errors, wait 5-10 minutes, and try again. Some updates are installing in background, and Windows Update app won't show them.
 
@@ -121,7 +93,9 @@ Install system drivers, generally from the PC manufacturer support website.
 
 ### Windows Defender
 
-Enable **Tamper protection** if it is disabled. I don't know what is disabling it.
+Disclaimer: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Init. Of course, Microsoft doesn't like people to get rid of their telemetry stuff, so they're trying to scare you so you wipe the Hosts file. Please ignore the notification, allow the "threat" on your device and review [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) if you feel like so.
+
+Enable **Tamper protection** if it's disabled. I don't know what is disabling it.
 
 Dismiss account protection and OneDrive warnings, if any.
 
