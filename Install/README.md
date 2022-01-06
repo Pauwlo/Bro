@@ -99,8 +99,6 @@ Enable **Tamper protection** if it's disabled. I don't know what is disabling it
 
 Dismiss account protection and OneDrive warnings, if any.
 
-Disable notifications about recent activity and scan results.
-
 ### Explorer
 
 If the SSD capacity is limited, move **Documents**, **Pictures**, **Music** and **Videos** to `D:\`.
@@ -137,7 +135,7 @@ Privacy: Use **Strict mode**, don't suggest **Shortcuts** and **Search engines**
 
 If using self-signed certificates, set `security.enterprise_roots.enabled` to `true`. *(Go to about:config)*
 
-Install **uBlock Origin**. Allow it to run in Private Windows.
+Install [uBlock Origin](https://addons.mozilla.org/firefox/addon/ublock-origin/). Allow it to run in Private Windows.
 
 This script has created a dummy file on your desktop so you can easily set Firefox as the default application for .pdf files.
 
@@ -204,7 +202,7 @@ Find a nice wallpaper on the internet. I usually save it to `Pictures\Saved Pict
 
 ### Start menu
 
-Clean `%ProgramData%\Microsoft\Windows\Start Menu` and `%AppData%\Microsoft\Windows\Start Menu`.
+Remove unnecessary folders and shortcuts in `%ProgramData%\Microsoft\Windows\Start Menu` and `%AppData%\Microsoft\Windows\Start Menu`.
 
 Hide software folders in `~` and `D:\Documents`, if any.
 

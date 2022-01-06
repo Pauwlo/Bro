@@ -160,6 +160,10 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
 "SubmitSamplesConsent"=dword:00000002
 
+; Disable Windows Defender notifications about recent activity and scan results
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender Security Center\Virus and threat protection]
+"SummaryNotificationDisabled"=dword:00000001
+
 ; Prevent handwriting data sharing
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC]
 "PreventHandwritingDataSharing"=dword:00000001
