@@ -464,6 +464,10 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
 "Flags"="506"
 
+; Disable Xbox Game Bar
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR]
+"AppCaptureEnabled"=dword:00000000
+
 ; Don't open Xbox Game Bar using a button on a controller
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\GameBar]
 "UseNexusForGameBarEnabled"=dword:00000000

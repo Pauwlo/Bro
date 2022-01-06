@@ -67,10 +67,6 @@ Open Windows settings (`Win`+`I`).
 
 Disable automatic rules.
 
-#### Gaming
-
-Disable Xbox Game Bar.
-
 ### Connect to the Internet
 
 Connect your computer to the internet.
