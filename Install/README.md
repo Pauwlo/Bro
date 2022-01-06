@@ -69,7 +69,7 @@ Disable automatic rules.
 
 #### Gaming
 
-Don't open Xbox Game Bar using a button on a controller.
+Disable Xbox Game Bar.
 
 ### Connect to the Internet
 
