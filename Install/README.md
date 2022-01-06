@@ -53,19 +53,9 @@ The script will do its job then reboot the computer.
 
 ## Finish setting up Windows
 
-### Explorer settings
-
 Open a Windows Explorer window (`Win`+`E`) and expand "This PC" in the sidebar.
 
-### Windows settings
-
-Open Windows settings (`Win`+`I`).
-
-#### System
-
-##### Focus assist
-
-Disable automatic rules.
+Disable automatic rules under Settings (`Win`+`I`) > System > Focus assist.
 
 ### Connect to the Internet
 
