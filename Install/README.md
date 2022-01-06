@@ -14,14 +14,18 @@ Make sure the computer is **not** connected to the internet.
 
 Boot from USB, in UEFI mode when available.
 
-Common keys for BIOS and Select Boot Media menus:
+Common hotkeys for BIOS and Select Boot Media menus:
 
-Brand | BIOS Setup / Booting options | Select Boot Media
------ | ---------------------------- | -----------------
-Acer  | F2                           | F12 (if enabled in BIOS)
-Asus  | Del                          | F8
-Dell  | F12                          | N/A
-MSI   | Del                          | F11
+Brand  | BIOS Setup / Booting options | Select Boot Media
+------ | ---------------------------- | -----------------
+Acer   | F2                           | F12 (if enabled in BIOS)
+Asus   | Del                          | F8
+Dell   | F12                          | N/A
+HP     | Esc F10                      | Esc F9
+Lenovo | F1, F2                       | F10, fn + F11, F12
+MSI    | Del                          | F11
+
+*See more [here](https://www.disk-image.com/faq-bootmenu.htm).*
 
 Format the drive you want to install Windows on. Remove recovery partitions if you know what you're doing.
 
