@@ -42,10 +42,10 @@ $ShouldInstallChocolatey = $true
 $ShouldInstallFirefox = $true
 $ShouldInstallVLC = $true
 $ShouldInstallNotepadPlusPlus = $true
-$Should7Zip = $true
+$ShouldInstall7Zip = $true
 
 # Init integrity checks
-if (!$ShouldInstallChocolatey -and ($ShouldInstallFirefox -or $ShouldInstallVLC -or $ShouldInstallNotepadPlusPlus -or $Should7Zip)) {
+if (!$ShouldInstallChocolatey -and ($ShouldInstallFirefox -or $ShouldInstallVLC -or $ShouldInstallNotepadPlusPlus -or $ShouldInstall7Zip)) {
     Write-Host -ForegroundColor Yellow "Chocolatey is required to install third-party software."
     Write-Host -ForegroundColor Yellow 'Set $ShouldInstallChocolatey to $true or set other software variables to $false.'
     Pause
@@ -96,7 +96,7 @@ if ($ShouldInstallChocolatey) {
         choco install notepadplusplus -y
     }
 
-    if ($Should7Zip) {
+    if ($ShouldInstall7Zip) {
         choco install 7zip --pre -y
 
         New-Item "$DummyFileName.7z" -Force | Out-Null
