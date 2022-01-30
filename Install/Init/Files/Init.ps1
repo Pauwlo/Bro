@@ -60,7 +60,7 @@ Write-Host 'Welcome to Init.'
 # Check if OneDrive setup is running
 $OneDriveSetup = Get-Process OneDriveSetup -ErrorAction SilentlyContinue
 if ($OneDriveSetup) {
-    Write-Host -ForegroundColor Yellow "`nOneDrive setup is still running. You probably started Init too early after installing Windows 10. Please wait 30 seconds, or more if you have a slow computer, and try again."
+    Write-Host -ForegroundColor Yellow "`nOneDrive setup is still running. You probably started Init too early after installing Windows. Please wait 30 seconds, or more if you have a slow computer, and try again."
     Pause
     Exit
 }
