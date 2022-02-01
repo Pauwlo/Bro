@@ -14,7 +14,7 @@ function Get-Logo {
     Write-Host '  | |  _ __  _| |_ '
     Write-Host "  | | | '_ \| | __|"
     Write-Host ' _| |_| | | | | |_   Post install'
-    Write-Host '|_____|_| |_|_|\__|  (c) 2021 Pauwlo'
+    Write-Host '|_____|_| |_|_|\__|  (c) 2022 Pauwlo'
     Write-Host ''
 }
 
