@@ -1,39 +1,80 @@
 Windows Registry Editor Version 5.00
 ; Init Registry Tweaks
 
+; Appearance
+
 ; Enable Windows dark mode (not apps, see optional tweeks at the bottom)
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
 "SystemUsesLightTheme"=dword:00000000
 
 ; Align taskbar icons to the left
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "TaskbarAl"=dword:00000000
 
 ; Remove chat from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "TaskbarMn"=dword:00000000
 
 ; Remove search from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
 "SearchboxTaskbarMode"=dword:00000000
 
 ; Remove Cortana from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "ShowCortanaButton"=dword:00000000
 
 ; Remove Task View from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "ShowTaskViewButton"=dword:00000000
 
 ; Remove People from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People]
 "PeopleBand"=dword:00000000
 
 ; Remove News and interests from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Feeds]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds]
 "ShellFeedsTaskbarViewMode"=dword:00000002
 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+"EnableFeeds"=dword:00000000
+
+; Disable widgets in Windows Explorer
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarDa"=dword:00000000
+
+; Don't show recently used files and folders
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"ShowFrequent"=dword:00000000
+"ShowRecent"=dword:00000000
+
+; Hide recently opened items in Jump Lists on Start or taskbar
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_TrackDocs"=dword:00000000
+
+; Disable suggestions in Start menu
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SubscribedContent-338388Enabled"=dword:00000000
+
+; Enable Windows Explorer compact mode
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"UseCompactMode"=dword:00000001
+
+; Do not use check boxes to select items
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"AutoCheckSelect"=dword:00000000
+
+; Disable Windows Spotlight
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"RotatingLockScreenEnabled"=dword:00000000
+
+; Disable tips and tricks on lockscreen
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"RotatingLockScreenOverlayEnabled"=dword:00000000
+
 ; Remove Meet Now from system tray
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"HideSCAMeetNow"=dword:00000001
+
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
 "HideSCAMeetNow"=dword:00000001
 
@@ -41,16 +82,75 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
 "HideRecentlyAddedApps"=dword:00000001
 
-; Hide recently opened items in Jump Lists on Start or taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"Start_TrackDocs"=dword:00000000
+; Remove Desktop from This PC
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag]
+"ThisPCPolicy"="Hide"
 
-; Disable suggestions in Start menu
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"SubscribedContent-338388Enabled"=dword:00000000
+; Remove Documents from This PC
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag]
+"ThisPCPolicy"="Hide"
+
+; Remove Downloads from This PC
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag]
+"ThisPCPolicy"="Hide"
+
+; Remove Pictures from This PC
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag]
+"ThisPCPolicy"="Hide"
+
+; Remove Music from This PC
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag]
+"ThisPCPolicy"="Hide"
+
+; Remove Videos from This PC
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag]
+"ThisPCPolicy"="Hide"
+
+; Remove 3D Objects from This PC
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+
+; Miscellaneous
+
+; Open Explorer with This PC instead of Quick Access
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"LaunchTo"=dword:00000001
+
+; Disable Xbox Game Bar
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR]
+"AppCaptureEnabled"=dword:00000000
+
+; Don't open Xbox Game Bar using a button on a controller
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\GameBar]
+"UseNexusForGameBarEnabled"=dword:00000000
+
+; Disable keyboard layout switch hotkeys
+[HKEY_CURRENT_USER\Keyboard Layout\Toggle]
+"Language Hotkey"="3"
+"Hotkey"="3"
+"Layout Hotkey"="3"
+
+; Disable Filter keys keyboard shortcut
+[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
+"Flags"="122"
+
+; Disable Sticky keys keyboard shortcut
+[HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
+"Flags"="506"
+
+; Enable numlock at start
+[HKEY_CURRENT_USER\Control Panel\Keyboard]
+"InitialKeyboardIndicators"="2"
+
+[HKEY_USERS\.DEFAULT\Control Panel\Keyboard]
+"InitialKeyboardIndicators"="2"
+
+
+; Annoyances
 
 ; Prevent suggested apps install
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
 "ContentDeliveryAllowed"=dword:00000000
 "FeatureManagementEnabled"=dword:00000000
 "OemPreInstalledAppsEnabled"=dword:00000000
@@ -60,84 +160,156 @@ Windows Registry Editor Version 5.00
 "SilentInstalledAppsEnabled"=dword:00000000
 "SystemPaneSuggestionsEnabled"=dword:00000000
 
-; Enable Windows Explorer compact mode
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"UseCompactMode"=dword:00000001
+; Disable suggested content in Settings
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SubscribedContent-338393Enabled"=dword:00000000
+"SubscribedContent-353694Enabled"=dword:00000000
+"SubscribedContent-353696Enabled"=dword:00000000
 
 ; Disable Windows Explorer ads
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "ShowSyncProviderNotifications"=dword:00000000
 
-; Do not use check boxes to select items
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"AutoCheckSelect"=dword:00000000
+; Do not show the Windows welcome experience after updates (Edge webpage)
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SubscribedContent-310093Enabled "=dword:00000000
 
-; Disable OneDrive network access before login
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\OneDrive]
-"PreventNetworkTrafficPreUserSignIn"=dword:00000001
+; Disable the possibility of suggesting to finish the setup of the device
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
+"ScoobeSystemSettingEnabled"=dword:00000000
+
+; Disable tips, tricks, and suggestions
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SoftLandingEnabled"=dword:00000000
+"SubscribedContent-338389Enabled"=dword:00000000
+
+; Disable suggestions in timeline
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SubscribedContent-353698Enabled"=dword:00000000
+
+; Disable notifications on lockscreen
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings]
+"NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK"=dword:00000000
+
+; Disable Windows Update peer-to-peer
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization]
+"SystemSettingsDownloadMode"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config]
+"DODownloadMode"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
+"DODownloadMode"=dword:00000000
 
 ; Disable OneDrive
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OneDrive]
 "DisableFileSyncNGSC"=dword:00000001
 
-; Disable suggested content in Settings
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"SubscribedContent-338393Enabled"=dword:00000000
-"SubscribedContent-353694Enabled"=dword:00000000
-"SubscribedContent-353696Enabled"=dword:00000000
+; Disable OneDrive network access before login
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\OneDrive]
+"PreventNetworkTrafficPreUserSignIn"=dword:00000001
 
-; Do not show the Windows welcome experience after updates (Edge webpage)
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"SubscribedContent-310093Enabled "=dword:00000000
+; Disable Windows Defender notifications about recent activity and scan results
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender Security Center\Virus and threat protection]
+"SummaryNotificationDisabled"=dword:00000001
 
-; Disable the possibility of suggesting to finish the setup of the device
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
-"ScoobeSystemSettingEnabled"=dword:00000000
+; Disable web results in Search
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
+"BingSearchEnabled"=dword:00000000
 
-; Disable tips, tricks, and suggestions
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"SoftLandingEnabled"=dword:00000000
-"SubscribedContent-338389Enabled"=dword:00000000
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"DisableSearchBoxSuggestions"=dword:00000001
 
-; Disable suggestions in timeline
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"SubscribedContent-353698Enabled"=dword:00000000
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"AllowCloudSearch"=dword:00000000
+"ConnectedSearchUseWeb"=dword:00000000
+"DisableWebSearch"=dword:00000001
 
-; Disable Windows Spotlight
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"RotatingLockScreenEnabled"=dword:00000000
+; Disable feedback reminders
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
+"NumberOfSIUFInPeriod"=dword:00000000
+"PeriodInNanoSeconds"=dword:00000000
 
-; Disable tips and tricks on lockscreen
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"RotatingLockScreenOverlayEnabled"=dword:00000000
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+"DoNotShowFeedbackNotifications"=dword:00000001
 
-; Disable notifications on lockscreen
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings]
-"NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK"=dword:00000000
+; Disable F1 Help
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32]
+@=""
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64]
+@=""
 
-; Open Explorer with This PC instead of Quick Access
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"LaunchTo"=dword:00000001
 
-; Don't show recently used files and folders
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
-"ShowFrequent"=dword:00000000
-"ShowRecent"=dword:00000000
+; Privacy
 
-; Disable Windows Update peer-to-peer
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization]
-"SystemSettingsDownloadMode"=dword:00000000
+; Disable Input Personnalisation
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Personalization\Settings]
+"AcceptedPrivacyPolicy"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
-"DODownloadMode"=dword:00000000
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization]
+"RestrictImplicitInkCollection"=dword:00000001
+"RestrictImplicitTextCollection"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config]
-"DODownloadMode"=dword:00000000
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore]
+"HarvestContacts"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\InputPersonalization]
+"AllowInputPersonalization"=dword:00000000
+
+; Disable Cortana
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Windows Search]
+"CortanaConsent"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"AllowCortana"=dword:00000000
+"AllowCortanaAboveLock"=dword:00000000
+
+; Disable customised user experiences with diagnostic data
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy]
+"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy]
+"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
+
+; Disable advertising ID
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
+"Enabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
+"Enabled"=dword:00000000
+
+; Disable transmission of typing information
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TIPC]
+"Enabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Input\TIPC]
+"Enabled"=dword:00000000
+
+; Disable app access to user account information
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
+"Value"="Deny"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{C1D23ACC-752B-43E5-8448-8D0E519CD6D6}]
+"Value"="Deny"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
+"Value"="Deny"
+
+; Disable app starts tracking
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_TrackProgs"=dword:00000000
+
+; Disable app access to diagnostics information
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics]
+"Value"="Deny"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{2297E4E2-5DBE-466D-A12B-0F8286F0D9CA}]
+"Value"="Deny"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics]
+"Value"="Deny"
 
 ; Disable telemetry
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
-"AllowTelemetry"=dword:00000000
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat]
 "AITEnable"=dword:00000000
 
@@ -153,20 +325,29 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice]
 "Start"=dword:00000004
 
-; Customized user experiences with diagnostic data
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy]
-"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
+"AllowTelemetry"=dword:00000000
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Privacy]
-"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
+; Disable geopositioning
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors]
+"DisableLocation"=dword:00000001
+"DisableLocationScripting"=dword:00000001
+"DisableWindowsLocationProvider"=dword:00000001
+
+; Disable Cortana and Search geopositioning
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"AllowSearchToUseLocation"=dword:00000000
+
+; Prevent downloading speech recognition and speech synthesis models
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\Preferences]
+"ModelDownloadAllowed"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech]
+"AllowSpeechModelUpdate"=dword:00000000
 
 ; Prevent Windows Defender automatic sample submission
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
 "SubmitSamplesConsent"=dword:00000002
-
-; Disable Windows Defender notifications about recent activity and scan results
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender Security Center\Virus and threat protection]
-"SummaryNotificationDisabled"=dword:00000001
 
 ; Prevent handwriting data sharing
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC]
@@ -183,20 +364,6 @@ Windows Registry Editor Version 5.00
 ; Disable camera in lockscreen
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]
 "NoLockScreenCamera"=dword:00000001
-
-; Disable advertising ID
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
-"Enabled"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
-"Enabled"=dword:00000000
-
-; Disable transmission of typing information
-[HKEY_CURRENT_USER\Software\Microsoft\Input\TIPC]
-"Enabled"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Input\TIPC]
-"Enabled"=dword:00000000
 
 ; Disable Microsoft experiments
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\System]
@@ -228,53 +395,36 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
 "AllowCrossDeviceClipboard"=dword:00000000
 
-; Disable app access to user account information
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
-"Value"="Deny"
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{C1D23ACC-752B-43E5-8448-8D0E519CD6D6}]
-"Value"="Deny"
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
-"Value"="Deny"
-
-; Disable app starts tracking
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"Start_TrackProgs"=dword:00000000
-
-; Disable app access to diagnostics information
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics]
-"Value"="Deny"
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics]
-"Value"="Deny"
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{2297E4E2-5DBE-466D-A12B-0F8286F0D9CA}]
-"Value"="Deny"
-
-; Disable tracking (DNT) in Edge (legacy)
-[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main]
-"DoNotTrack"=dword:00000001
+; Edge
 
 ; Disable page prediction in Edge (legacy)
-[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead]
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead]
 "FPEnabled"=dword:00000000
 
+; Enable DNT in Edge (legacy)
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main]
+"DoNotTrack"=dword:00000001
+
 ; Disable search and website suggestions in Edge (legacy)
-[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main]
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main]
 "ShowSearchSuggestionsGlobal"=dword:00000000
 
+; Disable form suggestions in Edge (legacy)
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main]
+"Use FormSuggest"="no"
+
 ; Disable Cortana in Edge (legacy)
-[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI]
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI]
 "EnableCortana"=dword:00000000
+
+; Hide search history in Edge (legacy)
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI\ShowSearchHistory]
+@=dword:00000000
 
 ; Disable automatic address bar completion in Edge (legacy)
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Browser]
 "AllowAddressBarDropdown"=dword:00000000
-
-; Hide search history in Edge (legacy)
-[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI\ShowSearchHistory]
-@=dword:00000000
 
 ; Disable user feedback in Edge toolbar (legacy)
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
@@ -284,10 +434,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
 "AutofillCreditCardEnabled"=dword:00000000
 
-; Disable form suggestions in Edge (legacy)
-[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main]
-"Use FormSuggest"="no"
-
 ; Disable Edge (legacy) launch in background
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main]
 "AllowPrelaunch"=dword:00000000
@@ -296,222 +442,119 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader]
 "AllowTabPreloading"=dword:00000000
 
-; Disable tracking (DNT) in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+; Enable DNT in Edge (Chromium)
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "ConfigureDoNotTrack"=dword:00000001
 
 ; Disable access to payment methods in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "PaymentMethodQueryEnabled"=dword:00000000
 
 ; Disable telemetry in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "MetricsReportingEnabled"=dword:00000000
 "PersonalizationReportingEnabled"=dword:00000000
 "SendSiteInfoToImproveServices"=dword:00000000
 
 ; Disable credit card info storing and autofill in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "AutofillCreditCardEnabled"=dword:00000000
 
 ; Disable suggestions in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "LocalProvidersEnabled"=dword:00000000
 "SearchSuggestEnabled"=dword:00000000
 
 ; Disable form autofill in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "AutofillAddressEnabled"=dword:00000000
 
 ; Disable suggestion of similar sites when website cannot be found in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "AlternateErrorPagesEnabled"=dword:00000000
 
 ; Disable showing search history in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "AddressBarMicrosoftSearchInBingProviderEnabled"=dword:00000000
 
 ; Disable user feedback in Edge toolbar (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "UserFeedbackAllowed"=dword:00000000
 
 ; Disable shopping assistant in Edge (Chromium)
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Edge]
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
 "EdgeShoppingAssistantEnabled"=dword:00000000
 
+; Disable use of a web service to resolve navigation errors (Chromium)
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
+"ResolveNavigationErrorsUseWebService"=dword:00000000
+
+
+; Synchronisation
+
 ; Disable settings synchronisation
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync]
 "SyncPolicy"=dword:00000005
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows]
-"Enabled"=dword:00000000
-
-; Disable personalization settings synchronisation
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization]
+; Disable accessibility settings synchronisation
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility]
 "Enabled"=dword:00000000
 
 ; Disable browser settings synchronisation
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings]
 "Enabled"=dword:00000000
 
 ; Disable credentials synchronisation
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials]
 "Enabled"=dword:00000000
 
 ; Disable language settings synchronisation
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language]
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language]
 "Enabled"=dword:00000000
 
-; Disable accessibility settings synchronisation
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility]
+; Disable personalisation settings synchronisation
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization]
 "Enabled"=dword:00000000
 
-; Disable Cortana
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Windows Search]
-"CortanaConsent"=dword:00000000
+; Disable advanced Windows settings synchronisation
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows]
+"Enabled"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
-"AllowCortana"=dword:00000000
-"AllowCortanaAboveLock"=dword:00000000
-
-; Disable geopositioning
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors]
-"DisableLocation"=dword:00000001
-"DisableLocationScripting"=dword:00000001
-"DisableWindowsLocationProvider"=dword:00000001
-
-; Disable Cortana and Search geopositioning
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
-"AllowSearchToUseLocation"=dword:00000000
-
-; Prevent downloading speech recognition and speech synthesis models
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\Preferences]
-"ModelDownloadAllowed"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech]
-"AllowSpeechModelUpdate"=dword:00000000
-
-; Disable Input Personnalization
-[HKEY_CURRENT_USER\Software\Microsoft\Personalization\Settings]
-"AcceptedPrivacyPolicy"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization]
-"RestrictImplicitInkCollection"=dword:00000001
-"RestrictImplicitTextCollection"=dword:00000001
-
-[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization\TrainedDataStore]
-"HarvestContacts"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\InputPersonalization]
-"AllowInputPersonalization"=dword:00000000
-
-; Disable web results in Search
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
-"AllowCloudSearch"=dword:00000000
-"ConnectedSearchUseWeb"=dword:00000000
-"DisableWebSearch"=dword:00000001
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
-"BingSearchEnabled"=dword:00000000
-
-; Disable feedback reminders
-[HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules]
-"NumberOfSIUFInPeriod"=dword:00000000
-"PeriodInNanoSeconds"=dword:00000000
-
-; Remove Desktop from This PC
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag]
-"ThisPCPolicy"="Hide"
-
-; Remove Documents from This PC
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag]
-"ThisPCPolicy"="Hide"
-
-; Remove Downloads from This PC
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag]
-"ThisPCPolicy"="Hide"
-
-; Remove Pictures from This PC
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag]
-"ThisPCPolicy"="Hide"
-
-; Remove Music from This PC
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag]
-"ThisPCPolicy"="Hide"
-
-; Remove Videos from This PC
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag]
-"ThisPCPolicy"="Hide"
-
-; Remove 3D Objects from This PC
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-
-; Enable numlock at start
-[HKEY_USERS\.DEFAULT\Control Panel\Keyboard]
-"InitialKeyboardIndicators"="2"
-
-[HKEY_CURRENT_USER\Control Panel\Keyboard]
-"InitialKeyboardIndicators"="2"
-
-; Disable keyboard layout switch hotkeys
-[HKEY_CURRENT_USER\Keyboard Layout\Toggle]
-"Language Hotkey"="3"
-"Hotkey"="3"
-"Layout Hotkey"="3"
-
-; Disable Filter keys keyboard shortcut
-[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
-"Flags"="122"
-
-; Disable Sticky keys keyboard shortcut
-[HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
-"Flags"="506"
-
-; Disable Xbox Game Bar
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR]
-"AppCaptureEnabled"=dword:00000000
-
-; Don't open Xbox Game Bar using a button on a controller
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\GameBar]
-"UseNexusForGameBarEnabled"=dword:00000000
-
-; Disable F1 Help
-[HKEY_CURRENT_USER\Software\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32]
-@=""
-[HKEY_CURRENT_USER\Software\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64]
-@=""
 
 ; Optional tweaks - uncomment (remove ;) to enable
 
 ; Enable apps dark mode
-;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+;[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
 ;"AppsUseLightTheme"=dword:00000000
 
 ; Disable clipboard history
-;[HKEY_CURRENT_USER\Software\Microsoft\Clipboard]
+;[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Clipboard]
 ;"EnableClipboardHistory"=dword:00000000
 
 ;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
 ;"AllowClipboardHistory"=dword:00000000
+
+; Disable lockscreen
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]
+;"NoLockScreen"=dword:00000001
+
+; Disable password reveal button
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredUI]
+;"DisablePasswordReveal"=dword:00000001
 
 ; Disable Modern Sleep (aka. Connected Sleep)
 ;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
 ;"CsEnabled"=dword:00000000
 ;"PlatformAoAcOverride"=dword:00000000
 
+; Disable RDP Warning
+;[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Terminal Server Client]
+;"AuthenticationLevelOverride"=dword:00000000
+
 ; Fix L2TP/IPsec
 ;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent]
 ;"AssumeUDPEncapsulationContextOnSendRule"=dword:00000002
 
-; Disable lockscreen
-;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]
-;"NoLockScreen"=dword:00000001
-
 ; Add lockscreen timeout setting to power options
 ;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7]
 ;"Attributes"=dword:00000002
-
-; Disable RDP Warning
-;[HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client]
-;"AuthenticationLevelOverride"=dword:00000000
