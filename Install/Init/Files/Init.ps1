@@ -75,6 +75,7 @@ $LayoutModificationFilePath = 'LayoutModification.xml'
 $HostsFilePath = 'Hosts.txt'
 $TweaksFilePath = 'Tweaks.reg'
 $CertificatesFolderPath = 'Certificates'
+$FontsFolderPath = 'Fonts'
 $PostInstallFilePath = 'Post install.ps1'
 
 $ShouldCleanTaskbarAndStartMenu = $true
@@ -84,6 +85,7 @@ $ShouldBlockMicrosoftTelemetry = $true
 $ShouldInstallHosts = $true
 $ShouldInstallTweaks = $true
 $ShouldImportCertificates = $true
+$ShouldInstallFonts = $true
 $ShouldSetUserHomeFolderIcon = $true
 $ShouldPinFoldersToQuickAccess = $true
 $ShouldRemoveEdgeShortcutFromDesktop = $true
@@ -117,6 +119,13 @@ if ($ShouldImportCertificates -and !(Test-Path $CertificatesFolderPath)) {
     Write-Host -ForegroundColor Yellow "Certificates won't be imported."
     Pause
     $ShouldImportCertificates = $false
+}
+
+if ($ShouldInstallFonts -and !(Test-Path $FontsFolderPath)) {
+    Write-Host -ForegroundColor Yellow "`nFiles\$FontsFolderPath folder is missing."
+    Write-Host -ForegroundColor Yellow "Fonts won't be installed."
+    Pause
+    $ShouldInstallFonts = $false
 }
 
 if ($ShouldCopyPostInstallScript -and !(Test-Path $PostInstallFilePath)) {
@@ -295,11 +304,10 @@ if ($ShouldBlockMicrosoftTelemetry) {
     sc.exe delete DiagTrack | Out-Null
     sc.exe delete dmwappushservice | Out-Null
 
-    New-Item "$env:ProgramData\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl"
+    New-Item "$env:ProgramData\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl" | Out-Null
 }
 
 if ($ShouldInstallHosts) {
-
     Add-MpPreference -ExclusionPath 'C:\Windows\System32\drivers\etc\hosts'
 
     $WindowsHostsFilePath = "$env:WINDIR\System32\drivers\etc\hosts"
@@ -328,6 +336,22 @@ if ($ShouldImportCertificates) {
 
     Get-ChildItem -Path $CertificatesFolderPath -Filter *.crt | ForEach-Object {
         Import-Certificate -FilePath $_.FullName -CertStoreLocation Cert:\LocalMachine\Root | Out-Null
+    }
+}
+
+# Install fonts
+if ($ShouldInstallFonts) {
+    Write-Host 'Installing fonts...'
+
+    $InstalledFontsFolderPath = Join-Path $env:LOCALAPPDATA 'Microsoft\Windows\Fonts'
+    $Destination = (New-Object -ComObject Shell.Application).Namespace(0x14)
+
+    Get-ChildItem -Path $FontsFolderPath -Include *.ttf, *.otf -Recurse | ForEach-Object {
+        $TargetPath = Join-Path $InstalledFontsFolderPath $_.Name
+
+        if (!(Test-Path $TargetPath)) {
+            $Destination.CopyHere($_.FullName, 0x10)
+        }
     }
 }
 
