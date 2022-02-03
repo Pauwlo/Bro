@@ -304,7 +304,7 @@ if ($ShouldBlockMicrosoftTelemetry) {
     sc.exe delete DiagTrack | Out-Null
     sc.exe delete dmwappushservice | Out-Null
 
-    New-Item "$env:ProgramData\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl" | Out-Null
+    New-Item "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl" | Out-Null
 }
 
 if ($ShouldInstallHosts) {

@@ -117,7 +117,7 @@ if ($ShouldInstallChocolatey) {
 }
 
 # Clean start menu and desktop
-$StartMenuPath = "$env:ProgramData\Microsoft\Windows\Start Menu\Programs"
+$StartMenuPath = "$env:PROGRAMDATA\Microsoft\Windows\Start Menu\Programs"
 
 if (Test-Path "$StartMenuPath\7-Zip") {
     Move-Item "$StartMenuPath\7-Zip\7-Zip File Manager.lnk" "$StartMenuPath\7-Zip.lnk"
