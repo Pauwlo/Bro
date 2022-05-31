@@ -84,6 +84,7 @@ $ShouldUninstallUselessApps = $true
 $ShouldBlockMicrosoftTelemetry = $true
 $ShouldInstallHosts = $true
 $ShouldInstallTweaks = $true
+$ShouldDisableFocusAssistRules = $true
 $ShouldImportCertificates = $true
 $ShouldInstallFonts = $true
 $ShouldSetUserHomeFolderIcon = $true
@@ -328,6 +329,32 @@ if ($ShouldInstallHosts) {
 if ($ShouldInstallTweaks) {
     Write-Host 'Installing registry tweaks...'
     reg import $TweaksFilePath 2>&1 | Out-Null
+}
+
+# Disable Focus Assist automatic rules
+if ($ShouldDisableFocusAssistRules) {
+    Write-Host 'Disabling Focus Assist automatic rules...'
+
+    $Prefix = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\$quietmoment'
+    $Suffix = '$windows.data.notifications.quietmoment\Current'
+    $FocusAssistRules = @(
+        'presentation',
+        'game',
+        'fullscreen',
+        'postoobe'
+    )
+    $Name = 'Data'
+
+    foreach ($rule in $FocusAssistRules) {
+        $Data = (Get-ItemProperty -Path "$Prefix$rule$Suffix" -Name $Name -ErrorAction SilentlyContinue).$Name
+
+        if ($Data) {
+            if ($Data[22] -eq 1 -and $Data[23] -eq 194 -and $Data[24] -eq 20) {
+                $Data = $Data[0..21] + $Data[25..($Data.Length-1)] # Remove 3 bytes at 0x0016
+                Set-ItemProperty -Path "$Prefix$rule$Suffix" -Name $Name -Value $Data
+            }
+        }
+    }
 }
 
 # Import certificates

@@ -59,8 +59,6 @@ The script will do its job then reboot the computer.
 
 Open a Windows Explorer window (`Win`+`E`) and expand "This PC" in the sidebar.
 
-Disable automatic rules under Settings (`Win`+`I`) > System > Focus assist.
-
 ### Connect to the Internet
 
 Connect your computer to the internet.
