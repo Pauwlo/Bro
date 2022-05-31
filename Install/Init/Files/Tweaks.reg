@@ -71,6 +71,10 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
 "RotatingLockScreenOverlayEnabled"=dword:00000000
 
+; Remove Bluetooth icon from system tray
+[HKEY_CURRENT_USER\Control Panel\Bluetooth]
+"Notification Area Icon"=dword:00000000
+
 ; Remove Meet Now from system tray
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
 "HideSCAMeetNow"=dword:00000001
