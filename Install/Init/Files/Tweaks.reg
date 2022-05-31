@@ -221,6 +221,10 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender Security Center\Virus and threat protection]
 "SummaryNotificationDisabled"=dword:00000001
 
+; Disable backup reminders
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.BackupReminder]
+"Enabled"=dword:00000000
+
 ; Disable web results in Search
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
 "BingSearchEnabled"=dword:00000000
