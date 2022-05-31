@@ -164,6 +164,10 @@ Windows Registry Editor Version 5.00
 "SilentInstalledAppsEnabled"=dword:00000000
 "SystemPaneSuggestionsEnabled"=dword:00000000
 
+; Prevent PC Health Check install
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHC]
+"PreviousUninstall"=dword:00000001
+
 ; Disable suggested content in Settings
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
 "SubscribedContent-338393Enabled"=dword:00000000
