@@ -82,6 +82,8 @@ if ($ShouldInstallChocolatey) {
     $DocumentsPath = [Environment]::GetFolderPath('MyDocuments')
     (Get-Item "$DocumentsPath\WindowsPowerShell").Attributes += 'Hidden'
 
+    choco feature enable -n=useRememberedArgumentsForUpgrades
+
     if ($ShouldInstallFirefox) {
         choco install firefox -y
 
