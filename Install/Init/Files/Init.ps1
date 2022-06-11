@@ -1,71 +1,20 @@
 # Init
 
-# Self-elevate
-$IsElevated = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-if (!$IsElevated) {
-    $CommandLine = '-ExecutionPolicy Bypass -File "' + $MyInvocation.MyCommand.Path + '" ' + $MyInvocation.UnboundArguments
-    Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine
-    Exit
-}
-
-function Get-Logo {
-    Write-Host ' _____       _ _   '
-    Write-Host '|_   _|     (_) |  '
-    Write-Host '  | |  _ __  _| |_ '
-    Write-Host "  | | | '_ \| | __|"
-    Write-Host ' _| |_| | | | | |_ '
-    Write-Host '|_____|_| |_|_|\__|  (c) 2022 Pauwlo'
-    Write-Host ''
-}
-
-function New-Shortcut {
-
-    Param(
-        [Parameter(Mandatory = $true)]
-        [String]
-        $Path,
-        
-        [Parameter(Mandatory = $true)]
-        [String]
-        $Target,
-        
-        [Parameter()]
-        [String]
-        $Arguments,
-        
-        [Parameter()]
-        [String]
-        $Icon
-    )
-
-    $WShellObject = New-Object -ComObject WScript.Shell
-    $Shortcut = $WShellObject.CreateShortcut($Path)
-    $Shortcut.TargetPath = $Target
-
-    if ($Arguments) {
-        $Shortcut.Arguments = $Arguments
-    }
-
-    if ($Icon) {
-        $Shortcut.IconLocation = $Icon
-    }
-
-    $Shortcut.Save()
-}
-
-$Host.UI.RawUI.WindowTitle = 'Init'
-Get-Logo
-Write-Host 'Welcome to Init.'
-
 # Variable declarations
 $InitPath = $MyInvocation.MyCommand.Path
 $InitFolderPath = (Get-Item $InitPath).Directory.FullName
 Set-Location $InitFolderPath
 
+Import-Module .\Modules\Get-AdministratorPrivileges
+Import-Module .\Modules\Get-Logo
+Import-Module .\Modules\New-Shortcut
+
+Get-AdministratorPrivileges $MyInvocation
+
 $DesktopPath = [Environment]::GetFolderPath('Desktop')
-$LayoutModificationFilePath = 'LayoutModification.xml'
-$HostsFilePath = 'Hosts.txt'
-$TweaksFilePath = 'Tweaks.reg'
+$LayoutModificationFilePath = 'System\LayoutModification.xml'
+$HostsFilePath = 'System\Hosts.txt'
+$RegistryTweaksFilePath = 'System\Tweaks.reg'
 $CertificatesFolderPath = 'Certificates'
 $FontsFolderPath = 'Fonts'
 $PostInstallFilePath = 'Post install.ps1'
@@ -74,8 +23,8 @@ $ShouldCleanTaskbarAndStartMenu = $true
 $ShouldUninstallOneDrive = $true
 $ShouldUninstallUselessApps = $true
 $ShouldBlockMicrosoftTelemetry = $true
-$ShouldInstallHosts = $true
-$ShouldInstallTweaks = $true
+$ShouldPatchHosts = $true
+$ShouldPatchRegistry = $true
 $ShouldDisableFocusAssistRules = $true
 $ShouldImportCertificates = $true
 $ShouldInstallFonts = $true
@@ -83,47 +32,51 @@ $ShouldSetUserHomeFolderIcon = $true
 $ShouldPinFoldersToQuickAccess = $true
 $ShouldRemoveEdgeShortcutFromDesktop = $true
 $ShouldRenameComputer = $true
-$ShouldCopyPostInstallScript = $true
+$ShouldCreatePostInstallShortcut = $true
+
+$Host.UI.RawUI.WindowTitle = 'Init'
+Get-Logo
+Write-Host 'Welcome to Init.'
 
 # Init integrity checks
-if ($ShouldInstallHosts -and !(Test-Path $HostsFilePath)) {
+if ($ShouldPatchHosts -and !(Test-Path $HostsFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$HostsFilePath is missing."
-    Write-Host -ForegroundColor Yellow "Hosts file won't be modified."
+    Write-Host -ForegroundColor Yellow 'Hosts file will not be patched.'
     Pause
-    $ShouldInstallHosts = $false
+    $ShouldPatchHosts = $false
 }
 
 if ($ShouldCleanTaskbarAndStartMenu -and !(Test-Path $LayoutModificationFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$LayoutModificationFilePath is missing."
-    Write-Host -ForegroundColor Yellow "Taskbar and start menu won't be cleaned."
+    Write-Host -ForegroundColor Yellow 'Taskbar and start menu will not be cleaned.'
     Pause
     $ShouldCleanTaskbarAndStartMenu = $false
 }
 
-if ($ShouldInstallTweaks -and !(Test-Path $TweaksFilePath)) {
-    Write-Host -ForegroundColor Yellow "`nFiles\$TweaksFilePath is missing."
-    Write-Host -ForegroundColor Yellow "Registry tweaks won't be applied. (not recommended)"
+if ($ShouldPatchRegistry -and !(Test-Path $RegistryTweaksFilePath)) {
+    Write-Host -ForegroundColor Yellow "`nFiles\$RegistryTweaksFilePath is missing."
+    Write-Host -ForegroundColor Yellow 'Registry will not be patched (not recommended).'
     Pause
-    $ShouldInstallTweaks = $false
+    $ShouldPatchRegistry = $false
 }
 
 if ($ShouldImportCertificates -and !(Test-Path $CertificatesFolderPath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$CertificatesFolderPath folder is missing."
-    Write-Host -ForegroundColor Yellow "Certificates won't be imported."
+    Write-Host -ForegroundColor Yellow 'Certificates will not be imported.'
     Pause
     $ShouldImportCertificates = $false
 }
 
 if ($ShouldInstallFonts -and !(Test-Path $FontsFolderPath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$FontsFolderPath folder is missing."
-    Write-Host -ForegroundColor Yellow "Fonts won't be installed."
+    Write-Host -ForegroundColor Yellow 'Fonts will not be installed.'
     Pause
     $ShouldInstallFonts = $false
 }
 
 if ($ShouldCopyPostInstallScript -and !(Test-Path $PostInstallFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$PostInstallFilePath is missing."
-    Write-Host -ForegroundColor Yellow "Post install script won't be copied to the desktop. (not recommended)"
+    Write-Host -ForegroundColor Yellow 'Post install shortcut will not be created to the desktop (not recommended).'
     Pause
     $ShouldCopyPostInstallScript = $false
 }
@@ -150,7 +103,7 @@ if ($ShouldRenameComputer) {
         $ComputerName = Read-Host -Prompt 'Computer name'
     }
 
-    if ($env:COMPUTERNAME -eq $ComputerName) {`
+    if ($env:COMPUTERNAME -eq $ComputerName) {
         Write-Host -ForegroundColor Yellow "`nComputer name is already set to $ComputerName."
         Pause
         $ShouldRenameComputer = $false
@@ -182,10 +135,7 @@ if ($ShouldCleanTaskbarAndStartMenu) {
     }
 
     Stop-Process -Name explorer
-    Start-Sleep -s 5
-    $WShellObject = New-Object -ComObject WScript.Shell
-    $WShellObject.SendKeys('^{ESCAPE}')
-    Start-Sleep -s 5
+    Start-Sleep -s 3
 
     foreach ($Registry in @('HKLM', 'HKCU')) {
         $KeyPath = $Registry + ':\Software\Policies\Microsoft\Windows\Explorer'
@@ -223,9 +173,7 @@ if ($ShouldUninstallOneDrive) {
     )
 
     foreach ($Folder in $OneDriveFolders) {
-        if (Test-Path $Folder) {
-            Remove-Item $Folder -Recurse -Force
-        }
+        Remove-Item $Folder -Recurse -Force -ErrorAction SilentlyContinue
     }
 }
 
@@ -290,6 +238,8 @@ if ($ShouldUninstallUselessApps) {
 
 # Block Microsoft telemetry
 if ($ShouldBlockMicrosoftTelemetry) {
+    Write-Host 'Removing telemetry services...'
+
     sc.exe stop DiagTrack | Out-Null
     sc.exe stop dmwappushservice | Out-Null
     sc.exe delete DiagTrack | Out-Null
@@ -298,13 +248,12 @@ if ($ShouldBlockMicrosoftTelemetry) {
     New-Item "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl" | Out-Null
 }
 
-if ($ShouldInstallHosts) {
+if ($ShouldPatchHosts) {
     Add-MpPreference -ExclusionPath 'C:\Windows\System32\drivers\etc\hosts'
 
     $WindowsHostsFilePath = "$env:WINDIR\System32\drivers\etc\hosts"
-    $WindowsHosts = Get-Content $WindowsHostsFilePath
 
-    if ($WindowsHosts -match 'telemetry') {
+    if ((Get-Content $WindowsHostsFilePath) -match 'telemetry') {
         Write-Host -ForegroundColor Yellow 'It seems that the hosts file was already patched in the past.'
         Write-Host -ForegroundColor Yellow 'In order to prevent loosing user modifications, and to avoid duplicates, it will not be patched again by Init.'
         Pause
@@ -316,9 +265,12 @@ if ($ShouldInstallHosts) {
 }
 
 # Import registry tweaks
-if ($ShouldInstallTweaks) {
-    Write-Host 'Installing registry tweaks...'
-    reg import $TweaksFilePath 2>&1 | Out-Null
+if ($ShouldPatchRegistry) {
+    Write-Host 'Patching registry...'
+    reg import $RegistryTweaksFilePath 2>&1 | Out-Null
+}
+else {
+    Remove-Item $RegistryTweaksFilePath -ErrorAction SilentlyContinue
 }
 
 # Disable Focus Assist automatic rules
@@ -340,7 +292,7 @@ if ($ShouldDisableFocusAssistRules) {
 
         if ($Data) {
             if ($Data[22] -eq 1 -and $Data[23] -eq 194 -and $Data[24] -eq 20) {
-                $Data = $Data[0..21] + $Data[25..($Data.Length-1)] # Remove 3 bytes at 0x0016
+                $Data = $Data[0..21] + $Data[25..($Data.Length - 1)] # Remove 3 bytes at 0x0016
                 Set-ItemProperty -Path "$Prefix$rule$Suffix" -Name $Name -Value $Data
             }
         }
@@ -434,22 +386,16 @@ if ($ShouldRenameComputer) {
     Rename-Computer -NewName $ComputerName -WarningAction SilentlyContinue
 }
 
-# Copy post install script
-if ($ShouldCopyPostInstallScript) {
-    Copy-Item $PostInstallFilePath $DesktopPath
-    (Get-Item "$DesktopPath\$PostInstallFilePath").Attributes += 'Hidden'
-
-    if ($ShouldInstallTweaks) {
-        Copy-Item $TweaksFilePath $DesktopPath
-        (Get-Item "$DesktopPath\$TweaksFilePath").Attributes += 'Hidden'
-    }
-
-    New-Shortcut "$DesktopPath\Post install.lnk" 'powershell' "-ExecutionPolicy Bypass -File `".\$PostInstallFilePath`""
+# Create post install shortcut
+if ($ShouldCreatePostInstallShortcut) {
+    New-Shortcut "$DesktopPath\Post install.lnk" 'powershell' "-ExecutionPolicy Bypass -File `".\Files\Post install.ps1`""
+    (Get-Item $(Get-Location)).Attributes += 'Hidden'
+}
+else {
+    Remove-Item $InitFolderPath -Recurse -Force
 }
 
 # Final clean-up
-Set-Location '..'
-Remove-Item $InitFolderPath -Recurse -Force
-Remove-Item 'Start Init.lnk'
+Remove-Item '..\Start Init.lnk'
 
 Restart-Computer
