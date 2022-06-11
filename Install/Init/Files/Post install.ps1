@@ -22,6 +22,7 @@ $DummyFileName = 'Dummy (right-click - Properties - Change...)'
 $RegistryTweaksFilePath = 'System\Tweaks.reg'
 
 $ShouldPatchRegistry = Test-Path $RegistryTweaksFilePath
+$ShouldSynchronizeClock = $true
 $ShouldUninstallTeams = $true
 $ShouldInstallChocolatey = $true
 $ShouldInstallFirefox = $true
@@ -44,6 +45,14 @@ if (!$ShouldInstallChocolatey -and ($ShouldInstallFirefox -or $ShouldInstallVLC 
 if ($ShouldPatchRegistry) {
     Write-Host 'Patching registry again...'
     reg import $RegistryTweaksFilePath 2>&1 | Out-Null
+}
+
+# Synchronize clock
+if ($ShouldSynchronizeClock) {
+    Write-Host 'Synchronizing clock...'
+
+    sc.exe start w32time | Out-Null
+    W32tm /resync /force | Out-Null
 }
 
 # Uninstall Microsoft Teams

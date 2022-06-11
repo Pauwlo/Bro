@@ -73,9 +73,7 @@ Open Microsoft Store and Get updates.
 
 Activate Windows if needed.
 
-Synchronize time & date.
-
-Hide unwanted icons from the system tray (Bluetooth, or Intel Graphics for example).
+Hide unwanted icons from the system tray (Intel Graphics for example).
 
 Install system drivers, generally from the PC manufacturer support website.
 
