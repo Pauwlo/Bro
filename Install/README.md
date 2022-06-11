@@ -79,7 +79,7 @@ Install system drivers, generally from the PC manufacturer support website.
 
 ### Windows Defender
 
-Disclaimer: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Init. Of course, Microsoft doesn't like people to get rid of their telemetry stuff, so they're trying to scare you so you wipe the Hosts file. Please ignore the notification, allow the "threat" on your device and review [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) if you feel like so.
+Disclaimer: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Init. Of course, Microsoft doesn't like people to get rid of their telemetry stuff, so they're trying to scare you so you wipe the Hosts file. Please ignore the notification, allow the "threat" on your device and review [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) if you feel like so. Please note that Init adds the hosts file to the Defender exclusion list anyway.
 
 Enable **Tamper protection** if it's disabled. I don't know what is disabling it.
 
