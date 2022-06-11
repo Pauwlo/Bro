@@ -22,13 +22,13 @@ $DummyFileName = 'Dummy (right-click - Properties - Change...)'
 $RegistryTweaksFilePath = 'System\Tweaks.reg'
 
 $ShouldPatchRegistry = Test-Path $RegistryTweaksFilePath
-$ShouldSynchronizeClock = $true
 $ShouldUninstallTeams = $true
 $ShouldInstallChocolatey = $true
 $ShouldInstallFirefox = $true
 $ShouldInstallVLC = $true
 $ShouldInstallNotepadPlusPlus = $true
 $ShouldInstall7Zip = $true
+$ShouldSynchronizeClock = $true
 
 $Host.UI.RawUI.WindowTitle = 'Init (post install)'
 Get-Logo
@@ -45,14 +45,6 @@ if (!$ShouldInstallChocolatey -and ($ShouldInstallFirefox -or $ShouldInstallVLC 
 if ($ShouldPatchRegistry) {
     Write-Host 'Patching registry again...'
     reg import $RegistryTweaksFilePath 2>&1 | Out-Null
-}
-
-# Synchronize clock
-if ($ShouldSynchronizeClock) {
-    Write-Host 'Synchronizing clock...'
-
-    sc.exe start w32time | Out-Null
-    W32tm /resync /force | Out-Null
 }
 
 # Uninstall Microsoft Teams
@@ -133,6 +125,17 @@ if (Test-Path "$StartMenuPath\VideoLAN") {
     Move-Item "$StartMenuPath\VideoLAN\VLC media player.lnk" "$StartMenuPath\VLC.lnk"
     Remove-Item "$StartMenuPath\VideoLAN" -Recurse -Force
     Remove-Item 'C:\Users\Public\Desktop\VLC media player.lnk'
+}
+
+# Synchronize clock
+if ($ShouldSynchronizeClock) {
+    Write-Host 'Synchronizing clock...'
+
+    sc.exe start w32time | Out-Null
+    Start-Sleep -s 3
+    w32tm /config /update | Out-Null
+    w32tm /resync /rediscover | Out-Null
+    W32tm /resync /force | Out-Null
 }
 
 # Final clean-up
