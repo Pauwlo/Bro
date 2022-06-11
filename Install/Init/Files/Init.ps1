@@ -57,14 +57,6 @@ $Host.UI.RawUI.WindowTitle = 'Init'
 Get-Logo
 Write-Host 'Welcome to Init.'
 
-# Check if OneDrive setup is running
-$OneDriveSetup = Get-Process OneDriveSetup -ErrorAction SilentlyContinue
-if ($OneDriveSetup) {
-    Write-Host -ForegroundColor Yellow "`nOneDrive setup is still running. You probably started Init too early after installing Windows. Please wait 30 seconds, or more if you have a slow computer, and try again."
-    Pause
-    Exit
-}
-
 # Variable declarations
 $InitPath = $MyInvocation.MyCommand.Path
 $InitFolderPath = (Get-Item $InitPath).Directory.FullName
@@ -213,10 +205,8 @@ if ($ShouldUninstallOneDrive) {
     $OneDrive_x86 = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
     $OneDrive_x64 = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
 
-    $OneDriveProcess = Get-Process OneDrive -ErrorAction SilentlyContinue
-    if ($OneDriveProcess) {
-        Stop-Process -InputObject $OneDriveProcess -Force
-    }
+    Get-Process OneDriveSetup -ErrorAction SilentlyContinue | Stop-Process
+    Get-Process OneDrive -ErrorAction SilentlyContinue | Stop-Process
 
     if (Test-Path $OneDrive_x64) {
         Start-Process $OneDrive_x64 /uninstall -Wait
