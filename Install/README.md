@@ -71,7 +71,7 @@ Run Windows Update until you're up to date. You will probably have to restart yo
 
 Open Microsoft Store and Get updates.
 
-Activate Windows if needed.
+Activate Windows if needed ([need help?](https://github.com/massgravel/Microsoft-Activation-Scripts)).
 
 Hide unwanted icons from the system tray (Intel Graphics for example).
 
