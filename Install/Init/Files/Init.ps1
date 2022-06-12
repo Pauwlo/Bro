@@ -74,11 +74,11 @@ if ($ShouldInstallFonts -and !(Test-Path $FontsFolderPath)) {
     $ShouldInstallFonts = $false
 }
 
-if ($ShouldCopyPostInstallScript -and !(Test-Path $PostInstallFilePath)) {
+if ($ShouldCreatePostInstallShortcut -and !(Test-Path $PostInstallFilePath)) {
     Write-Host -ForegroundColor Yellow "`nFiles\$PostInstallFilePath is missing."
-    Write-Host -ForegroundColor Yellow 'Post install shortcut will not be created to the desktop (not recommended).'
+    Write-Host -ForegroundColor Yellow 'Post install shortcut will not be created on the desktop (not recommended).'
     Pause
-    $ShouldCopyPostInstallScript = $false
+    $ShouldCreatePostInstallShortcut = $false
 }
 
 if ($ShouldRenameComputer) {
