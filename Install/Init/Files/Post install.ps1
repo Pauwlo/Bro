@@ -18,8 +18,11 @@ if (! (Test-Internet)) {
 
 Get-AdministratorPrivileges $MyInvocation
 
-$DummyFileName = 'Dummy (right-click - Properties - Change...)'
 $RegistryTweaksFilePath = 'System\Tweaks.reg'
+$SoftwareFolderPath = 'Software'
+$DummyFileName = 'Dummy (right-click - Properties - Change...)'
+$DesktopPath = [Environment]::GetFolderPath('Desktop')
+$StartMenuPath = "$env:PROGRAMDATA\Microsoft\Windows\Start Menu\Programs"
 
 $ShouldPatchRegistry = Test-Path $RegistryTweaksFilePath
 $ShouldUninstallTeams = $true
@@ -29,6 +32,7 @@ $ShouldInstallVLC = $true
 $ShouldInstallNotepadPlusPlus = $true
 $ShouldInstall7Zip = $true
 $ShouldSynchronizeClock = $true
+$ShouldMoveSoftwareFolderToDesktop = $true
 
 $Host.UI.RawUI.WindowTitle = 'Init (post install)'
 Get-Logo
@@ -40,6 +44,14 @@ if (!$ShouldInstallChocolatey -and ($ShouldInstallFirefox -or $ShouldInstallVLC 
     Pause
     Exit
 }
+
+if ($ShouldMoveSoftwareFolderToDesktop -and !(Test-Path $SoftwareFolderPath)) {
+    Write-Host -ForegroundColor Yellow "`nFiles\$SoftwareFolderPath folder is missing."
+    Write-Host -ForegroundColor Yellow 'Third-party files will not be moved to the desktop.'
+    Pause
+    $ShouldMoveSoftwareFolderToDesktop = $false
+}
+
 
 # Reimport registry tweaks in case Windows updates overrode some
 if ($ShouldPatchRegistry) {
@@ -114,8 +126,6 @@ if ($ShouldInstallChocolatey) {
 }
 
 # Clean start menu and desktop
-$StartMenuPath = "$env:PROGRAMDATA\Microsoft\Windows\Start Menu\Programs"
-
 if (Test-Path "$StartMenuPath\7-Zip") {
     Move-Item "$StartMenuPath\7-Zip\7-Zip File Manager.lnk" "$StartMenuPath\7-Zip.lnk"
     Remove-Item "$StartMenuPath\7-Zip" -Recurse -Force
@@ -137,6 +147,13 @@ if ($ShouldSynchronizeClock) {
     w32tm /resync /rediscover | Out-Null
     W32tm /resync /force | Out-Null
 }
+
+# Move Software folder to the desktop
+if ($ShouldMoveSoftwareFolderToDesktop) {
+    Move-Item $SoftwareFolderPath $DesktopPath
+}
+
+Pause
 
 # Final clean-up
 Set-Location '..'
