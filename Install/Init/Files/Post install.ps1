@@ -108,9 +108,9 @@ if ($ShouldInstallChocolatey) {
     if ($ShouldInstall7Zip) {
         choco install 7zip --pre -ry
 
-        New-Item "$DummyFileName.7z" -Force | Out-Null
-        New-Item "$DummyFileName.rar" -Force | Out-Null
-        New-Item "$DummyFileName.zip" -Force | Out-Null
+        New-Item "$DesktopPath\$DummyFileName.7z" -Force | Out-Null
+        New-Item "$DesktopPath\$DummyFileName.rar" -Force | Out-Null
+        New-Item "$DesktopPath\$DummyFileName.zip" -Force | Out-Null
 
         # Set context menu items via registry
         $RegistryPath = 'HKCU:\SOFTWARE\7-Zip\Options'
