@@ -153,8 +153,6 @@ if ($ShouldMoveSoftwareFolderToDesktop) {
     Move-Item $SoftwareFolderPath $DesktopPath
 }
 
-Pause
-
 # Final clean-up
 Set-Location '..'
 Remove-Item $InitFolderPath -Recurse -Force
