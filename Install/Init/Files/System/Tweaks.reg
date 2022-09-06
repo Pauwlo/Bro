@@ -464,7 +464,6 @@ Windows Registry Editor Version 5.00
 
 ; Disable telemetry in Edge (Chromium)
 [HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
-"MetricsReportingEnabled"=dword:00000000
 "PersonalizationReportingEnabled"=dword:00000000
 "SendSiteInfoToImproveServices"=dword:00000000
 
