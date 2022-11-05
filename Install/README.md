@@ -71,7 +71,7 @@ Run Windows Update until you're up to date. You will probably have to restart yo
 
 Open Microsoft Store and Get updates.
 
-If you're using Windows 10, install **HEVC Video Extensions** via the shortcuts on the Desktop.
+If you're using Windows 10, install **HEVC Video Extensions** via the shortcut on the Desktop.
 
 Activate Windows if needed ([need help?](https://github.com/massgravel/Microsoft-Activation-Scripts)).
 
