@@ -31,6 +31,7 @@ $ShouldInstallFonts = $true
 $ShouldSetUserHomeFolderIcon = $true
 $ShouldPinFoldersToQuickAccess = $true
 $ShouldRemoveEdgeShortcutFromDesktop = $true
+$ShouldCreateHEVCAppShortcut = $true
 $ShouldRenameComputer = $true
 $ShouldCreatePostInstallShortcut = $true
 
@@ -378,6 +379,15 @@ if ($ShouldRemoveEdgeShortcutFromDesktop) {
     if (Test-Path $EdgeShortcutPathPublic) {
         Remove-Item $EdgeShortcutPathPublic -Force
     }
+}
+
+# Create a desktop shortcut to an app that will add native support
+# for HEIC images (thumbnails and open in Photos, essentially)
+# (already included in Windows 11)
+if ($ShouldCreateHEVCAppShortcut -and !((wmic os get Caption) -like '*windows 11*')) {
+    Write-Host 'Creating desktop shortcut for HEVC Video Extensions...'
+
+    New-Shortcut "$DesktopPath\Get HEVC Video Extensions.url" 'ms-windows-store://pdp/?ProductId=9n4wgh0z6vhq'
 }
 
 # Rename computer
