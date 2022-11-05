@@ -33,11 +33,11 @@ Install Windows. Your computer will restart and show you the OOBE.
 
 Select region and keyboard layout(s).
 
-Make sure you stay offline (click on `I don't have internet` then `Continue with limited setup`), so you can create a local account. With a password, please!
+If you're using Windows 11, press `Shift+F10`, and run the following command: `oobe\BypassNRO`. This will reboot the computer and force the OOBE to skip the Microsoft sign in part.
 
-Use secret questions if you feel like needing them. I don't. I usually just type some long and random string of letters and numbers.
+Make sure you stay offline (click on `I don't have internet` then `Continue with limited setup`), so you can create a local account.
 
-Decline all "recommended" settings, such as activity history, Cortana, speech recognition, location, etc.
+Decline **all** "recommended" settings, such as activity history, Cortana, speech recognition, location, etc.
 
 ## Run Init
 
