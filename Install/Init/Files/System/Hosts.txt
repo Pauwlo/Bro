@@ -1,8 +1,3 @@
-
-# MalwareBytes
-0.0.0.0 elb-telemetry-prod-external-1332413525.us-west-2.elb.amazonaws.com
-
-# Microsoft
 0.0.0.0 118-163-160-187-HINET-IP.hinet.net
 0.0.0.0 a-0001.a-msedge.net
 0.0.0.0 a-0002.a-msedge.net
@@ -85,6 +80,7 @@
 0.0.0.0 BN4SCH101121318.wns.windows.com
 0.0.0.0 BN4SCH101123006.wns.windows.com
 0.0.0.0 bnsch020022361.wns.windows.com
+0.0.0.0 browser.pipe.aria.microsoft.com
 0.0.0.0 bs.serving-sys.com
 0.0.0.0 by3301-a.1drv.com
 0.0.0.0 by3301-c.1drv.com
@@ -290,6 +286,7 @@
 0.0.0.0 ssw.live.com
 0.0.0.0 ssw.live.com.nsatc.net
 0.0.0.0 static.2mdn.net
+0.0.0.0 statics-marketingsites-neu-ms-com.akamaized.net
 0.0.0.0 statsfe1.ws.microsoft.com
 0.0.0.0 statsfe2.update.microsoft.com.akadns.net
 0.0.0.0 statsfe2.ws.microsoft.com
@@ -348,6 +345,9 @@
 0.0.0.0 wns.notify.windows.com.akadns.net
 0.0.0.0 www.msedge.net
 0.0.0.0 www.msftncsi.com
+
+# MalwareBytes
+0.0.0.0 elb-telemetry-prod-external-1332413525.us-west-2.elb.amazonaws.com
 
 # Microsoft Office
 0.0.0.0 e1723.g.akamaiedge.net
