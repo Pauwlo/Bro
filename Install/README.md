@@ -59,19 +59,13 @@ Enter the computer name, then press Enter.
 
 The script will do its job then reboot the computer.
 
-## Finish setting up Windows
-
-Open a Windows Explorer window (`Win`+`E`) and expand "This PC" in the sidebar.
-
 ### Connect to the Internet
 
 Connect your computer to the internet.
 
 Set the network as Private if you trust it.
 
-Windows may show you various prompts for using a Microsoft account instead of a local account. Always decline these *not-intrusive-at-all* messages.
-
-Run Windows Update until you're up to date. You will probably have to restart your computer several times. If you have errors, wait 5-10 minutes, and try again. Some updates are installing in background, and Windows Update app won't show them.
+Run Windows Update until you're up to date. You may have to restart your computer several times. If you see update errors, wait 5-10 minutes, and try again. Some updates are installing in the background, and the Windows Update app doesn't show them.
 
 Open Microsoft Store and Get updates.
 
@@ -79,11 +73,11 @@ Activate Windows if needed ([need help?](https://github.com/massgravel/Microsoft
 
 Hide unwanted icons from the system tray (Intel Graphics for example).
 
-Install system drivers, generally from the PC manufacturer support website.
+Install important or missing system drivers (BIOS update, touchpad, fingerprint reader or laptop hotkeys support...), generally from the PC manufacturer support website.
 
 ### Windows Defender
 
-Disclaimer: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Init. Of course, Microsoft doesn't like people to get rid of their telemetry stuff, so they're trying to scare you so you wipe the Hosts file. Please ignore the notification, allow the "threat" on your device and review [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) if you feel like so. Please note that Init adds the hosts file to the Defender exclusion list anyway.
+Disclaimer: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Init. Of course, Microsoft doesn't like people to get rid of their telemetry stuff, so they're trying to make you wipe the Hosts file so their data collections servers are unblocked. Please ignore the notification, allow the "threat" on your device and review [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) if you feel like so. Please note that Init adds the hosts file to the Defender exclusion list anyway...
 
 Enable **Tamper protection** if it's disabled. I don't know what is disabling it.
 
