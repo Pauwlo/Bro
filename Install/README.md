@@ -43,13 +43,15 @@ Decline **all** "recommended" settings, such as activity history, Cortana, speec
 
 ## Run Init
 
-If you want to import certificates with Init, place them in the `.\Init\Files\Certificates` folder. They will be imported in Local Machine\Trusted Root Certification Authorities.
+Clone this repository with Git on your machine, or [download ZIP](https://github.com/Pauwlo/Init/archive/refs/heads/main.zip).
 
-Copy the Init script folder and its shortcut `Start Init.lnk` on a USB drive. The one you used to install Windows, for example.
+If you want to import certificates with Init, place them in the `.\Init\Files\Certificates` folder. They will be imported in *Local Machine\Trusted Root Certification Authorities*.
 
-Insert the USB drive into the computer, then select "Open folder" when prompted.
+Copy the Init script folder and its shortcut `Start Init.lnk` on a USB drive. The one you've used to install Windows, for example.
 
-Copy the two elements on the desktop.
+Insert the USB drive into the freshly installed computer, then select "Open folder" when prompted.
+
+Move the two elements on the desktop.
 
 Double-click on `Start Init`. Click on Yes when prompted (Init requires administrator privileges).
 
