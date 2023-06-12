@@ -4,9 +4,9 @@
 
 ### Get Windows
 
-Download the desired Windows ISO via [TechBench](https://tb.rg-adguard.net/).
+Download the desired Windows ISO from [adguard](https://files.rg-adguard.net/), [UUP Dump](https://uupdump.net/) or [Microsoft](https://www.microsoft.com/fr-fr/software-download).
 
-Create a bootable USB drive with [Rufus](https://rufus.ie/).
+Create a bootable USB drive with [Rufus](https://rufus.ie/) (or use the Media Creation Tool from Microsoft).
 
 ## Install Windows
 
@@ -14,18 +14,20 @@ Make sure the computer is **not** connected to the internet.
 
 Boot from USB, in UEFI mode when available.
 
-Common hotkeys for BIOS and Select Boot Media menus:
+<details>
+    <summary>Common hotkeys for BIOS and Select Boot Media menus</summary>
+  
+    Brand  | BIOS Setup / Booting options | Select Boot Media
+    ------ | ---------------------------- | -----------------
+    Acer   | F2                           | F12 (if enabled in BIOS)
+    Asus   | Del                          | F8
+    Dell   | F12                          | N/A
+    HP     | Esc F10                      | Esc F9
+    Lenovo | F1, F2                       | F10, fn + F11, F12
+    MSI    | Del                          | F11
 
-Brand  | BIOS Setup / Booting options | Select Boot Media
------- | ---------------------------- | -----------------
-Acer   | F2                           | F12 (if enabled in BIOS)
-Asus   | Del                          | F8
-Dell   | F12                          | N/A
-HP     | Esc F10                      | Esc F9
-Lenovo | F1, F2                       | F10, fn + F11, F12
-MSI    | Del                          | F11
-
-*See more [here](https://www.disk-image.com/faq-bootmenu.htm).*
+    *See more [here](https://www.disk-image.com/faq-bootmenu.htm).*
+</details>
 
 Format the drive you want to install Windows on. Remove recovery partitions if you know what you're doing.
 
