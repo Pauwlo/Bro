@@ -97,15 +97,15 @@ Run the `Post install` script on the Desktop.
 
 Start Firefox.
 
-Pin to taskbar, make default browser and select theme.
+Set as default browser, don't import from previous browser, save and continue.
 
-Remove default **Getting started** and **Mozilla Firefox** bookmarks.
+Always show bookmarks toolbar (`Ctrl+Shift+B`).
 
-Always show bookmarks toolbar.
+Remove default bookmarks.
 
 Remove the "Import bookmarks..." button from the toolbar.
 
-Remove Pocket from the toolbar.
+Remove View and Pocket from the toolbar.
 
 #### Options
 
@@ -121,7 +121,7 @@ If using self-signed certificates, set `security.enterprise_roots.enabled` to `t
 
 Install [uBlock Origin](https://addons.mozilla.org/firefox/addon/ublock-origin/). Allow it to run in Private Windows.
 
-This script has created a dummy file on your desktop so you can easily set Firefox as the default application for .pdf files.
+Pin uBlock Origin to Toolbar.
 
 Right-click the file -> Properties -> Change... -> Select Firefox -> OK -> Delete.
 

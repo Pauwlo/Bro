@@ -93,8 +93,6 @@ if ($ShouldInstallChocolatey) {
 
     if ($ShouldInstallFirefox) {
         choco install firefox -ry
-
-        New-Item "$DesktopPath\$DummyFileName.pdf" -Force | Out-Null
     }
 
     if ($ShouldInstallVLC) {
