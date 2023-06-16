@@ -63,7 +63,7 @@ The script will do its job then reboot the computer.
 
 Connect your computer to the internet.
 
-Set the network as Private if you trust it.
+Set the network as Private if you trust it. Windows 10 will ask you on your first connect, on Windows 11 you have to go to Network settings to change it from Public.
 
 Run Windows Update until you're up to date. You may have to restart your computer several times. If you see update errors, wait 5-10 minutes, and try again. Some updates are installing in the background, and the Windows Update app doesn't show them.
 
