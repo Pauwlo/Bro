@@ -187,7 +187,7 @@ if ($ShouldUninstallUselessApps) {
         'Microsoft.549981C3F5F10',
         'Microsoft.Advertising.Xaml',
         'Microsoft.BingNews',
-        'Microsoft.BingWeather',
+        #'Microsoft.BingWeather', # MSN Weather
         'Microsoft.GamingApp',
         'Microsoft.GetHelp',
         'Microsoft.Getstarted',
