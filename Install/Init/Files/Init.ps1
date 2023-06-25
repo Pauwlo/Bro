@@ -8,6 +8,7 @@ Set-Location $InitFolderPath
 Import-Module .\Modules\Get-AdministratorPrivileges
 Import-Module .\Modules\Get-Logo
 Import-Module .\Modules\New-Shortcut
+Import-Module .\Modules\Set-Wallpaper
 
 Get-AdministratorPrivileges $MyInvocation
 
@@ -17,6 +18,7 @@ $HostsFilePath = 'System\Hosts.txt'
 $RegistryTweaksFilePath = 'System\Tweaks.reg'
 $CertificatesFolderPath = 'Certificates'
 $FontsFolderPath = 'Fonts'
+$WallpaperFolderPath = 'Wallpaper'
 $PostInstallFilePath = 'Post install.ps1'
 
 $ShouldCleanTaskbarAndStartMenu = $true
@@ -31,6 +33,7 @@ $ShouldInstallFonts = $true
 $ShouldSetUserHomeFolderIcon = $true
 $ShouldPinFoldersToQuickAccess = $true
 $ShouldRemoveEdgeShortcutFromDesktop = $true
+$ShouldSetWallpaper = $true
 $ShouldRenameComputer = $true
 $ShouldCreatePostInstallShortcut = $true
 
@@ -72,6 +75,13 @@ if ($ShouldInstallFonts -and !(Test-Path $FontsFolderPath)) {
     Write-Host -ForegroundColor Yellow 'Fonts will not be installed.'
     Pause
     $ShouldInstallFonts = $false
+}
+
+if ($ShouldSetWallpaper -and !(Test-Path $WallpaperFolderPath)) {
+    Write-Host -ForegroundColor Yellow "`nFiles\$WallpaperFolderPath folder is missing."
+    Write-Host -ForegroundColor Yellow 'Wallpaper will not be set.'
+    Pause
+    $ShouldSetWallpaper = $false
 }
 
 if ($ShouldCreatePostInstallShortcut -and !(Test-Path $PostInstallFilePath)) {
@@ -378,6 +388,14 @@ if ($ShouldRemoveEdgeShortcutFromDesktop) {
     if (Test-Path $EdgeShortcutPathPublic) {
         Remove-Item $EdgeShortcutPathPublic -Force
     }
+}
+
+# Set wallpaper
+if ($ShouldSetWallpaper) {
+    Write-Host 'Applying wallpaper...'
+
+    $WallpaperPath = (Get-ChildItem -Recurse -Include *.jpg, *.png)[0]
+    Set-Wallpaper $WallpaperPath
 }
 
 # Rename computer
