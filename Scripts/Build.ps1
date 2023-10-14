@@ -12,6 +12,8 @@ if (Test-Path $OutputFile) {
 $Now = Get-Date
 Write-Output "# This file was automatically generated on $Now." | Out-File $OutputFile
 
+Get-Content 'Stuff\Config.ps1' | Out-File $OutputFile -Append
+
 $Logo = Get-Content 'Stuff\Logo.txt' -Raw
 $Logo = "`$global:Logo = @'`r`n" + $Logo + "`r`n'@"
 Write-Output $Logo | Out-File $OutputFile -Append
@@ -21,3 +23,6 @@ Get-ChildItem .\Modules -File -Recurse | ForEach-Object {
 }
 
 Get-Content 'Scripts\Start.ps1' | Out-File $OutputFile -Append
+
+$OutputPath = ((Get-Item $PSScriptRoot).Parent).ToString() + "\Bro.ps1"
+Write-Host "Bro script built successfully to $OutputPath"
