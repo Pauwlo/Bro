@@ -24,4 +24,4 @@ Custom templates (`Documents\Custom Office Templates`)
 
 Fonts (`C:\Windows\Fonts`)
 
-*Congratulations, your computer can now be reinstalled/destroyed.*
+*Bravo, your computer can now be reinstalled/destroyed.*
