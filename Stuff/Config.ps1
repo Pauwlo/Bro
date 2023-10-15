@@ -32,6 +32,7 @@ $Config = @{
 	}
 
 	UselessApps = @(
+		'Clipchamp.Clipchamp'
 		'MicrosoftTeams'
 		'MicrosoftWindows.Client.WebExperience' # Widgets
 		'Microsoft.549981C3F5F10'
@@ -67,12 +68,14 @@ $Config = @{
 		'Microsoft.YourPhone'
 		'Microsoft.ZuneMusic'
 		'Microsoft.ZuneVideo'
+		'MicrosoftCorporationII.MicrosoftFamily'
+		'MicrosoftCorporationII.QuickAssist'
 	)
 
 	Assets = @{
-		Hosts = 'https://raw.githubusercontent.com/Pauwlo/Init/main/Install/Init/Files/System/Hosts.txt'
-		LayoutModificationXml = 'https://raw.githubusercontent.com/Pauwlo/Init/main/Install/Init/Files/System/LayoutModification.xml'
-		RegistryFile = 'https://allsafe.pauwlo.fr/files/Tweaks.reg'
-		Wallpaper = 'https://raw.githubusercontent.com/Pauwlo/Init/main/Install/Init/Files/Wallpaper/Gradient.jpg'
+		Hosts = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Hosts.txt'
+		LayoutModificationXml = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/LayoutModification.xml'
+		RegistryFile = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Tweaks.reg'
+		Wallpaper = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Gradient.jpg'
 	}
 }
