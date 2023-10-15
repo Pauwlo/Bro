@@ -72,7 +72,7 @@ $Config = @{
 	Assets = @{
 		Hosts = 'https://raw.githubusercontent.com/Pauwlo/Init/main/Install/Init/Files/System/Hosts.txt'
 		LayoutModificationXml = 'https://raw.githubusercontent.com/Pauwlo/Init/main/Install/Init/Files/System/LayoutModification.xml'
-		RegistryFile = 'https://raw.githubusercontent.com/Pauwlo/Init/main/Install/Init/Files/System/Tweaks.reg'
+		RegistryFile = 'https://allsafe.pauwlo.fr/files/Tweaks.reg'
 		Wallpaper = 'https://raw.githubusercontent.com/Pauwlo/Init/main/Install/Init/Files/Wallpaper/Gradient.jpg'
 	}
 }
