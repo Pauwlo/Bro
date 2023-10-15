@@ -45,15 +45,19 @@ Decline **all** "recommended" settings, such as activity history, Cortana, speec
 
 Connect your computer to the internet.
 
-Open a PowerShell or Windows Terminal window with admin privileges (right-click on Start menu, or `Win`+`X A`).
-
-[TODO] Run Bro from a single line (irm ...)
-
-### Connect to the Internet
-
 Set the network as Private if you trust it. Windows 10 will ask you on your first connect, on Windows 11 you have to go to Network settings to change it from Public.
 
-Run Windows Update until you're up to date. You may have to restart your computer several times. If you see update errors, wait 5-10 minutes, and try again. Some updates are installing in the background, and the Windows Update app doesn't show them.
+Open a PowerShell or Windows Terminal window with admin privileges (right-click on Start menu, or `Win`+`X A`).
+
+Run the following command:
+
+```powershell
+irm pauw.io/bro | iex
+```
+
+## Get Updates
+
+Run Windows Update until you're up to date. You may have to restart your computer several times. If you see update errors, wait 5-10 minutes, and try again. Some updates are installing in the background, and the Settings app may not show them.
 
 Open Microsoft Store and Get updates.
 
@@ -65,7 +69,7 @@ Install important or missing system drivers (BIOS update, touchpad, fingerprint 
 
 ### Windows Defender
 
-Disclaimer: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Init. Of course, Microsoft doesn't like people to get rid of their telemetry stuff, so they're trying to make you wipe the Hosts file so their data collections servers are unblocked. Please ignore the notification, allow the "threat" on your device and review [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) if you feel like so. Please note that Init adds the hosts file to the Defender exclusion list anyway...
+Warning: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Bro. It's fine. Microsoft doesn't like it when people mess with their telemetry stuff, so they're going out of their way and flag the Hosts file as a "threat" when it blocks their data collection servers. You can always check the [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) file content.
 
 Enable **Tamper protection** if it's disabled. I don't know what is disabling it.
 
@@ -76,10 +80,6 @@ Dismiss account protection and OneDrive warnings, if any.
 If the SSD capacity is limited, move **Documents**, **Pictures**, **Music** and **Videos** to `D:\`.
 
 ## Programs
-
-### Chocolatey
-
-Run the `Post install` script on the Desktop.
 
 ### Mozilla Firefox
 
