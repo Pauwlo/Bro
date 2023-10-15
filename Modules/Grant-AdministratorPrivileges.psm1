@@ -1,4 +1,4 @@
-function Get-AdministratorPrivileges {
+function Grant-AdministratorPrivileges {
 
 	Param(
         [Parameter(Mandatory = $true)]

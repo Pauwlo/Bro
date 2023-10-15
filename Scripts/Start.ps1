@@ -1,4 +1,4 @@
-Get-AdministratorPrivileges $MyInvocation
+Grant-AdministratorPrivileges $MyInvocation
 
 Get-Logo
 $Selection = Get-Menu
