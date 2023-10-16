@@ -6,12 +6,12 @@ A PowerShell framework to automate your operating system setup & backup procedur
 
 ### Backup
 
-See `Backup.md`.
+See `Docs/Backup.md`.
 
 ### Install
 
-See `Install.md`.
+See `Docs/Install.md`.
 
 ## Build
 
-Run `Scripts\Build.ps1`.
+Run `Build.ps1`.
