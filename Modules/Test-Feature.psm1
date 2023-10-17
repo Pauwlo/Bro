@@ -1,4 +1,4 @@
-function Test-FeatureEnabled {
+function Test-Feature {
 	Param(
         [Parameter(Mandatory = $true)]
         $Feature

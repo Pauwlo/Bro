@@ -1,100 +1,100 @@
 function Invoke-Install {
 
 	# Rename computer
-	if (Test-FeatureEnabled RenameComputer) {
+	if (Test-Feature RenameComputer) {
 		Invoke-RenameComputer
 	}
 
 	# Block Microsoft telemetry
-	if (Test-FeatureEnabled BlockMicrosoftTelemetry) {
+	if (Test-Feature BlockMicrosoftTelemetry) {
 		Write-Host 'Removing telemetry services...'
 		Remove-TelemetryServices
 	}
 
 	# Patch Hosts file
-	if (Test-FeatureEnabled PatchHosts) {
+	if (Test-Feature PatchHosts) {
 		Write-Host 'Patching hosts... (Windows Defender may false positive)'
 		Invoke-PatchHosts
 	}
 
 	# Patch registry
-	if (Test-FeatureEnabled PatchRegistry) {
+	if (Test-Feature PatchRegistry) {
 		Write-Host 'Patching registry...'
 		Invoke-PatchRegistry
 	}
 
 	# Disable Focus Assist automatic rules
-	if (Test-FeatureEnabled DisableFocusAssist) {
+	if (Test-Feature DisableFocusAssist) {
 		Write-Host 'Disabling Focus Assist automatic rules...'
 		Disable-FocusAssist
 	}
 
 	# Uninstall useless apps
-	if (Test-FeatureEnabled UninstallUselessApps) {
+	if (Test-Feature UninstallUselessApps) {
 		Write-Host 'Uninstalling useless apps...'
 		Remove-UselessApps
 	}
 
 	# Uninstall OneDrive
-	if (Test-FeatureEnabled UninstallOneDrive) {
+	if (Test-Feature UninstallOneDrive) {
 		Write-Host 'Uninstalling OneDrive...'
 		Remove-OneDrive
 	}
 
 	# Import certificates
-	if (Test-FeatureEnabled ImportCertificates) {
+	if (Test-Feature ImportCertificates) {
 		Write-Host 'Importing certificates...'
 	}
 
 	# Install fonts
-	if (Test-FeatureEnabled InstallFonts) {
+	if (Test-Feature InstallFonts) {
 		Write-Host 'Installing fonts...'
 	}
 
 	# Set user home folder icon
-	if (Test-FeatureEnabled SetUserHomeIcon) {
+	if (Test-Feature SetUserHomeIcon) {
 		Write-Host 'Setting user home folder icon...'
 		Set-UserHomeIcon
 	}
 
 	# Pin folders to Quick Access
-	if (Test-FeatureEnabled PinFoldersToQuickAccess) {
+	if (Test-Feature PinFoldersToQuickAccess) {
 		Write-Host 'Pinning user folders to Quick Access...'
 		Invoke-PinFoldersToQuickAccess
 	}
 
 	# Remove Edge shortcut from Desktop
-	if (Test-FeatureEnabled RemoveEdgeShortcut) {
+	if (Test-Feature RemoveEdgeShortcut) {
 		Write-Host 'Removing Edge shortcut from desktop...'
 		Remove-EdgeShortcut
 	}
 
 	# Set wallpaper
-	if (Test-FeatureEnabled SetWallpaper) {
+	if (Test-Feature SetWallpaper) {
 		Write-Host 'Applying wallpaper...'
 		Set-Wallpaper
 	}
 
 	# Install software
-	if (Test-FeatureEnabled InstallSoftware) {
+	if (Test-Feature InstallSoftware) {
 		Write-Host 'Installing software...'
 		Install-Software | Out-Null
 	}
 
 	# Clean start menu & taskbar
-	if (Test-FeatureEnabled CleanStartAndTaskbar) {
+	if (Test-Feature CleanStartAndTaskbar) {
 		Write-Host 'Cleaning taskbar & start menu...'
 		Invoke-CleanStartAndTaskbar
 	}
 
 	# Clean-up start menu and desktop
-	if (Test-FeatureEnabled CleanShortcuts) {
+	if (Test-Feature CleanShortcuts) {
 		Write-Host 'Cleaning shortcuts...'
 		Invoke-CleanShortcuts
 	}
 
 	# Synchronize clock
-	if (Test-FeatureEnabled SynchronizeClock) {
+	if (Test-Feature SynchronizeClock) {
 		Write-Host 'Synchronizing clock...'
 		Invoke-SynchronizeClock
 	}

@@ -3,7 +3,6 @@ $Config = @{
 		BlockMicrosoftTelemetry = $true
 		CleanShortcuts = $true
 		CleanStartAndTaskbar = $true
-		CreatePostInstallShortcut = $true
 		DisableFocusAssist = $true
 		ImportCertificates = $true
 		InstallFonts = $true
