@@ -1,6 +1,7 @@
 function Test-Feature {
 	Param(
         [Parameter(Mandatory = $true)]
+        [String]
         $Feature
     )
 

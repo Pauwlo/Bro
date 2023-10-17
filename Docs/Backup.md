@@ -1,5 +1,15 @@
 # Backup
 
+## Run Bro
+
+Open a PowerShell or Windows Terminal window with admin privileges (right-click on Start menu, or `Win`+`X A`).
+
+Run the following command:
+
+```powershell
+irm pauw.io/bro | iex
+```
+
 ## Data
 
 Backup main folders:

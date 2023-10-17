@@ -1,8 +1,12 @@
 function Get-Asset {
 	Param(
         [Parameter(Mandatory = $true)]
+        [String]
         $Asset,
-		$OutputPath
+
+		[Parameter()]
+        [String]
+        $OutputPath
     )
 
 	$AssetUrl = $Config['Assets'][$Asset]

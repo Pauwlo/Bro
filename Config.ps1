@@ -1,8 +1,10 @@
 $Config = @{
 	Features = @{
+		BackupUserFolders = $true
 		BlockMicrosoftTelemetry = $true
 		CleanShortcuts = $true
 		CleanStartAndTaskbar = $true
+		CreateTemporaryBackupShortcut = $true
 		DisableFocusAssist = $true
 		ImportCertificates = $true
 		InstallFonts = $true
@@ -76,5 +78,14 @@ $Config = @{
 		LayoutModificationXml = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/LayoutModification.xml'
 		RegistryFile = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Tweaks.reg'
 		Wallpaper = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Gradient.jpg'
+	}
+
+	BackupUserFolders = @{
+		Desktop = $true
+		Downloads = $true
+		Documents = $true
+		Pictures = $true
+		Music = $true
+		Videos = $true
 	}
 }
