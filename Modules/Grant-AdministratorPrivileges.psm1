@@ -1,10 +1,10 @@
 function Grant-AdministratorPrivileges {
 
 	Param(
-        [Parameter(Mandatory = $true)]
-        [Management.Automation.InvocationInfo]
-        $Invocation
-    )
+		[Parameter(Mandatory = $true)]
+		[Management.Automation.InvocationInfo]
+		$Invocation
+	)
 
 	$IsElevated = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 

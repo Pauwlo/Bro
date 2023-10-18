@@ -1,19 +1,19 @@
 function Invoke-BackupUserFolders {
 
 	Param(
-        [Parameter(Mandatory = $true)]
-        [String]
-        $OutputPath
-    )
+		[Parameter(Mandatory = $true)]
+		[String]
+		$OutputPath
+	)
 
 	$ShellAppObject = New-Object -ComObject Shell.Application
 	
-	$Desktop   = [Environment]::GetFolderPath('Desktop')
-	$Downloads = $ShellAppObject.NameSpace('shell:Downloads').Self.Path
-	$Documents = [Environment]::GetFolderPath('MyDocuments')
-	$Pictures  = [Environment]::GetFolderPath('MyPictures')
-	$Music     = [Environment]::GetFolderPath('MyMusic')
-	$Videos    = [Environment]::GetFolderPath('MyVideos')
+	$Desktop	= [Environment]::GetFolderPath('Desktop')
+	$Downloads	= $ShellAppObject.NameSpace('shell:Downloads').Self.Path
+	$Documents	= [Environment]::GetFolderPath('MyDocuments')
+	$Pictures	= [Environment]::GetFolderPath('MyPictures')
+	$Music		= [Environment]::GetFolderPath('MyMusic')
+	$Videos		= [Environment]::GetFolderPath('MyVideos')
 
 	$BackupFolders = @(
 		@{

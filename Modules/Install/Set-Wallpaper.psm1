@@ -10,7 +10,7 @@ public class Wallpaper
   private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
   public static void SetWallpaper(string path)
   {
-    SystemParametersInfo(SetDesktopWallpaper, 0, path, UpdateIniFile | SendWinIniChange);
+	SystemParametersInfo(SetDesktopWallpaper, 0, path, UpdateIniFile | SendWinIniChange);
   }
 }
 '@
@@ -22,7 +22,7 @@ function Set-Wallpaper {
 
 	Get-Asset Wallpaper $FilePath | Out-Null
 
-    [Wallpaper]::SetWallpaper($FilePath)
+	[Wallpaper]::SetWallpaper($FilePath)
 
-    Remove-Item $FilePath
+	Remove-Item $FilePath
 }
