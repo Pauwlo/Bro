@@ -6,8 +6,8 @@ $Config = @{
 		CleanStartAndTaskbar = $true
 		CreateTemporaryBackupShortcut = $true
 		DisableFocusAssist = $true
-		ImportCertificates = $true
-		InstallFonts = $true
+		ImportCertificates = $false
+		InstallFonts = $false
 		InstallSoftware = $true
 		PatchHosts = $true
 		PatchRegistry = $true
@@ -74,6 +74,8 @@ $Config = @{
 	)
 
 	Assets = @{
+		Certificates = ''
+		Fonts = ''
 		Hosts = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Hosts.txt'
 		LayoutModificationXml = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/LayoutModification.xml'
 		RegistryFile = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Tweaks.reg'

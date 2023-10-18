@@ -44,11 +44,13 @@ function Invoke-Install {
 	# Import certificates
 	if (Test-Feature ImportCertificates) {
 		Write-Host 'Importing certificates...'
+		Import-Certificates
 	}
 
 	# Install fonts
 	if (Test-Feature InstallFonts) {
 		Write-Host 'Installing fonts...'
+		Install-Fonts
 	}
 
 	# Set user home folder icon

@@ -21,9 +21,9 @@ function Grant-KeyPermissions {
 
 	switch -regex ($RootKey) {
 		'HKCU|HKEY_CURRENT_USER'	{ $RootKey = 'CurrentUser' }
-		'HKLM|HKEY_LOCAL_MACHINE'   { $RootKey = 'LocalMachine' }
+		'HKLM|HKEY_LOCAL_MACHINE'	{ $RootKey = 'LocalMachine' }
 		'HKCR|HKEY_CLASSES_ROOT'	{ $RootKey = 'ClassesRoot' }
-		'HKCC|HKEY_CURRENT_CONFIG'  { $RootKey = 'CurrentConfig' }
+		'HKCC|HKEY_CURRENT_CONFIG'	{ $RootKey = 'CurrentConfig' }
 		'HKU|HKEY_USERS'			{ $RootKey = 'Users' }
 	}
 
