@@ -1,11 +1,17 @@
 function Get-BackupOutputPath {
-	$Now = (Get-Date).ToString("yyyy-MM-dd HH-mm-ss")
-	$OutputPath = "$env:TMP\Backup $Now"
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$Name
+	)
+
+	$OutputPath = "$env:TMP\$Name"
 
 	$i = 0
 	while (Test-Path $OutputPath) {
 		$i++
-		$OutputPath = "$Desktop\Backup $Now ($i)"
+		$OutputPath = "$env:TMP\$Name ($i)"
 	}
 
 	New-Item $OutputPath -ItemType Directory | Out-Null

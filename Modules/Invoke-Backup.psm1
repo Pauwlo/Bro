@@ -1,11 +1,23 @@
 function Invoke-Backup {
 
-	$OutputPath = Get-BackupOutputPath
 	$DesktopPath = [Environment]::GetFolderPath('Desktop')
+
+	# Create a temporary backup location
+	$Now = (Get-Date).ToString("yyyy-MM-dd HH-mm-ss")
+	$Name = "Backup $Now"
+	$OutputPath = Get-BackupOutputPath $Name
 
 	# Create a temporary shortcut to the backup location on the desktop
 	if (Test-Feature CreateTemporaryBackupShortcut) {
-		New-Shortcut "$DesktopPath\Backup.lnk" $OutputPath
+		$ShortcutName = 'Backup'
+
+		$i = 0
+		while (Test-Path "$DesktopPath\$ShortcutName.lnk") {
+			$i++
+			$ShortcutName = "Backup ($i)"
+		}
+
+		New-Shortcut "$DesktopPath\$ShortcutName.lnk" $OutputPath
 	}
 	
 	# Backup user folders
@@ -13,7 +25,17 @@ function Invoke-Backup {
 		Invoke-BackupUserFolders $OutputPath
 	}
 
-	Remove-Item "$DesktopPath\Backup.lnk" -ErrorAction SilentlyContinue
+	# Remove temporary shortcuts
+	if (Test-Feature CreateTemporaryBackupShortcut) {
+		Remove-Item "$DesktopPath\$ShortcutName.lnk" -ErrorAction SilentlyContinue
+		Remove-Item "$OutputPath\Desktop\$ShortcutName.lnk" -ErrorAction SilentlyContinue
+	}
+
+	# Make a ZIP of the backup data and put it on the desktop
+	Compress-Archive $OutputPath "$DesktopPath\$Name.zip"
+
+	# Delete the backup data
+	Remove-Item $OutputPath -Force -Recurse
 
 	Write-Host 'Done!'
 }
