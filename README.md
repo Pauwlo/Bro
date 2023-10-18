@@ -1,13 +1,17 @@
-# Init
+# Bro
 
-Documenting and automating my own system (re)installation procedures because I like it clean.
+A PowerShell framework to automate your operating system setup & backup procedures.
 
-Feel free to fork this repository and tweak it to your needs.
+## Usage
 
-## Backup
+### Backup
 
-See [Backup\README.md](https://github.com/Pauwlo/Init/blob/main/Backup/README.md).
+See `Docs/Backup.md`.
 
-## Install
+### Install
 
-See [Install\README.md](https://github.com/Pauwlo/Init/blob/main/Install/README.md).
+See `Docs/Install.md`.
+
+## Build
+
+Run `Build.ps1`.
