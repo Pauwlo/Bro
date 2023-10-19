@@ -76,10 +76,10 @@ $Config = @{
 	Assets = @{
 		Certificates = ''
 		Fonts = ''
-		Hosts = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Hosts.txt'
-		LayoutModificationXml = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/LayoutModification.xml'
-		RegistryFile = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Tweaks.reg'
-		Wallpaper = 'https://raw.githubusercontent.com/Pauwlo/Init/bro/Stuff/Gradient.jpg'
+		Hosts = 'https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Hosts.txt'
+		LayoutModificationXml = 'https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/LayoutModification.xml'
+		RegistryFile = 'https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Tweaks.reg'
+		Wallpaper = 'https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Gradient.jpg'
 	}
 
 	BackupUserFolders = @{
