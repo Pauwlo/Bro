@@ -48,7 +48,7 @@ function Grant-KeyPermissions {
 			$Key,
 
 			[Parameter(Mandatory = $true)]
-			[String]
+			[System.Security.Principal.SecurityIdentifier]
 			$Sid,
 
 			[Parameter()]
