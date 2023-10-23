@@ -38,5 +38,5 @@ switch ($Selection) {
 }
 '@ | Out-File $OutputFile -Append
 
-$OutputPath = ((Get-Item $PSScriptRoot).Parent).ToString() + "\Bro.ps1"
+$OutputPath = ((Get-Item $PSScriptRoot).Parent).ToString() + '\' + $OutputFile
 Write-Host "Bro script built successfully to $OutputPath"
