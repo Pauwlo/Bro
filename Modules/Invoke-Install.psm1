@@ -1,4 +1,5 @@
 function Invoke-Install {
+	$ProgressPreference = 'SilentlyContinue'
 
 	# Rename computer
 	if (Test-Feature RenameComputer) {
@@ -100,6 +101,8 @@ function Invoke-Install {
 		Write-Host 'Synchronizing clock...'
 		Invoke-SynchronizeClock
 	}
+
+	$ProgressPreference = 'Continue'
 
 	Write-Host 'Done!'
 }
