@@ -7,6 +7,11 @@ function Invoke-CleanShortcuts {
 		Remove-Item "$StartMenu\7-Zip" -Recurse
 	}
 	
+	if (Test-Path "$StartMenu\VideoLAN\VLC") {
+		Move-Item "$StartMenu\VideoLAN\VLC\VLC media player.lnk" "$StartMenu\VLC.lnk"
+		Remove-Item "$StartMenu\VideoLAN" -Recurse
+	}
+	
 	if (Test-Path "$StartMenu\VideoLAN") {
 		Move-Item "$StartMenu\VideoLAN\VLC media player.lnk" "$StartMenu\VLC.lnk"
 		Remove-Item "$StartMenu\VideoLAN" -Recurse
