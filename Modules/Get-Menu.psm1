@@ -9,7 +9,7 @@ function Get-Menu {
 		$Selection = [System.Console]::ReadKey($true)
 	}
 
-	switch ($Selection) {
+	switch ($Selection.KeyChar) {
 		b { return 0 }
 		i { return 1 }
 		q { return 9 }
