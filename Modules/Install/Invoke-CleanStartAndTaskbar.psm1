@@ -6,8 +6,10 @@ function Invoke-CleanStartAndTaskbar {
 	Set-Location C:\
 	Import-StartLayout -LayoutPath $TempLayoutPath -MountPath C:
 
+	$KeyPathRelative = 'Software\Policies\Microsoft\Windows\Explorer'
+
 	foreach ($Registry in @('HKLM', 'HKCU')) {
-		$KeyPath = $Registry + ':\Software\Policies\Microsoft\Windows\Explorer'
+		$KeyPath = "$Registry`:\$KeyPathRelative"
 
 		if (!(Test-Path $KeyPath)) {
 			New-Item $KeyPath | Out-Null
@@ -21,8 +23,10 @@ function Invoke-CleanStartAndTaskbar {
 	Start-Sleep 3
 
 	foreach ($Registry in @('HKLM', 'HKCU')) {
-		$KeyPath = $Registry + ':\Software\Policies\Microsoft\Windows\Explorer'
-		Remove-Item $KeyPath
+		$KeyPath = "$Registry`:\$KeyPathRelative"
+
+		Remove-ItemProperty $KeyPath -Name 'LockedStartLayout'
+		Remove-ItemProperty $KeyPath -Name 'StartLayoutFile'
 	}
 
 	Remove-Item $TempLayoutPath
