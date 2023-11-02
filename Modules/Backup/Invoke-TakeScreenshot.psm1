@@ -19,6 +19,8 @@ function Invoke-TakeScreenshot {
 	# Show the desktop
 	$ShellAppObject = New-Object -ComObject Shell.Application
 	$ShellAppObject.toggleDesktop()
+	$ShellScriptObject = New-Object -ComObject WScript.Shell
+	$ShellScriptObject.SendKeys("^{ESC}")
 
 	Start-Sleep 1
 
