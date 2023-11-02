@@ -16,6 +16,7 @@ $Config = @{
 		RenameComputer = $true
 		SetUserHomeIcon = $true
 		SetWallpaper = $true
+		TakeScreenshot = $true
 		UninstallOneDrive = $true
 		UninstallUselessApps = $true
 	}

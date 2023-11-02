@@ -31,6 +31,11 @@ function Invoke-Backup {
 		Remove-Item "$OutputPath\Desktop\$ShortcutName.lnk" -ErrorAction SilentlyContinue
 	}
 
+	# Take a screenshot of the desktop
+	if (Test-Feature TakeScreenshot) {
+		Invoke-TakeScreenshot $OutputPath
+	}
+
 	# Make a ZIP of the backup data and put it on the desktop
 	Compress-Archive $OutputPath "$DesktopPath\$Name.zip"
 
