@@ -13,7 +13,7 @@ function Invoke-PatchRegistry {
 	Write-Output "reg import '$FilePath' 2>&1" | Out-File $ScriptFilePath -Encoding ascii
 	Write-Output "Remove-Item '$FilePath'" | Out-File $ScriptFilePath -Append -Encoding ascii
 	Write-Output "Remove-Item '$ScriptFilePath'" | Out-File $ScriptFilePath -Append -Encoding ascii
-	Write-Output "Unregister-ScheduledTask 'Bro\Re-patch registry'" | Out-File $ScriptFilePath -Append -Encoding ascii
+	Write-Output "Unregister-ScheduledTask 'Re-patch registry' -Confirm:`$false" | Out-File $ScriptFilePath -Append -Encoding ascii
 
 	$A = New-ScheduledTaskAction -Execute 'powershell' -Argument "-ExecutionPolicy Bypass -File `"$ScriptFilePath`""
 	$T = New-ScheduledTaskTrigger -AtLogon
