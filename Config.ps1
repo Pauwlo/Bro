@@ -28,17 +28,17 @@ $Config = @{
 		Chocolatey = $true # required for below
 		WinGet = $true
 
-		Firefox = $true
-		VLC = $true
-		NotepadPlusPlus = $true
-		'7Zip' = $true
-	}
-
-	ChocolateyPackages = @{
 		Firefox = $false
 		VLC = $false
 		NotepadPlusPlus = $false
 		'7Zip' = $false
+	}
+
+	ChocolateyPackages = @{
+		Firefox = $true
+		VLC = $true
+		NotepadPlusPlus = $true
+		'7Zip' = $true
 	}
 
 	UselessApps = @(
