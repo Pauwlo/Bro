@@ -4,7 +4,7 @@ function Remove-TelemetryServices {
 	sc.exe delete DiagTrack | Out-Null
 	sc.exe delete dmwappushservice | Out-Null
 
-	$LogPath = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl"
+	$LogPath = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\Autologger\AutoLogger-Diagtrack-Listener.etl"
 
 	if (Test-Path $LogPath) {
 		Remove-Item $LogPath -Force

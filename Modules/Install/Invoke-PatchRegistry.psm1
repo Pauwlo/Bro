@@ -19,7 +19,7 @@ function Invoke-PatchRegistry {
 	$T = New-ScheduledTaskTrigger -AtLogon
 	$P = New-ScheduledTaskPrincipal -UserId SYSTEM -RunLevel Highest
 	$Task = New-ScheduledTask -Action $A -Trigger $T -Principal $P
-	Register-ScheduledTask 'Bro\Re-patch registry' -InputObject $Task | Out-Null
+	Register-ScheduledTask 'Bro\Re-patch registry' -InputObject $Task -Force | Out-Null
 
 	Stop-Process -Name explorer
 }

@@ -29,6 +29,8 @@ function Invoke-CleanStartAndTaskbar {
 		Remove-ItemProperty $KeyPath -Name 'StartLayoutFile'
 	}
 
+	Stop-Process -Name explorer
+
 	Remove-Item $TempLayoutPath
 	Set-Location $PreviousLocation
 }
