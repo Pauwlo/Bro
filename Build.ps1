@@ -30,9 +30,12 @@ switch ($Selection) {
 		Invoke-Backup
 	}
 	1 {
-		Invoke-Install
+		Invoke-Debloat
 	}
 	2 {
+		Invoke-Install
+	}
+	3 {
 		Invoke-Update
 	}
 	9 {
