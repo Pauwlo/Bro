@@ -32,6 +32,9 @@ switch ($Selection) {
 	1 {
 		Invoke-Install
 	}
+	2 {
+		Invoke-Update
+	}
 	9 {
 		Stop-Bro
 	}
