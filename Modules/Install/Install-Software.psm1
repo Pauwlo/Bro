@@ -4,6 +4,7 @@ function Install-Software {
 		Install-Chocolatey
 
 		if (Test-InstallSoftware WinGet) {
+			choco install microsoft-vclibs -ry
 			choco install winget -ry
 		}
 
