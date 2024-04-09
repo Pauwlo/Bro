@@ -25,7 +25,10 @@ Get-ChildItem .\Modules -File -Recurse | ForEach-Object {
 Grant-AdministratorPrivileges $MyInvocation
 
 $OriginalFolder = Split-Path -Parent $MyInvocation.MyCommand.Definition
-Set-Location $OriginalFolder
+
+if (Test-Path $OriginalFolder) {
+	Set-Location $OriginalFolder
+}
 
 $Config = Get-Config
 
