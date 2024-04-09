@@ -3,6 +3,6 @@ function Test-InstallChocolateyPackage {
 		[Parameter(Mandatory = $true)]
 		$Package
 	)
-
-	return $Config['ChocolateyPackages'][$Package] -eq $true
+	
+	return $Package -in $Config.chocolatey
 }

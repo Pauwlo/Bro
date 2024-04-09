@@ -12,7 +12,7 @@ function Test-Feature {
 
 	if (! $Config.features.$Group) {
 		Write-Warning "Unknown feature group: $Group"
-	} elseif (! $Config.features.$Group.$Name) {
+	} elseif (! $Name -in $Config.features.$Group) {
 		Write-Warning "Unknown feature for group $Group`: $Name"
 	}
 

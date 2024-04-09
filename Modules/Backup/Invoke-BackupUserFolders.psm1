@@ -43,8 +43,10 @@ function Invoke-BackupUserFolders {
 	)
 
 	$BackupFolders | ForEach-Object {
-		if ($Config['BackupUserFolders'][$_.Destination] -eq $true) {
-			Write-Host "Saving user $($_.Destination.ToLower())..."
+		$destination = $_.Destination.ToLower()
+
+		if ($Config.backupFolders.$destination -eq $true) {
+			Write-Host "Saving user $destination..."
 			$Destination = "$OutputPath\" + $_.Destination
 			Copy-Item $_.Source $Destination -Force -Recurse
 		}

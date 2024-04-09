@@ -10,7 +10,7 @@ function Get-AssetBits {
 		$OutputPath
 	)
 
-	$AssetUrl = $Config['Assets'][$Asset]
+	$AssetUrl = $Config.assets.$Asset
 
 	if ($null -eq $AssetUrl) {
 		Write-Warning "Unknown asset: $Asset"

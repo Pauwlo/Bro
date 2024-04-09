@@ -1,5 +1,5 @@
 function Remove-UselessApps {
-	$UselessApps = $Config['UselessApps']
+	$UselessApps = $Config.uselessApps
 
 	foreach ($App in $UselessApps) {
 		$ProPackageFullName = (Get-AppxProvisionedPackage -Online | Where-Object { $_.Displayname -eq $App }).PackageName

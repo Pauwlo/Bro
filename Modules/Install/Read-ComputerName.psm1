@@ -1,5 +1,5 @@
 function Read-ComputerName {
-	$ComputerName = $Config['Input']['NewComputerName']
+	$ComputerName = $Config.newComputerName
 
 	if ($null -ne $ComputerName) {
 		return $ComputerName

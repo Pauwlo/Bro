@@ -4,5 +4,5 @@ function Test-InstallSoftware {
 		$Software
 	)
 
-	return $Config['Software'][$Software] -eq $true
+	return $Package -in $Config.winget
 }
