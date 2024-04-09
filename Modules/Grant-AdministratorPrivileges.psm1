@@ -10,7 +10,12 @@ function Grant-AdministratorPrivileges {
 
 	if (!$IsElevated) {
 		$CommandLine = '-ExecutionPolicy Bypass -File "' + $Invocation.MyCommand.Path + '" ' + $Invocation.UnboundArguments
-		Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine
+
+		try {
+			Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine
+		} catch {
+			Write-Warning "Bro requires elevated permissions. Please run it as administrator."
+		}
 		Exit
 	}
 }
