@@ -1,0 +1,107 @@
+{
+	"title": "Bro",
+	"features": {
+		"common": {
+			"blockMicrosoftTelemetry": true,
+			"cleanShortcuts": true,
+			"cleanStartAndTaskbar": true,
+			"disableFocusAssist": true,
+			"importCertificates": false,
+			"patchHosts": true,
+			"patchRegistry": true,
+			"removeEdgeShortcut": true,
+			"synchronizeClock": true,
+			"uninstallUselessApps": true
+		},
+		"backup": {
+			"backupUserFolders": true,
+			"createTemporaryBackupShortcut": true,
+			"takeScreenshot": true
+		},
+		"install": {
+			"installFonts": false,
+			"installSoftware": true,
+			"pinFoldersToQuickAccess": true,
+			"renameComputer": true,
+			"setUserHomeIcon": true,
+			"setWallpaper": true,
+			"uninstallOneDrive": true
+		},
+		"update": {
+			"updateSoftware": true
+		}
+	},
+
+	"assets": {
+		"certificates": "",
+		"fonts": "",
+		"hosts": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Hosts.txt",
+		"layoutModificationXml": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/LayoutModification.xml",
+		"registryFile": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Tweaks.reg",
+		"wallpaper": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Gradient.jpg"
+	},
+
+	"newComputerName": null,
+
+	"backupFolders": {
+		"desktop": true,
+		"downloads": true,
+		"documents": true,
+		"pictures": true,
+		"music": true,
+		"videos": true
+	},
+
+	"chocolatey": {
+		"firefox": true,
+		"vlc": true,
+		"notepad-plus-plus": true,
+		"7zip": true
+	},
+
+	"winget": {
+		"firefox": false,
+		"vlc": false,
+		"notepad-plus-plus": false,
+		"7zip": false
+	},
+
+	"uselessApps": [
+		"Clipchamp.Clipchamp",
+		"MicrosoftTeams",
+		"MicrosoftWindows.Client.WebExperience",
+		"Microsoft.549981C3F5F10",
+		"Microsoft.Advertising.Xaml",
+		"Microsoft.BingNews",
+		"Microsoft.GamingApp",
+		"Microsoft.GetHelp",
+		"Microsoft.Getstarted",
+		"Microsoft.Messaging",
+		"Microsoft.Microsoft3DViewer",
+		"Microsoft.MicrosoftOfficeHub",
+		"Microsoft.MicrosoftSolitaireCollection",
+		"Microsoft.MixedReality.Portal",
+		"Microsoft.MSPaint",
+		"Microsoft.Office.OneNote",
+		"Microsoft.OneConnect",
+		"Microsoft.People",
+		"Microsoft.PowerAutomateDesktop",
+		"Microsoft.Print3D",
+		"Microsoft.SkypeApp",
+		"Microsoft.Todos",
+		"Microsoft.Wallet",
+		"Microsoft.WindowsFeedbackHub",
+		"Microsoft.WindowsMaps",
+		"Microsoft.Xbox.TCUI",
+		"Microsoft.XboxApp",
+		"Microsoft.XboxGameOverlay",
+		"Microsoft.XboxGamingOverlay",
+		"Microsoft.XboxIdentityProvider",
+		"Microsoft.XboxSpeechToTextOverlay",
+		"Microsoft.YourPhone",
+		"Microsoft.ZuneMusic",
+		"Microsoft.ZuneVideo",
+		"MicrosoftCorporationII.MicrosoftFamily",
+		"MicrosoftCorporationII.QuickAssist"
+	]
+}

@@ -7,11 +7,15 @@ if (Test-Path $OutputFile) {
 $Now = Get-Date
 Write-Output "# This file was automatically generated on $Now." | Out-File $OutputFile
 
-Get-Content 'Config.ps1' -Raw | Out-File $OutputFile -Append
+Write-Output "# <config placeholder>" | Out-File $OutputFile -Append
 
 $Logo = Get-Content 'Stuff\Logo.txt' -Raw
 $Logo = "`$global:Logo = @'`r`n" + $Logo + "`r`n'@`r`n"
 Write-Output $Logo | Out-File $OutputFile -Append
+
+$DefaultConfig = Get-Content 'Stuff\Config.json' -Raw
+$DefaultConfig = "`$DefaultConfig = @'`r`n" + $DefaultConfig + "`r`n'@`r`n"
+Write-Output $DefaultConfig | Out-File $OutputFile -Append
 
 Get-ChildItem .\Modules -File -Recurse | ForEach-Object {
 	Get-Content $_.FullName -Raw | Out-File ./$OutputFile -Append
@@ -19,6 +23,11 @@ Get-ChildItem .\Modules -File -Recurse | ForEach-Object {
 
 @'
 Grant-AdministratorPrivileges $MyInvocation
+
+$OriginalFolder = Split-Path -Parent $MyInvocation.MyCommand.Definition
+Set-Location $OriginalFolder
+
+$Config = Get-Config
 
 Get-Logo
 $Selection = Get-Menu

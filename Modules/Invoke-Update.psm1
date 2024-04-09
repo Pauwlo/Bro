@@ -2,37 +2,37 @@ function Invoke-Update {
 	$ProgressPreference = 'SilentlyContinue'
 
 	# Block Microsoft telemetry
-	if (Test-Feature BlockMicrosoftTelemetry) {
+	if (Test-Feature common.blockMicrosoftTelemetry) {
 		Write-Host 'Removing telemetry services...'
 		Remove-TelemetryServices
 	}
 
 	# Import certificates
-	if (Test-Feature ImportCertificates) {
+	if (Test-Feature common.importCertificates) {
 		Write-Host 'Importing certificates...'
 		Import-Certificates
 	}
 
 	# Install fonts
-	if (Test-Feature InstallFonts) {
+	if (Test-Feature install.installFonts) {
 		Write-Host 'Installing fonts...'
 		Install-Fonts
 	}
 
 	# Remove Edge shortcut from Desktop
-	if (Test-Feature RemoveEdgeShortcut) {
+	if (Test-Feature common.removeEdgeShortcut) {
 		Write-Host 'Removing Edge shortcut from desktop...'
 		Remove-EdgeShortcut
 	}
 
 	# Install software
-	if (Test-Feature InstallSoftware) {
+	if (Test-Feature update.updateSoftware) {
 		Write-Host 'Updating software...'
 		Update-Software | Out-Null
 	}
 
 	# Clean-up start menu and desktop
-	if (Test-Feature CleanShortcuts) {
+	if (Test-Feature common.cleanShortcuts) {
 		Write-Host 'Cleaning shortcuts...'
 		Invoke-CleanShortcuts
 	}

@@ -8,7 +8,7 @@ function Invoke-Backup {
 	$OutputPath = Get-BackupOutputPath $Name
 
 	# Create a temporary shortcut to the backup location on the desktop
-	if (Test-Feature CreateTemporaryBackupShortcut) {
+	if (Test-Feature backup.createTemporaryBackupShortcut) {
 		$ShortcutName = 'Backup'
 
 		$i = 0
@@ -21,18 +21,18 @@ function Invoke-Backup {
 	}
 	
 	# Backup user folders
-	if (Test-Feature BackupUserFolders) {
+	if (Test-Feature backup.backupUserFolders) {
 		Invoke-BackupUserFolders $OutputPath
 	}
 
 	# Remove temporary shortcuts
-	if (Test-Feature CreateTemporaryBackupShortcut) {
+	if (Test-Feature backup.createTemporaryBackupShortcut) {
 		Remove-Item "$DesktopPath\$ShortcutName.lnk" -ErrorAction SilentlyContinue
 		Remove-Item "$OutputPath\Desktop\$ShortcutName.lnk" -ErrorAction SilentlyContinue
 	}
 
 	# Take a screenshot of the desktop
-	if (Test-Feature TakeScreenshot) {
+	if (Test-Feature backup.takeScreenshot) {
 		Invoke-TakeScreenshot $OutputPath
 	}
 
