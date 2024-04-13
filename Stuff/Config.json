@@ -21,6 +21,7 @@
 		"install": {
 			"installFonts": false,
 			"installSoftware": true,
+			"installWinGet": false,
 			"pinFoldersToQuickAccess": true,
 			"renameComputer": true,
 			"setUserHomeIcon": true,
@@ -55,7 +56,7 @@
 	"chocolatey": {
 		"firefox": true,
 		"vlc": true,
-		"notepad-plus-plus": true,
+		"notepadplusplus": true,
 		"7zip": true
 	},
 

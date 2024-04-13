@@ -1,47 +1,25 @@
 function Install-Software {
 
-	if (Test-InstallSoftware Chocolatey) {
+	#if (($Config.chocolatey.Count -ge 1) -or (Test-Feature install.installWinGet)) {
 		Install-Chocolatey
 
-		if (Test-InstallSoftware WinGet) {
+		if (Test-Feature install.installWinGet) {
 			choco install microsoft-vclibs -ry
 			choco install winget -ry
 		}
 
-		if (Test-InstallChocolateyPackage Firefox) {
-			choco install firefox -ry
-		}
-	
-		if (Test-InstallChocolateyPackage VLC) {
-			choco install vlc -ry
-		}
-	
-		if (Test-InstallChocolateyPackage NotepadPlusPlus) {
-			choco install notepadplusplus -ry
-		}
+		choco install firefox -ry
+		choco install vlc -ry
+		choco install notepadplusplus -ry
+		choco install 7zip -ry
+	#}
 
-		if (Test-InstallChocolateyPackage 7Zip) {
-			choco install 7zip -ry
-		}
-	}
+	#winget install -e --id Mozilla.Firefox --accept-source-agreements --accept-package-agreements
+	#winget install -e --id VideoLAN.VLC --accept-source-agreements --accept-package-agreements
+	#winget install -e --id Notepad++.Notepad++ --accept-source-agreements --accept-package-agreements
+	#winget install -e --id 7zip.7zip --accept-source-agreements --accept-package-agreements
 
-	if (Test-InstallSoftware Firefox) {
-		winget install -e --id Mozilla.Firefox --accept-source-agreements --accept-package-agreements
-	}
-
-	if (Test-InstallSoftware VLC) {
-		winget install -e --id VideoLAN.VLC --accept-source-agreements --accept-package-agreements
-	}
-
-	if (Test-InstallSoftware NotepadPlusPlus) {
-		winget install -e --id Notepad++.Notepad++ --accept-source-agreements --accept-package-agreements
-	}
-
-	if (Test-InstallSoftware 7Zip) {
-		winget install -e --id 7zip.7zip --accept-source-agreements --accept-package-agreements
-	}
-
-	if ((Test-InstallChocolateyPackage 7Zip) -or (Test-InstallSoftware 7Zip)) {
+	#if ((Test-InstallChocolateyPackage 7Zip) -or (Test-InstallWinGetPackage 7Zip)) {
 		$DesktopPath = [Environment]::GetFolderPath('Desktop')
 		$DummyFileName = 'Dummy (right-click - Properties - Change...)'
 		
@@ -59,5 +37,5 @@ function Install-Software {
 		}
 
 		New-ItemProperty -Path $RegistryPath -Name $Name -Value $Value -PropertyType DWORD -Force | Out-Null
-	}
+	#}
 }
