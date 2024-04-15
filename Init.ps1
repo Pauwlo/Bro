@@ -9,6 +9,12 @@ if (Test-Path $OriginalFolder) {
 $Config = Get-Config
 
 Get-Logo
+
+if (-not (Test-ValidateConfig)) {
+	Pause
+	Write-Host ''
+}
+
 $Selection = Get-Menu
 
 Start-Transcript $env:TMP\Bro.log -Append | Out-Null

@@ -24,6 +24,11 @@ Get-ChildItem .\Modules -File -Recurse | ForEach-Object {
 $Init = Get-Content 'Init.ps1'
 Write-Output $Init | Out-File $OutputFile -Append
 
+Import-Module '.\Modules\Test-Feature.psm1'
+Import-Module '.\Modules\Test-ValidateConfig.psm1'
+Import-Module '.\Modules\Get-Config.psm1'
+$global:Config = Get-Config 'Stuff\Config.json'
+Test-ValidateConfig | Out-Null
 
 $OutputPath = ((Get-Item $PSScriptRoot).Parent).ToString() + '\' + $OutputFile
 Write-Host "Bro script built successfully to $OutputPath"
