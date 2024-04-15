@@ -19,9 +19,12 @@
 			"takeScreenshot": true
 		},
 		"install": {
+			"installChocolatey": true,
+			"installChocolateyPackages": true,
 			"installFonts": false,
 			"installSoftware": true,
 			"installWinGet": false,
+			"installWinGetPackages": false,
 			"pinFoldersToQuickAccess": true,
 			"renameComputer": true,
 			"setUserHomeIcon": true,
@@ -29,7 +32,9 @@
 			"uninstallOneDrive": true
 		},
 		"update": {
-			"updateSoftware": true
+			"updateChocolateyPackages": true,
+			"updateSoftware": true,
+			"updateWinGetPackages": false
 		}
 	},
 
@@ -54,17 +59,17 @@
 	},
 
 	"chocolatey": {
-		"firefox": true,
-		"vlc": true,
-		"notepadplusplus": true,
-		"7zip": true
+		"Firefox": true,
+		"VLC": true,
+		"Notepad++": true,
+		"7-Zip": true
 	},
 
 	"winget": {
-		"firefox": false,
-		"vlc": false,
-		"notepad-plus-plus": false,
-		"7zip": false
+		"Firefox": false,
+		"VLC": false,
+		"Notepad++": false,
+		"7-Zip": false
 	},
 
 	"uselessApps": [

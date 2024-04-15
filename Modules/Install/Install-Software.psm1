@@ -1,25 +1,23 @@
 function Install-Software {
 
-	#if (($Config.chocolatey.Count -ge 1) -or (Test-Feature install.installWinGet)) {
+	if (Test-Feature install.installChocolatey) {
 		Install-Chocolatey
+	}
 
-		if (Test-Feature install.installWinGet) {
-			choco install microsoft-vclibs -ry
-			choco install winget -ry
-		}
+	if (Test-Feature install.installChocolateyPackages) {
+		Install-ChocolateyPackages
+	}
 
-		choco install firefox -ry
-		choco install vlc -ry
-		choco install notepadplusplus -ry
-		choco install 7zip -ry
-	#}
+	if (Test-Feature install.installWinGet) {
+		Install-WinGet
+	}
 
-	#winget install -e --id Mozilla.Firefox --accept-source-agreements --accept-package-agreements
-	#winget install -e --id VideoLAN.VLC --accept-source-agreements --accept-package-agreements
-	#winget install -e --id Notepad++.Notepad++ --accept-source-agreements --accept-package-agreements
-	#winget install -e --id 7zip.7zip --accept-source-agreements --accept-package-agreements
+	if (Test-Feature install.installWinGetPackages) {
+		Install-WinGetPackages
+	}
 
-	#if ((Test-InstallChocolateyPackage 7Zip) -or (Test-InstallWinGetPackage 7Zip)) {
+	if ((Test-InstallChocolateyPackage '7-Zip') -or (Test-InstallWinGetPackage '7-Zip')) {
+		# Create dummy shortcuts on the desktop
 		$DesktopPath = [Environment]::GetFolderPath('Desktop')
 		$DummyFileName = 'Dummy (right-click - Properties - Change...)'
 		
@@ -37,5 +35,5 @@ function Install-Software {
 		}
 
 		New-ItemProperty -Path $RegistryPath -Name $Name -Value $Value -PropertyType DWORD -Force | Out-Null
-	#}
+	}
 }
