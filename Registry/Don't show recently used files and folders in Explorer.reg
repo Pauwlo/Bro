@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+; Don't show recently used files and folders in Explorer
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"ShowFrequent"=dword:00000000
+"ShowRecent"=dword:00000000
+
+; Hide recently opened items in Jump Lists on Start or taskbar
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_TrackDocs"=dword:00000000

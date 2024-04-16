@@ -6,7 +6,9 @@
 			"cleanShortcuts": true,
 			"cleanStartAndTaskbar": true,
 			"disableFocusAssist": true,
+			"hideRecentFilesInExplorer": true,
 			"importCertificates": false,
+			"openExplorerWithThisPC": true,
 			"patchHosts": true,
 			"patchRegistry": true,
 			"removeEdgeShortcut": true,
@@ -43,7 +45,11 @@
 		"fonts": "",
 		"hosts": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Hosts.txt",
 		"layoutModificationXml": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/LayoutModification.xml",
-		"registryFile": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Registry/Tweaks.reg",
+		"registry": {
+			"dontShowRecentFiles": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Registry/Don't show recently used files and folders in Explorer.reg",
+			"openExplorerWithThisPC": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Registry/Open Explorer with This PC instead of Quick Access.reg",
+			"tweaks": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Registry/Tweaks.reg"
+		},
 		"wallpaper": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Gradient.jpg"
 	},
 

@@ -43,15 +43,6 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "TaskbarDa"=dword:00000000
 
-; Don't show recently used files and folders
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
-"ShowFrequent"=dword:00000000
-"ShowRecent"=dword:00000000
-
-; Hide recently opened items in Jump Lists on Start or taskbar
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"Start_TrackDocs"=dword:00000000
-
 ; Disable suggestions in Start menu
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
 "SubscribedContent-338388Enabled"=dword:00000000
@@ -118,10 +109,6 @@ Windows Registry Editor Version 5.00
 
 
 ; Miscellaneous
-
-; Open Explorer with This PC instead of Quick Access
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"LaunchTo"=dword:00000001
 
 ; Disable Xbox Game Bar
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR]

@@ -3,9 +3,27 @@ function Invoke-PatchRegistry {
 	if (Test-Path "HKLM:\$CommunicationsKey") {
 		Grant-KeyPermissions 'HKLM' $CommunicationsKey
 	}
+
+	if (Test-Feature common.openExplorerWithThisPC) {
+		Write-Verbose "Applying patch: Open Explorer with This PC instead of Quick Access"
+
+		$FilePath = "$env:TMP\Bro_OpenExplorerWithThisPC.reg"
+		Get-RegistryAsset openExplorerWithThisPC $FilePath | Out-Null
+		reg import $FilePath 2>&1 | Out-Null
+		Remove-Item $FilePath
+	}
+
+	if (Test-Feature common.hideRecentFilesInExplorer) {
+		Write-Verbose "Applying patch: Don't show recently used files and folders in Explorer"
+
+		$FilePath = "$env:TMP\Bro_DontShowRecentFilesAndFolders.reg"
+		Get-RegistryAsset dontShowRecentFiles $FilePath | Out-Null
+		reg import $FilePath 2>&1 | Out-Null
+		Remove-Item $FilePath
+	}
 	
 	$FilePath = "$env:TMP\Bro_Tweaks.reg"
-	Get-Asset RegistryFile $FilePath | Out-Null
+	Get-RegistryAsset tweaks $FilePath | Out-Null
 	reg import $FilePath 2>&1 | Out-Null
 
 	$ScriptFilePath = "$env:TMP\Bro (re-patch registry on reboot).ps1"
