@@ -43,7 +43,7 @@
 		"fonts": "",
 		"hosts": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Hosts.txt",
 		"layoutModificationXml": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/LayoutModification.xml",
-		"registryFile": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Tweaks.reg",
+		"registryFile": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Registry/Tweaks.reg",
 		"wallpaper": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Gradient.jpg"
 	},
 
