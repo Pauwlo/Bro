@@ -55,6 +55,13 @@ Run the following command:
 irm pauw.io/bro | iex
 ```
 
+For more verbose output, run:
+
+```powershell
+$VerbosePreference = 'Continue'
+irm pauw.io/bro | iex
+```
+
 ## Get Updates
 
 Run Windows Update until you're up to date. You may have to restart your computer several times. If you see update errors, wait 5-10 minutes, and try again. Some updates are installing in the background, and the Settings app may not show them.

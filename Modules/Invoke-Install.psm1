@@ -81,7 +81,12 @@ function Invoke-Install {
 	# Install software
 	if (Test-Feature install.installSoftware) {
 		Write-Host 'Installing software...'
-		Install-Software | Out-Null
+
+		if ($VerbosePreference -eq 'SilentlyContinue') {
+			Install-Software | Out-Null
+		} else {
+			Install-Software
+		}
 	}
 
 	# Clean start menu & taskbar

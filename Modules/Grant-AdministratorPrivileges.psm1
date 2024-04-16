@@ -9,7 +9,11 @@ function Grant-AdministratorPrivileges {
 	$IsElevated = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 	if (!$IsElevated) {
-		$CommandLine = '-ExecutionPolicy Bypass -File "' + $Invocation.MyCommand.Path + '" ' + $Invocation.UnboundArguments
+		if ($VerbosePreference -eq 'SilentlyContinue') {
+			$CommandLine = '-ExecutionPolicy Bypass -File "' + $Invocation.MyCommand.Path + '" ' + $Invocation.UnboundArguments
+		} else {
+			$CommandLine = '-ExecutionPolicy Bypass -File "' + $Invocation.MyCommand.Path + '" -Verbose ' + $Invocation.UnboundArguments
+		}
 
 		try {
 			Start-Process -FilePath powershell -Verb Runas -ArgumentList $CommandLine

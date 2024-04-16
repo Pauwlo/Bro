@@ -9,6 +9,11 @@ Write-Output "# This file was automatically generated on $Now." | Out-File $Outp
 
 Write-Output "# <config placeholder>" | Out-File $OutputFile -Append
 
+@'
+[CmdletBinding()] param()
+
+'@ | Out-File $OutputFile -Append
+
 $Logo = Get-Content 'Stuff\Logo.txt' -Raw
 $Logo = "`$global:Logo = @'`r`n" + $Logo + "`r`n'@`r`n"
 Write-Output $Logo | Out-File $OutputFile -Append
