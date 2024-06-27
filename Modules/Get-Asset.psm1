@@ -18,7 +18,7 @@ function Get-Asset {
 	}
 
 	if ($null -ne $OutputPath) {
-		Invoke-WebRequest $AssetUrl -OutFile $OutputPath -UseBasicParsing
+		return Invoke-WebRequest $AssetUrl -OutFile $OutputPath -UseBasicParsing
 	}
 
 	return Invoke-WebRequest $AssetUrl -UseBasicParsing
