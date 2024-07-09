@@ -1,8 +1,11 @@
 function Update-Software {
 
-	if (Test-InstallSoftware Chocolatey) {
+	if (Test-Feature update.updateChocolateyPackages) {
 		choco upgrade all -ry
 	}
 
-	winget upgrade --all
+	if (Test-Feature update.updateWinGetPackages) {
+		winget upgrade --all
+	}
+
 }

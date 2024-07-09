@@ -28,7 +28,12 @@ function Invoke-Update {
 	# Install software
 	if (Test-Feature update.updateSoftware) {
 		Write-Host 'Updating software...'
-		Update-Software | Out-Null
+		
+		if ($VerbosePreference -eq 'SilentlyContinue') {
+			Update-Software | Out-Null
+		} else {
+			Update-Software
+		}
 	}
 
 	# Clean-up start menu and desktop
