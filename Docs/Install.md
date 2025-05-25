@@ -4,18 +4,18 @@
 
 ### Get Windows
 
-Download the desired Windows ISO from [adguard](https://files.rg-adguard.net/), [UUP Dump](https://uupdump.net/) or [Microsoft](https://www.microsoft.com/fr-fr/software-download).
+I recommend [Windows 10 LTSC 2021](https://pauw.io/windows-10). [See more...](https://github.com/Pauwlo/Bro/blob/main/Docs/Get%20Windows.md)
 
-Create a bootable USB drive with [Rufus](https://rufus.ie/) (or use the Media Creation Tool from Microsoft).
+Create a bootable USB drive with [Rufus](https://rufus.ie/).
 
 ## Install Windows
 
 Make sure the computer is **not** connected to the internet.
 
-Boot from USB, in UEFI mode when available.
+Boot from USB in UEFI mode.
 
 <details>
-    <summary>Common hotkeys for BIOS and Select Boot Media menus</summary>
+    <summary>Common hotkeys for BIOS Setup and Select Boot Media menus</summary>
   
     Brand  | BIOS Setup / Booting options | Select Boot Media
     ------ | ---------------------------- | -----------------
@@ -76,7 +76,7 @@ Install important or missing system drivers (BIOS update, touchpad, fingerprint 
 
 ### Windows Defender
 
-Warning: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Bro. It's fine. Microsoft doesn't like it when people mess with their telemetry stuff, so they're going out of their way and flag the Hosts file as a "threat" when it blocks their data collection servers. You can always check the [Hosts.txt](https://github.com/Pauwlo/Init/blob/main/Install/Init/Files/Hosts.txt) file content.
+Warning: Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Bro. It's fine. Microsoft doesn't like it when people mess with their telemetry stuff, so they're going out of their way and flag the Hosts file as a "threat" when it blocks their data collection servers. You can always check the [Hosts.txt](https://github.com/Pauwlo/Bro/blob/main/Stuff/Hosts.txt) file content.
 
 Enable **Tamper protection** if it's disabled. I don't know what is disabling it.
 
