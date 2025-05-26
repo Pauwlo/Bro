@@ -110,15 +110,15 @@ General: Don't recommend extensions or features as you browse.
 
 Home: Only keep **Web Search** on Firefox Home Content.
 
-Search: Remove alternative search engines.
+Search: Remove alternative search engines, don't suggest **Shortcuts** and **Search engines** in address bar.
 
-Privacy: Use **Strict mode**, don't suggest **Shortcuts** and **Search engines** in address bar and disable **Firefox Data Collection**.
-
-If using self-signed certificates, set `security.enterprise_roots.enabled` to `true`. *(Go to about:config)*
+Privacy: Use **Strict** mode and disable **Firefox Data Collection**.
 
 Install [uBlock Origin](https://addons.mozilla.org/firefox/addon/ublock-origin/). Allow it to run in Private Windows.
 
 Pin uBlock Origin to Toolbar.
+
+If you want a nice, lightweight startpage, install [Bonjourr](https://addons.mozilla.org/firefox/addon/bonjourr-startpage/).
 
 This script has created a dummy file on your desktop so you can easily set Firefox as the default application for PDF files.
 
