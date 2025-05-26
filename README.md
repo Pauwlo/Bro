@@ -2,6 +2,8 @@
 
 A PowerShell framework to automate your operating system setup & backup procedures.
 
+🇫🇷 ReadMe disponible en [Français](https://github.com/Pauwlo/Bro/blob/main/README-FR.md).
+
 ## TL;DR
 
 Open PowerShell with admin privileges (`Win`+`X A`) and run:
