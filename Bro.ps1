@@ -1,4 +1,4 @@
-# This file was automatically generated on 07/10/2024 01:33:33.
+# This file was automatically generated on 05/26/2025 00:52:48.
 # <config placeholder>
 [CmdletBinding()] param()
 
@@ -40,6 +40,7 @@ $DefaultConfig = @'
 			"installChocolatey": true,
 			"installChocolateyPackages": true,
 			"installFonts": false,
+			"installMicrosoftStore": true,
 			"installSoftware": true,
 			"installWinGet": false,
 			"installWinGetPackages": false,
@@ -564,7 +565,7 @@ function Invoke-Install {
 		Invoke-PinFoldersToQuickAccess
 	}
 
-	# Remove Edge shortcut from Desktop
+	# Remove Edge shortcut from desktop
 	if (Test-Feature common.removeEdgeShortcut) {
 		Write-Host 'Removing Edge shortcut from desktop...'
 		Remove-EdgeShortcut
@@ -603,6 +604,12 @@ function Invoke-Install {
 	if (Test-Feature common.synchronizeClock) {
 		Write-Host 'Synchronizing clock...'
 		Invoke-SynchronizeClock
+	}
+
+	# Add Microsoft Store install and apps shortcuts to the desktop
+	if (Test-Feature install.installMicrosoftStore) {
+		Write-Host 'Adding Microsoft Store shortcuts to the desktop...'
+		Invoke-AddMicrosoftStore
 	}
 
 	$ProgressPreference = 'Continue'
@@ -1019,6 +1026,16 @@ function Install-WinGetPackages {
 	if (Test-InstallWinGetPackage VLC) {
 		winget install -e --id VideoLAN.VLC --accept-source-agreements --accept-package-agreements
 	}
+}
+
+function Invoke-AddMicrosoftStore {
+	$DesktopPath = [Environment]::GetFolderPath('Desktop')
+
+	New-Shortcut "$DesktopPath\Install Microsoft Store.lnk" 'wsreset' '-i' | Out-Null
+	
+	New-Shortcut "$DesktopPath\Get App Installer.url" 'ms-windows-store://pdp/?ProductId=9nblggh4nns1'
+	New-Shortcut "$DesktopPath\Get Calculator.url" 'ms-windows-store://pdp/?ProductId=9wzdncrfhvn5'
+	New-Shortcut "$DesktopPath\Get Webp Image Extensions.url" 'ms-windows-store://pdp/?ProductId=9pg2dk419drg'
 }
 
 function Invoke-CleanShortcuts {
