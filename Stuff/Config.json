@@ -24,6 +24,7 @@
 			"installChocolatey": true,
 			"installChocolateyPackages": true,
 			"installFonts": false,
+			"installMicrosoftStore": true,
 			"installSoftware": true,
 			"installWinGet": false,
 			"installWinGetPackages": false,

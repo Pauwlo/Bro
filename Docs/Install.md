@@ -66,7 +66,11 @@ irm pauw.io/bro | iex
 
 Run Windows Update until you're up to date. You may have to restart your computer several times. If you see update errors, wait 5-10 minutes, and try again. Some updates are installing in the background, and the Settings app may not show them.
 
-Open Microsoft Store and Get updates.
+If applicable, install Microsoft Store with the shortcut on the desktop. It may take a few minutes to install and show up in the Start menu.
+
+Then, install the Store apps with the "Get..." shortcuts on the desktop once they show the Store icon. Delete them afterwards.
+
+Otherwise, just open Microsoft Store and Get updates.
 
 Activate Windows if needed ([need help?](https://github.com/massgravel/Microsoft-Activation-Scripts)).
 
@@ -117,6 +121,8 @@ If using self-signed certificates, set `security.enterprise_roots.enabled` to `t
 Install [uBlock Origin](https://addons.mozilla.org/firefox/addon/ublock-origin/). Allow it to run in Private Windows.
 
 Pin uBlock Origin to Toolbar.
+
+This script has created a dummy file on your desktop so you can easily set Firefox as the default application for PDF files.
 
 Right-click the file -> Properties -> Change... -> Select Firefox -> OK -> Delete.
 
@@ -175,7 +181,7 @@ If needed, create a `Games` folder in `D:\` with icon: `C:\Windows\System32\imag
 
 ### Desktop
 
-Clean the Desktop. I usually only keep Firefox's shortcut and the Recycle Bin.
+Clean the Desktop. I usually only keep the Recycle Bin.
 
 Find a nice wallpaper on the internet. I usually save it to `Pictures\Saved Pictures` and use it as Desktop & Lock screen background image.
 
@@ -183,7 +189,7 @@ Find a nice wallpaper on the internet. I usually save it to `Pictures\Saved Pict
 
 Remove unnecessary folders and shortcuts in `%ProgramData%\Microsoft\Windows\Start Menu` and `%AppData%\Microsoft\Windows\Start Menu`.
 
-Hide software folders in `~` and `D:\Documents`, if any.
+Hide software folders in `~` and `Documents`, if any.
 
 Pin important software in Start menu. (Firefox, Office apps, Calculator...)
 

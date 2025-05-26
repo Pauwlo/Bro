@@ -66,7 +66,7 @@ function Invoke-Install {
 		Invoke-PinFoldersToQuickAccess
 	}
 
-	# Remove Edge shortcut from Desktop
+	# Remove Edge shortcut from desktop
 	if (Test-Feature common.removeEdgeShortcut) {
 		Write-Host 'Removing Edge shortcut from desktop...'
 		Remove-EdgeShortcut
@@ -105,6 +105,12 @@ function Invoke-Install {
 	if (Test-Feature common.synchronizeClock) {
 		Write-Host 'Synchronizing clock...'
 		Invoke-SynchronizeClock
+	}
+
+	# Add Microsoft Store install and apps shortcuts to the desktop
+	if (Test-Feature install.installMicrosoftStore) {
+		Write-Host 'Adding Microsoft Store shortcuts to the desktop...'
+		Invoke-AddMicrosoftStore
 	}
 
 	$ProgressPreference = 'Continue'
