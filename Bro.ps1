@@ -1,4 +1,4 @@
-# This file was automatically generated on 05/26/2025 00:52:48.
+# This file was automatically generated on 05/27/2025 22:01:58.
 # <config placeholder>
 [CmdletBinding()] param()
 
@@ -1031,7 +1031,7 @@ function Install-WinGetPackages {
 function Invoke-AddMicrosoftStore {
 	$DesktopPath = [Environment]::GetFolderPath('Desktop')
 
-	New-Shortcut "$DesktopPath\Install Microsoft Store.lnk" 'wsreset' '-i' | Out-Null
+	New-Shortcut "$DesktopPath\Install Microsoft Store.lnk" 'wsreset' '-i >nul' | Out-Null
 	
 	New-Shortcut "$DesktopPath\Get App Installer.url" 'ms-windows-store://pdp/?ProductId=9nblggh4nns1'
 	New-Shortcut "$DesktopPath\Get Calculator.url" 'ms-windows-store://pdp/?ProductId=9wzdncrfhvn5'
