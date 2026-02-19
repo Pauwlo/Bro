@@ -4,15 +4,21 @@ if (Test-Path $OutputFile) {
 	Remove-Item $OutputFile -Force
 }
 
-$Now = Get-Date
-Write-Output "# This file was automatically generated on $Now." | Out-File $OutputFile
+$BuildNumber = if ($env:GITHUB_RUN_NUMBER) { $env:GITHUB_RUN_NUMBER } else { 0 }
+$BuildDate = (Get-Date).ToString('yyyy-MM-dd hh:mm:ss')
 
-Write-Output "# <config placeholder>" | Out-File $OutputFile -Append
+$Header = @"
+# This file was automatically generated.
+`$Script:BuildNumber = $BuildNumber
+`$Script:BuildDate = '$BuildDate'
 
-@'
-[CmdletBinding()] param()
+# <config placeholder>
 
-'@ | Out-File $OutputFile -Append
+[CmdletBinding()] param() # this line adds support for `$VerbosePreference
+
+"@
+
+Add-Content $OutputFile $Header
 
 $Logo = Get-Content 'Stuff\Logo.txt' -Raw
 $Logo = "`$global:Logo = @'`r`n" + $Logo + "`r`n'@`r`n"
