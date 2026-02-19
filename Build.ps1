@@ -21,7 +21,7 @@ $Header = @"
 Add-Content $OutputFile $Header
 
 $Logo = Get-Content 'Stuff\Logo.txt' -Raw
-$Logo = "`$global:Logo = @'`r`n" + $Logo + "`r`n'@`r`n"
+$Logo = "`$Script:Logo = @'`r`n" + $Logo + "`r`n'@`r`n"
 Write-Output $Logo | Out-File $OutputFile -Append
 
 $DefaultConfig = Get-Content 'Stuff\Config.json' -Raw

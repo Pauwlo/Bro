@@ -1,5 +1,4 @@
 {
-	"title": "Bro",
 	"features": {
 		"common": {
 			"blockMicrosoftTelemetry": true,
@@ -52,6 +51,13 @@
 			"tweaks": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Registry/Tweaks.reg"
 		},
 		"wallpaper": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Gradient.jpg"
+	},
+
+	"misc": {
+		"clearTerminalOnLaunch": false,
+		"showLogo": true,
+		"showBuildDate": false,
+		"windowTitle": "Bro"
 	},
 
 	"newComputerName": null,
