@@ -9,12 +9,12 @@ $BuildDate = (Get-Date).ToString('yyyy-MM-dd hh:mm:ss')
 
 $Header = @"
 # This file was automatically generated.
+[CmdletBinding()] param() # this line adds support for `$VerbosePreference
+
 `$Script:BuildNumber = $BuildNumber
 `$Script:BuildDate = '$BuildDate'
 
 # <config placeholder>
-
-[CmdletBinding()] param() # this line adds support for `$VerbosePreference
 
 "@
 
