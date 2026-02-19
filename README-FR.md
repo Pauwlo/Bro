@@ -12,13 +12,6 @@ Ouvrez PowerShell en tant qu'administrateur (`Win`+`X A`) et exécutez :
 irm pauw.io/bro | iex
 ```
 
-Pour afficher plus de détails, exécutez plutôt :
-
-```powershell
-$VerbosePreference = 'Continue'
-irm pauw.io/bro | iex
-```
-
 ## Utilisation
 
 ### Sauvegarde

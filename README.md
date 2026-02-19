@@ -12,13 +12,6 @@ Open PowerShell with admin privileges (`Win`+`X A`) and run:
 irm pauw.io/bro | iex
 ```
 
-For more verbose output, run:
-
-```powershell
-$VerbosePreference = 'Continue'
-irm pauw.io/bro | iex
-```
-
 ## Usage
 
 ### Backup
