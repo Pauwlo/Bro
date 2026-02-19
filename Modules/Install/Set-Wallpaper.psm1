@@ -15,7 +15,9 @@ public class Wallpaper
 }
 '@
 
-Add-Type $Code
+if (-not ([System.Management.Automation.PSTypeName]'Wallpaper').Type) {
+    Add-Type $Code
+}
 
 function Set-Wallpaper {
 	$FilePath = "$env:TMP\Bro_Wallpaper.jpg"
