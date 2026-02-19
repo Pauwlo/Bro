@@ -16,7 +16,7 @@ public class Wallpaper
 '@
 
 if (-not ([System.Management.Automation.PSTypeName]'Wallpaper').Type) {
-    Add-Type $Code
+	Add-Type $Code
 }
 
 function Set-Wallpaper {
