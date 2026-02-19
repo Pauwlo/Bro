@@ -1,12 +1,12 @@
 # This file was automatically generated.
-$Script:BuildNumber = 6
-$Script:BuildDate = '2026-02-19 04:57:34'
+[CmdletBinding()] param() # this line adds support for $VerbosePreference
+
+$Script:BuildNumber = 7
+$Script:BuildDate = '2026-02-19 07:42:50'
 
 # <config placeholder>
 
-[CmdletBinding()] param() # this line adds support for $VerbosePreference
-
-$global:Logo = @'
+$Script:Logo = @'
 `7MM"""Yp,
   MM    Yb
   MM    dP `7Mb,od8 ,pW"Wq.
@@ -19,7 +19,6 @@ $global:Logo = @'
 
 $DefaultConfig = @'
 {
-	"title": "Bro",
 	"features": {
 		"common": {
 			"blockMicrosoftTelemetry": true,
@@ -72,6 +71,13 @@ $DefaultConfig = @'
 			"tweaks": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Registry/Tweaks.reg"
 		},
 		"wallpaper": "https://raw.githubusercontent.com/Pauwlo/Bro/main/Stuff/Gradient.jpg"
+	},
+
+	"misc": {
+		"clearTerminalOnLaunch": false,
+		"showLogo": true,
+		"showBuildDate": false,
+		"windowTitle": "Bro"
 	},
 
 	"newComputerName": null,
@@ -138,6 +144,7 @@ $DefaultConfig = @'
 		"MicrosoftCorporationII.QuickAssist"
 	]
 }
+
 '@
 
 function Get-Asset {
@@ -223,9 +230,19 @@ function Get-Config {
 }
 
 function Get-Logo {
-	$Host.UI.RawUI.WindowTitle = $Config.title
-	Clear-Host
-	Write-Host $global:Logo
+	$Host.UI.RawUI.WindowTitle = $Config.misc.windowTitle
+
+	if ($Config.misc.clearTerminalOnLaunch) {
+		Clear-Host
+	}
+
+	if ($Config.misc.showLogo) {
+		Write-Host $Script:Logo
+	}
+
+	if ($Config.misc.showBuildDate) {
+		Write-Host "Build Date: $Script:BuildDate ($Script:BuildNumber)"
+	}
 }
 
 function Get-Menu {
@@ -613,7 +630,7 @@ function Invoke-Install {
 	# Add Microsoft Store install and apps shortcuts to the desktop
 	if (Test-Feature install.installMicrosoftStore) {
 		Write-Host 'Adding Microsoft Store shortcuts to the desktop...'
-		Invoke-AddMicrosoftStore
+		Invoke-AddMicrosoftStoreShortcuts
 	}
 
 	$ProgressPreference = 'Continue'
@@ -1044,14 +1061,36 @@ function Install-WinGetPackages {
 	}
 }
 
-function Invoke-AddMicrosoftStore {
+function Invoke-AddMicrosoftStoreShortcuts {
 	$DesktopPath = [Environment]::GetFolderPath('Desktop')
 
-	New-Shortcut "$DesktopPath\Install Microsoft Store.lnk" 'wsreset' '-i >nul' | Out-Null
-	
-	New-Shortcut "$DesktopPath\Get App Installer.url" 'ms-windows-store://pdp/?ProductId=9nblggh4nns1'
-	New-Shortcut "$DesktopPath\Get Calculator.url" 'ms-windows-store://pdp/?ProductId=9wzdncrfhvn5'
-	New-Shortcut "$DesktopPath\Get Webp Image Extensions.url" 'ms-windows-store://pdp/?ProductId=9pg2dk419drg'
+	$AppxAvailable = [bool](Get-Command Get-AppxPackage -ErrorAction SilentlyContinue)
+
+	function Test-AppxInstalled($Name) {
+		if ($AppxAvailable) {
+			[bool](Get-AppxPackage -Name $Name -ErrorAction SilentlyContinue)
+		} else {
+			[bool](Get-ChildItem "$env:ProgramFiles\WindowsApps\$Name*" -ErrorAction SilentlyContinue)
+		}
+	}
+
+	$StoreInstalled = Test-AppxInstalled "Microsoft.WindowsStore"
+
+	if (!$StoreInstalled) {
+		New-Shortcut "$DesktopPath\Install Microsoft Store.lnk" 'wsreset' '-i >nul' | Out-Null
+	}
+
+	if (!$StoreInstalled -or !(Test-AppxInstalled "Microsoft.DesktopAppInstaller")) {
+		New-Shortcut "$DesktopPath\Get App Installer.url" 'ms-windows-store://pdp/?ProductId=9nblggh4nns1'
+	}
+
+	if (!(Test-AppxInstalled "Microsoft.WindowsCalculator")) {
+		New-Shortcut "$DesktopPath\Get Calculator.url" 'ms-windows-store://pdp/?ProductId=9wzdncrfhvn5'
+	}
+
+	if (!(Test-AppxInstalled "Microsoft.WebpImageExtension")) {
+		New-Shortcut "$DesktopPath\Get Webp Image Extensions.url" 'ms-windows-store://pdp/?ProductId=9pg2dk419drg'
+	}
 }
 
 function Invoke-CleanShortcuts {
@@ -1379,7 +1418,9 @@ public class Wallpaper
 }
 '@
 
-Add-Type $Code
+if (-not ([System.Management.Automation.PSTypeName]'Wallpaper').Type) {
+	Add-Type $Code
+}
 
 function Set-Wallpaper {
 	$FilePath = "$env:TMP\Bro_Wallpaper.jpg"
