@@ -110,7 +110,7 @@ function Invoke-Install {
 	# Add Microsoft Store install and apps shortcuts to the desktop
 	if (Test-Feature install.installMicrosoftStore) {
 		Write-Host 'Adding Microsoft Store shortcuts to the desktop...'
-		Invoke-AddMicrosoftStore
+		Invoke-AddMicrosoftStoreShortcuts
 	}
 
 	$ProgressPreference = 'Continue'
