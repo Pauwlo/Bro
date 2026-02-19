@@ -1,6 +1,10 @@
-# This file was automatically generated on 05/27/2025 22:01:58.
+# This file was automatically generated.
+$Script:BuildNumber = 6
+$Script:BuildDate = '2026-02-19 04:57:34'
+
 # <config placeholder>
-[CmdletBinding()] param()
+
+[CmdletBinding()] param() # this line adds support for $VerbosePreference
 
 $global:Logo = @'
 `7MM"""Yp,
@@ -855,6 +859,18 @@ function Test-WinGetInstalled {
 	return $false
 }
 
+function Update-Software {
+
+	if (Test-Feature update.updateChocolateyPackages) {
+		choco upgrade all -ry
+	}
+
+	if (Test-Feature update.updateWinGetPackages) {
+		winget upgrade --all
+	}
+
+}
+
 function Disable-FocusAssist {
 	$Prefix = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\$quietmoment'
 	$Suffix = '$windows.data.notifications.quietmoment\Current'
@@ -1373,18 +1389,6 @@ function Set-Wallpaper {
 	[Wallpaper]::SetWallpaper($FilePath)
 
 	Remove-Item $FilePath
-}
-
-function Update-Software {
-
-	if (Test-Feature update.updateChocolateyPackages) {
-		choco upgrade all -ry
-	}
-
-	if (Test-Feature update.updateWinGetPackages) {
-		winget upgrade --all
-	}
-
 }
 
 function Get-BackupOutputPath {
