@@ -146,17 +146,9 @@ Don't allow network access to metadata.
 
 Never show media change popups.
 
-### Photos
+### JPEGView
 
-Open Windows Photos app.
-
-Close the Sign in and introduction windows.
-
-Remove the Pictures folder from sources.
-
-Disable automatically generated albums.
-
-Don't show a notification when new albums are available.
+Set as default viewer for images.
 
 ### Office (optional)
 

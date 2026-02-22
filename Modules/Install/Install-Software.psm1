@@ -44,4 +44,8 @@ function Install-Software {
 
 		New-Item "$DesktopPath\$DummyFileName.pdf" -Force | Out-Null
 	}
+
+	if (Test-InstallSoftware JPEGView) {
+		Install-JPEGView
+	}
 }
