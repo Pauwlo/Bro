@@ -1,5 +1,7 @@
 function Install-Software {
 
+	$DesktopPath = [Environment]::GetFolderPath('Desktop')
+
 	if (Test-Feature install.installChocolatey) {
 		Install-Chocolatey
 	}
@@ -17,10 +19,9 @@ function Install-Software {
 	}
 
 	if ((Test-InstallChocolateyPackage '7-Zip') -or (Test-InstallWinGetPackage '7-Zip')) {
-		# Create dummy shortcuts on the desktop
-		$DesktopPath = [Environment]::GetFolderPath('Desktop')
+		# Create dummy files on the desktop
 		$DummyFileName = 'Dummy (right-click - Properties - Change...)'
-		
+
 		New-Item "$DesktopPath\$DummyFileName.7z" -Force | Out-Null
 		New-Item "$DesktopPath\$DummyFileName.rar" -Force | Out-Null
 		New-Item "$DesktopPath\$DummyFileName.zip" -Force | Out-Null
@@ -35,5 +36,12 @@ function Install-Software {
 		}
 
 		New-ItemProperty -Path $RegistryPath -Name $Name -Value $Value -PropertyType DWORD -Force | Out-Null
+	}
+
+	if ((Test-InstallChocolateyPackage 'Firefox') -or (Test-InstallWinGetPackage 'Firefox')) {
+		# Create dummy PDF file on the desktop
+		$DummyFileName = 'Dummy PDF (right-click - Properties - Change...)'
+
+		New-Item "$DesktopPath\$DummyFileName.pdf" -Force | Out-Null
 	}
 }
