@@ -1,8 +1,8 @@
 # This file was automatically generated.
 [CmdletBinding()] param() # this line adds support for $VerbosePreference
 
-$Script:BuildNumber = 7
-$Script:BuildDate = '2026-02-19 07:42:50'
+$Script:BuildNumber = 8
+$Script:BuildDate = '2026-02-22 07:16:04'
 
 # <config placeholder>
 
@@ -91,6 +91,10 @@ $DefaultConfig = @'
 		"videos": true
 	},
 
+	"software": {
+		"JPEGView": true
+	},
+
 	"chocolatey": {
 		"Firefox": true,
 		"VLC": true,
@@ -129,6 +133,7 @@ $DefaultConfig = @'
 		"Microsoft.SkypeApp",
 		"Microsoft.Todos",
 		"Microsoft.Wallet",
+		"Microsoft.Windows.Photos",
 		"Microsoft.WindowsFeedbackHub",
 		"Microsoft.WindowsMaps",
 		"Microsoft.Xbox.TCUI",
@@ -776,6 +781,25 @@ function Test-InstallChocolateyPackage {
 	return $false
 }
 
+function Test-InstallSoftware {
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$Name
+	)
+
+	$SoftwareNames = $Config.software.PSObject.Properties;
+
+	foreach ($Software in $SoftwareNames) {
+		if ($Software.Name -eq $Name) {
+			return $Software.Value -eq $true
+		}
+	}
+
+	return $false
+}
+
 function Test-InstallWinGetPackage {
 
 	Param(
@@ -874,6 +898,114 @@ function Test-WinGetInstalled {
 	}
 	
 	return $false
+}
+
+function Get-BackupOutputPath {
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$Name
+	)
+
+	$OutputPath = "$env:TMP\$Name"
+
+	$i = 0
+	while (Test-Path $OutputPath) {
+		$i++
+		$OutputPath = "$env:TMP\$Name ($i)"
+	}
+
+	New-Item $OutputPath -ItemType Directory | Out-Null
+	Write-Host "Backup folder created at $OutputPath"
+
+	return $OutputPath
+}
+
+function Invoke-BackupUserFolders {
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$OutputPath
+	)
+
+	$ShellAppObject = New-Object -ComObject Shell.Application
+	
+	$Desktop	= [Environment]::GetFolderPath('Desktop')
+	$Downloads	= $ShellAppObject.NameSpace('shell:Downloads').Self.Path
+	$Documents	= [Environment]::GetFolderPath('MyDocuments')
+	$Pictures	= [Environment]::GetFolderPath('MyPictures')
+	$Music		= [Environment]::GetFolderPath('MyMusic')
+	$Videos		= [Environment]::GetFolderPath('MyVideos')
+
+	$BackupFolders = @(
+		@{
+			Source = $Desktop
+			Destination = 'Desktop'
+		},
+		@{
+			Source = $Downloads
+			Destination = 'Downloads'
+		},
+		@{
+			Source = $Documents
+			Destination = 'Documents'
+		},
+		@{
+			Source = $Pictures
+			Destination = 'Pictures'
+		},
+		@{
+			Source = $Music
+			Destination = 'Music'
+		},
+		@{
+			Source = $Videos
+			Destination = 'Videos'
+		}
+	)
+
+	$BackupFolders | ForEach-Object {
+		$destination = $_.Destination.ToLower()
+
+		if ($Config.backupFolders.$destination -eq $true) {
+			Write-Host "Saving user $destination..."
+			$Destination = "$OutputPath\" + $_.Destination
+			Copy-Item $_.Source $Destination -Force -Recurse
+		}
+	}
+}
+
+# From https://stackoverflow.com/questions/59996907/how-to-take-a-remote-screenshot-with-powershell
+Add-Type -AssemblyName System.Windows.Forms
+Add-type -AssemblyName System.Drawing
+
+function Invoke-TakeScreenshot {
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$OutputPath
+	)
+
+	$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+
+	$Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
+
+	$Graphic = [System.Drawing.Graphics]::FromImage($Bitmap)
+
+	# Show the desktop
+	$ShellAppObject = New-Object -ComObject Shell.Application
+	$ShellAppObject.toggleDesktop()
+	$ShellScriptObject = New-Object -ComObject WScript.Shell
+	$ShellScriptObject.SendKeys("^{ESC}")
+
+	Start-Sleep 1
+
+	$Graphic.CopyFromScreen($Screen.Left, $Screen.Top, 0, 0, $Bitmap.Size)
+	
+	$Bitmap.Save("$OutputPath\Screenshot.png")
 }
 
 function Update-Software {
@@ -986,7 +1118,46 @@ function Install-Fonts {
 	Remove-Item $FontsPath -Recurse
 }
 
+function Install-JPEGView {
+	$StartMenuPath = "$env:PROGRAMDATA\Microsoft\Windows\Start Menu\Programs"
+
+	$JPEGViewUrl = 'https://github.com/sylikc/jpegview/releases/download/v1.3.46/JPEGView_1.3.46.zip'
+	$JPEGViewZipFilePath = 'JPEGView.zip'
+	$JPEGViewZipExtractPath = "$env:Tmp\JPEGView"
+	$JPEGViewInstallPath = "$env:ProgramFiles\JPEGView"
+
+	Start-BitsTransfer -Source $JPEGViewUrl -Destination $JPEGViewZipFilePath
+	Expand-Archive -Path $JPEGViewZipFilePath -Destination $JPEGViewZipExtractPath
+	Remove-Item $JPEGViewZipFilePath
+
+	New-Item $JPEGViewInstallPath -ItemType Directory | Out-Null
+	Move-Item "$JPEGViewZipExtractPath\JPEGView64\*" $JPEGViewInstallPath
+	Remove-Item $JPEGViewZipExtractPath -Recurse
+
+	New-Shortcut "$StartMenuPath\JPEGView.lnk" "$JPEGViewInstallPath\JPEGView.exe"
+
+	$MachinePath = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ";$JPEGViewInstallPath"
+	[Environment]::SetEnvironmentVariable('Path', $MachinePath, [EnvironmentVariableTarget]::Machine)
+
+	$ConfigFilePath = "$env:AppData\JPEGView\JPEGView.ini"
+	$KeymapFileFilePath = "$JPEGViewInstallPath\KeyMap.txt.default"
+	$ConfigFile = Get-Content "$JPEGViewInstallPath\JPEGView.ini.tpl" -Raw
+	$KeymapFile = Get-Content $KeymapFileFilePath -Raw
+
+	$ConfigFile = $ConfigFile.Replace('FilesProcessedByWIC=*.wdp;*.hdp;*.jxr', 'FilesProcessedByWIC=*.wdp;*.hdp;*.jxr;*.heic')
+	$ConfigFile = $ConfigFile.Replace('ShowFullScreen=auto', 'ShowFullScreen=false')
+	$ConfigFile = $ConfigFile.Replace('IsSortedUpcounting=true', 'IsSortedUpcounting=false')
+	New-Item (Split-Path $ConfigFilePath) -ItemType Directory | Out-Null
+	New-Item $ConfigFilePath | Out-Null
+	Set-Content $ConfigFilePath $ConfigFile
+
+	$KeymapFile = $KeymapFile.Replace('   IDM_MOVE_TO_RECYCLE_BIN_CONFIRM', '   IDM_MOVE_TO_RECYCLE_BIN')
+	Set-Content $KeymapFileFilePath $KeymapFile
+}
+
 function Install-Software {
+
+	$DesktopPath = [Environment]::GetFolderPath('Desktop')
 
 	if (Test-Feature install.installChocolatey) {
 		Install-Chocolatey
@@ -1005,10 +1176,9 @@ function Install-Software {
 	}
 
 	if ((Test-InstallChocolateyPackage '7-Zip') -or (Test-InstallWinGetPackage '7-Zip')) {
-		# Create dummy shortcuts on the desktop
-		$DesktopPath = [Environment]::GetFolderPath('Desktop')
+		# Create dummy files on the desktop
 		$DummyFileName = 'Dummy (right-click - Properties - Change...)'
-		
+
 		New-Item "$DesktopPath\$DummyFileName.7z" -Force | Out-Null
 		New-Item "$DesktopPath\$DummyFileName.rar" -Force | Out-Null
 		New-Item "$DesktopPath\$DummyFileName.zip" -Force | Out-Null
@@ -1023,6 +1193,17 @@ function Install-Software {
 		}
 
 		New-ItemProperty -Path $RegistryPath -Name $Name -Value $Value -PropertyType DWORD -Force | Out-Null
+	}
+
+	if ((Test-InstallChocolateyPackage 'Firefox') -or (Test-InstallWinGetPackage 'Firefox')) {
+		# Create dummy PDF file on the desktop
+		$DummyFileName = 'Dummy PDF (right-click - Properties - Change...)'
+
+		New-Item "$DesktopPath\$DummyFileName.pdf" -Force | Out-Null
+	}
+
+	if (Test-InstallSoftware JPEGView) {
+		Install-JPEGView
 	}
 }
 
@@ -1430,114 +1611,6 @@ function Set-Wallpaper {
 	[Wallpaper]::SetWallpaper($FilePath)
 
 	Remove-Item $FilePath
-}
-
-function Get-BackupOutputPath {
-
-	Param(
-		[Parameter(Mandatory = $true)]
-		[String]
-		$Name
-	)
-
-	$OutputPath = "$env:TMP\$Name"
-
-	$i = 0
-	while (Test-Path $OutputPath) {
-		$i++
-		$OutputPath = "$env:TMP\$Name ($i)"
-	}
-
-	New-Item $OutputPath -ItemType Directory | Out-Null
-	Write-Host "Backup folder created at $OutputPath"
-
-	return $OutputPath
-}
-
-function Invoke-BackupUserFolders {
-
-	Param(
-		[Parameter(Mandatory = $true)]
-		[String]
-		$OutputPath
-	)
-
-	$ShellAppObject = New-Object -ComObject Shell.Application
-	
-	$Desktop	= [Environment]::GetFolderPath('Desktop')
-	$Downloads	= $ShellAppObject.NameSpace('shell:Downloads').Self.Path
-	$Documents	= [Environment]::GetFolderPath('MyDocuments')
-	$Pictures	= [Environment]::GetFolderPath('MyPictures')
-	$Music		= [Environment]::GetFolderPath('MyMusic')
-	$Videos		= [Environment]::GetFolderPath('MyVideos')
-
-	$BackupFolders = @(
-		@{
-			Source = $Desktop
-			Destination = 'Desktop'
-		},
-		@{
-			Source = $Downloads
-			Destination = 'Downloads'
-		},
-		@{
-			Source = $Documents
-			Destination = 'Documents'
-		},
-		@{
-			Source = $Pictures
-			Destination = 'Pictures'
-		},
-		@{
-			Source = $Music
-			Destination = 'Music'
-		},
-		@{
-			Source = $Videos
-			Destination = 'Videos'
-		}
-	)
-
-	$BackupFolders | ForEach-Object {
-		$destination = $_.Destination.ToLower()
-
-		if ($Config.backupFolders.$destination -eq $true) {
-			Write-Host "Saving user $destination..."
-			$Destination = "$OutputPath\" + $_.Destination
-			Copy-Item $_.Source $Destination -Force -Recurse
-		}
-	}
-}
-
-# From https://stackoverflow.com/questions/59996907/how-to-take-a-remote-screenshot-with-powershell
-Add-Type -AssemblyName System.Windows.Forms
-Add-type -AssemblyName System.Drawing
-
-function Invoke-TakeScreenshot {
-
-	Param(
-		[Parameter(Mandatory = $true)]
-		[String]
-		$OutputPath
-	)
-
-	$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
-
-	$Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
-
-	$Graphic = [System.Drawing.Graphics]::FromImage($Bitmap)
-
-	# Show the desktop
-	$ShellAppObject = New-Object -ComObject Shell.Application
-	$ShellAppObject.toggleDesktop()
-	$ShellScriptObject = New-Object -ComObject WScript.Shell
-	$ShellScriptObject.SendKeys("^{ESC}")
-
-	Start-Sleep 1
-
-	$Graphic.CopyFromScreen($Screen.Left, $Screen.Top, 0, 0, $Bitmap.Size)
-	
-	$Bitmap.Save("$OutputPath\Screenshot.png")
 }
 
 Grant-AdministratorPrivileges $MyInvocation
