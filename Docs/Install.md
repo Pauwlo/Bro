@@ -23,6 +23,7 @@ Boot from USB in UEFI mode.
     Asus   | Del                          | F8
     Dell   | F12                          | N/A
     HP     | Esc F10                      | Esc F9
+    Huawei | F2                           | F12
     Lenovo | F1, F2                       | F10, fn + F11, F12
     MSI    | Del                          | F11
 
@@ -35,7 +36,7 @@ Install Windows. Your computer will restart and show you the OOBE.
 
 Select region and keyboard layout(s).
 
-If you're using Windows 11, press `Shift+F10`, and run the following command: `oobe\BypassNRO`. This will reboot the computer and force the OOBE to skip the Microsoft sign in part.
+If you're using Windows 11, press `Shift+F10`, and run the following command: `start ms-cxh:localonly`. This will open the local account creation window so you can skip the OOBE.
 
 Make sure you stay offline (click on `I don't have internet` then `Continue with limited setup`), so you can create a local account.
 
@@ -45,7 +46,7 @@ Decline **all** "recommended" settings, such as activity history, Cortana, speec
 
 Connect your computer to the internet.
 
-Set the network as Private if you trust it. Windows 10 will ask you on your first connect, on Windows 11 you have to go to Network settings to change it from Public.
+Set the network as Private if you trust it. Windows 10 will ask you on your first connect, if not then go to Network settings to change it.
 
 Open a PowerShell or Windows Terminal window with admin privileges (right-click on Start menu, or `Win`+`X A`).
 
@@ -55,22 +56,25 @@ Run the following command:
 irm pauw.io/bro | iex
 ```
 
-For more verbose output, run:
-
-```powershell
-$VerbosePreference = 'Continue'
-irm pauw.io/bro | iex
-```
+From there, you can either [Install](https://github.com/Pauwlo/Bro/tree/main/Modules/Invoke-Install.psm1) (press `I`) or [Debloat](https://github.com/Pauwlo/Bro/tree/main/Modules/Invoke-Debloat.psm1) (press `D`) your system.
 
 ## Get Updates
 
 Run Windows Update until you're up to date. You may have to restart your computer several times. If you see update errors, wait 5-10 minutes, and try again. Some updates are installing in the background, and the Settings app may not show them.
 
-If applicable, install Microsoft Store with the shortcut on the desktop. It may take a few minutes to install and show up in the Start menu.
+## Install Microsoft Store (LTSC only)
 
-Then, install the Store apps with the "Get..." shortcuts on the desktop once they show the Store icon. Delete them afterwards.
+Install Microsoft Store with the shortcut on the desktop. It may take a few minutes to install and show up in the Start menu.
 
-Otherwise, just open Microsoft Store and Get updates.
+Then, install the Store apps with the "Get..." shortcuts on the desktop once they show the Store icon.
+
+If Internet Explorer opens, Don't use recommended settings and close it.
+
+Delete the shortcuts when all the apps are installed.
+
+## Finish Windows setup
+
+Open Microsoft Store and Get updates.
 
 Activate Windows if needed ([need help?](https://github.com/massgravel/Microsoft-Activation-Scripts)).
 
@@ -86,7 +90,7 @@ Dismiss account protection and OneDrive warnings, if any.
 
 ### Explorer
 
-If the SSD capacity is limited, move **Documents**, **Pictures**, **Music** and **Videos** to `D:\`.
+When applicable, if the SSD capacity is limited, move **Documents**, **Pictures**, **Music** and **Videos** to a secondary drive, usually `D:\`.
 
 ## Programs
 
@@ -102,7 +106,7 @@ Remove default bookmarks.
 
 Remove the "Import bookmarks..." button from the toolbar.
 
-Remove View and Pocket from the toolbar.
+Remove Sidebars, View and Account buttons from the toolbar.
 
 #### Options
 
@@ -154,14 +158,7 @@ Disable automatically generated albums.
 
 Don't show a notification when new albums are available.
 
-### Office
-
-Don't install:
-
-- OneDrive
-- OneDrive for Business
-- Skype Entreprise
-- Teams
+### Office (optional)
 
 During an Office 365 installation, Teams might install automatically after next reboot. To prevent that, uninstall **Teams Machine-Wide Installer** from Windows Settings.
 
@@ -173,9 +170,9 @@ Set Outlook as default Email application, if needed.
 
 ### HDD Folders
 
-If the SSD capacity is limited, create a `Programs` folder in `D:\` with icon: `C:\Windows\System32\shell32.dll,162`. Install future non-critical programs in this folder instead of regular `C:\Program Files\`.
+When applicable, if the SSD capacity is limited, create a `Programs` folder in a secondary drive (usually `D:\`) with icon: `C:\Windows\System32\shell32.dll,162`. Install non-critical programs in this folder instead of the regular `C:\Program Files\`.
 
-If needed, create a `Games` folder in `D:\` with icon: `C:\Windows\System32\imageres.dll,177`. Install future non-critical games in this folder instead of regular `C:\Program Files\`.
+If needed, also create a `Games` folder with icon: `C:\Windows\System32\imageres.dll,177`. Install future games in this folder instead of regular `C:\Program Files\`.
 
 ### Desktop
 
