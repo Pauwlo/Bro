@@ -1,10 +1,14 @@
 function Invoke-CleanStartAndTaskbar {
+	$IsWindows11 = [System.Environment]::OSVersion.Version.Build -ge 22000
 	$PreviousLocation = Get-Location
 
 	$TempLayoutPath = 'C:\LayoutModification.xml'
 	Get-Asset LayoutModificationXml $TempLayoutPath | Out-Null
 	Set-Location C:\
-	Import-StartLayout -LayoutPath $TempLayoutPath -MountPath C:
+
+	if (! $IsWindows11) {
+		Import-StartLayout -LayoutPath $TempLayoutPath -MountPath C:
+	}
 
 	$KeyPathRelative = 'Software\Policies\Microsoft\Windows\Explorer'
 
