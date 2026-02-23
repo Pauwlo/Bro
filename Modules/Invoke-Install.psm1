@@ -6,6 +6,12 @@ function Invoke-Install {
 		Invoke-RenameComputer
 	}
 
+	# Patch registry
+	if (Test-Feature common.patchRegistry) {
+		Write-Host 'Patching registry...'
+		Invoke-PatchRegistry
+	}
+
 	# Block Microsoft telemetry
 	if (Test-Feature common.blockMicrosoftTelemetry) {
 		Write-Host 'Removing telemetry services...'
@@ -16,12 +22,6 @@ function Invoke-Install {
 	if (Test-Feature common.patchHosts) {
 		Write-Host 'Patching hosts... (Windows Defender may false positive)'
 		Invoke-PatchHosts
-	}
-
-	# Patch registry
-	if (Test-Feature common.patchRegistry) {
-		Write-Host 'Patching registry...'
-		Invoke-PatchRegistry
 	}
 
 	# Disable Focus Assist automatic rules

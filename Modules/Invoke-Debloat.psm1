@@ -1,6 +1,12 @@
 function Invoke-Debloat {
 	$ProgressPreference = 'SilentlyContinue'
 
+	# Patch registry
+	if (Test-Feature common.patchRegistry) {
+		Write-Host 'Patching registry...'
+		Invoke-PatchRegistry
+	}
+
 	# Block Microsoft telemetry
 	if (Test-Feature common.blockMicrosoftTelemetry) {
 		Write-Host 'Removing telemetry services...'
@@ -11,12 +17,6 @@ function Invoke-Debloat {
 	if (Test-Feature common.patchHosts) {
 		Write-Host 'Patching hosts... (Windows Defender may false positive)'
 		Invoke-PatchHosts
-	}
-
-	# Patch registry
-	if (Test-Feature common.patchRegistry) {
-		Write-Host 'Patching registry...'
-		Invoke-PatchRegistry
 	}
 
 	# Disable Focus Assist automatic rules
@@ -36,13 +36,13 @@ function Invoke-Debloat {
 		Write-Host 'Uninstalling OneDrive...'
 		Remove-OneDrive
 	}
-	
+
 	# Remove Edge shortcut from Desktop
 	if (Test-Feature common.removeEdgeShortcut) {
 		Write-Host 'Removing Edge shortcut from desktop...'
 		Remove-EdgeShortcut
 	}
-	
+
 	# Clean start menu & taskbar
 	if (Test-Feature common.cleanStartAndTaskbar) {
 		Write-Host 'Cleaning taskbar & start menu...'
