@@ -1,6 +1,4 @@
 function Invoke-PatchHosts {
-	Add-MpPreference -ExclusionPath 'C:\Windows\System32\drivers\etc\hosts'
-
 	$HostsPath = "$env:WINDIR\System32\drivers\etc\hosts"
 	$Hosts = Get-Content $HostsPath
 	$NewHosts = [System.Collections.Generic.List[string]]::new()
@@ -9,7 +7,7 @@ function Invoke-PatchHosts {
 	$Ignore = $false
 	for ($i = 0; $i -lt $Hosts.Length; $i++) {
 		$Line = $Hosts[$i]
-		
+
 		if ($Line -eq '#< Added by Bro (https://pauw.io/bro.git)') {
 			$Ignore = $true
 		} elseif ($Line -eq '#> Added by Bro (https://pauw.io/bro.git)') {
