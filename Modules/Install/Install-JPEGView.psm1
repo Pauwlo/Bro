@@ -14,6 +14,9 @@ function Install-JPEGView {
 	Move-Item "$JPEGViewZipExtractPath\JPEGView64\*" $JPEGViewInstallPath
 	Remove-Item $JPEGViewZipExtractPath -Recurse
 
+	# Fix permissions for all users
+	icacls $JPEGViewInstallPath /inheritance:e /grant "*S-1-5-32-545:(OI)(CI)RX" /T /C | Out-Null
+
 	New-Shortcut "$StartMenuPath\JPEGView.lnk" "$JPEGViewInstallPath\JPEGView.exe"
 
 	$MachinePath = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ";$JPEGViewInstallPath"
