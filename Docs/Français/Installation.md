@@ -23,6 +23,7 @@ Démarrez depuis la clé USB en mode UEFI.
     Asus   | Del                               | F8
     Dell   | F12                               | N/A
     HP     | Esc F10                           | Esc F9
+    Huawei | F2                                | F12
     Lenovo | F1, F2                            | F10, fn + F11, F12
     MSI    | Del                               | F11
 
@@ -45,7 +46,7 @@ Refusez **tous** les paramètres "recommandés" : historique d’activité, Cort
 
 Connectez l’ordinateur à Internet.
 
-Définissez le réseau comme **privé** si vous lui faites confiance. Windows 10 vous demande à la première connexion, sur Windows 11 vous devez vous rendre dans les Paramètres réseau pour le changer en "Public".
+Définissez le réseau comme **privé** si vous lui faites confiance. Windows 10 vous demande à la première connexion, sinon rendez-vous dans les Paramètres réseau pour le changer.
 
 Ouvrez une fenêtre PowerShell ou Windows Terminal en tant qu'administrateur (clic droit sur le menu Démarrer, ou `Win`+`X A`).
 
@@ -55,22 +56,25 @@ Exécutez la commande suivante :
 irm pauw.io/bro | iex
 ```
 
-Pour afficher plus de détails, exécutez plutôt :
-
-```powershell
-$VerbosePreference = 'Continue'
-irm pauw.io/bro | iex
-```
+Vous pouvez choisir d'[Installer](https://github.com/Pauwlo/Bro/tree/main/Modules/Invoke-Install.psm1) (appuyez sur `I`) ou [Debloat (désencombrer)](https://github.com/Pauwlo/Bro/tree/main/Modules/Invoke-Debloat.psm1) (appuyez sur `D`) votre système.
 
 ## Mettre à jour
 
-Exécutez Windows Update jusqu’à ce que tout soit à jour. Redémarrez si nécessaire.
+Exécutez Windows Update jusqu’à ce que tout soit à jour. Vous pouvez être amené à redémarrer votre ordinateur plusieurs fois. Si des erreurs apparaîssent, patientez 5-10 minutes, puis réessayez. Certaines mises à jour s'installent en arrière-plan et l'app Paramètres ne les affiche pas toujours.
 
-Si besoin, installez le Microsoft Store avec le raccourci sur le bureau. Cela peut prendre quelques minutes pour qu'il apparaisse dans le menu Démarrer.
+## Installation du Microsoft Store (LTSC seulement)
 
-Installez ensuite les applications du Store avec les raccourcis "Get..." sur le bureau une fois qu'ils affichent l'icône du Store. Supprimez-les ensuite.
+Installez le Microsoft Store avec le raccourci sur le bureau. Cela peut prendre quelques minutes pour qu'il apparaisse dans le menu Démarrer.
 
-Sinon, ouvrez le Microsoft Store et mettez les applications à jour.
+Installez les applications du Store avec les raccourcis "Get..." sur le bureau une fois qu'ils affichent l'icône du Store.
+
+Supprimez les raccourcis lorsque les applications sont installées.
+
+Si Internet Explorer s'ouvre, choisissez de Ne pas utiliser les paramètres recommandés, puis fermez-le.
+
+## Finaliser l'installation Windows
+
+Ouvrez le Microsoft Store et mettez les applications à jour.
 
 Activez Windows si nécessaire ([besoin d'aide ?](https://github.com/massgravel/Microsoft-Activation-Scripts)).
 
@@ -80,13 +84,15 @@ Installez les pilotes importants depuis le site du fabricant (mise à jour du BI
 
 ### Windows Defender
 
+Windows Defender peut vous avertir d'une menace `SettingsModifier:Win32/HostsFileHijack` après avoir exécuté Bro. Ce n'est rien. Windows considère désormais toute modification du fichier hosts comme malveillante. Une partie du travail de Bro consiste à préserver la confidentialité en désactivant la télémétrie de Microsoft via une modification inoffensive du fichier hosts, mais Microsoft a décidé que le fait de bloquer sa capacité à espionner les utilisateurs était *malveillant*, d'où cet avertissement. Vous pouvez toujours consulter le contenu du fichier [Hosts.txt](https://github.com/Pauwlo/Bro/blob/main/Stuff/Hosts.txt).
+
 Activez la **Protection contre les falsifications** si elle est désactivée. Je ne sais pas ce qui la désactive.
 
 Ignorez les éventuels avertissements de protection du compte et OneDrive.
 
 ### Explorateur
 
-Déplacez les bibliothèques Documents, Images, Musique et Vidéos vers D:\ si nécessaire (espace disque limité sur C:).
+Si possible, lorsque l'espace du SSD est limité, déplacez les bibliothèques **Documents**, **Images**, **Musique** et **Vidéos** vers un disque secondaire, généralement `D:\`.
 
 ## Programmes
 
@@ -142,26 +148,11 @@ Refusez l’accès réseau aux métadonnées.
 
 Ne jamais afficher une infobulle de changement de média.
 
-### Photos (si installée)
+### JPEGView
 
-Ouvrez l’application Photos.
+Définir en tant que visionneuse d'image par défaut.
 
-Fermez les fenêtres de connexion et de présentation.
-
-Supprimez le dossier Images des sources.
-
-Désactivez la génération automatique d’albums.
-
-Désactivez les notifications de nouveaux albums.
-
-### Office
-
-Ne pas installer :
-
-- OneDrive
-- OneDrive for Business
-- Skype Entreprise
-- Teams
+### Office (facultatif)
 
 Pendant l'installation d'Office 365, Teams peut s'installer automatiquement au prochain redémarrage. Pour l'en empêcher, désinstallez **Teams Machine-Wide Installer** dans les Paramètres.
 
@@ -173,9 +164,9 @@ Définissez Outlook comme client e-mail par défaut si besoin.
 
 ### Dossiers racine
 
-Si la capacité du disque C est limitée, créez un dossier `Programmes` dans `D:\` avec l'icône `C:\Windows\System32\shell32.dll,162`. Installez des programmes dans cet emplacement pour soulager `Program Files`.
+Si possible, lorsque l'espace du SSD est limité, créez un dossier `Programmes`  vers un disque secondaire (généralement `D:\`) avec l'icône `C:\Windows\System32\shell32.dll,162`. Installez des programmes dans cet emplacement pour soulager `Program Files`.
 
-Si nécessaire, créez un dossier `Jeux` dans `D:\` avec l'icône `C:\Windows\System32\imageres.dll,177` pour les mêmes besoins.
+Si nécessaire, créez aussi un dossier `Jeux` avec l'icône `C:\Windows\System32\imageres.dll,177`. Installez des jeux dans cet emplacement pour soulager `Program Files`.
 
 ### Bureau
 

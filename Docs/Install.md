@@ -84,7 +84,7 @@ Install important or missing system drivers (BIOS update, touchpad, fingerprint 
 
 ### Windows Defender
 
-Windows Defender may notify you about a SettingsModifier:Win32/HostsFileHijack threat after running Bro. It's fine. Windows now treats any modification of the hosts file as malicious. Part of Bro's job is to maintain privacy by disabling Microsoft's telemetry via an otherwise-harmless modification to the hosts file, but Microsoft has decided that blocking their ability to spy on users is *malicious*, so you get this warning. You can always review the contents of [Hosts.txt](https://github.com/Pauwlo/Bro/blob/main/Stuff/Hosts.txt).
+Windows Defender may notify you about a `SettingsModifier:Win32/HostsFileHijack` threat after running Bro. It's fine. Windows now treats any modification of the hosts file as malicious. Part of Bro's job is to maintain privacy by disabling Microsoft's telemetry via an otherwise-harmless modification to the hosts file, but Microsoft has decided that blocking their ability to spy on users is *malicious*, so you get this warning. You can always review the contents of [Hosts.txt](https://github.com/Pauwlo/Bro/blob/main/Stuff/Hosts.txt).
 
 Enable **Tamper protection** if it's disabled. I don't know what is disabling it.
 
