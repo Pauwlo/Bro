@@ -1,8 +1,8 @@
 # This file was automatically generated.
 [CmdletBinding()] param() # this line adds support for $VerbosePreference
 
-$Script:BuildNumber = 8
-$Script:BuildDate = '2026-02-22 07:16:04'
+$Script:BuildNumber = 9
+$Script:BuildDate = '2026-02-23 02:54:14'
 
 # <config placeholder>
 
@@ -464,6 +464,12 @@ function Invoke-Backup {
 function Invoke-Debloat {
 	$ProgressPreference = 'SilentlyContinue'
 
+	# Patch registry
+	if (Test-Feature common.patchRegistry) {
+		Write-Host 'Patching registry...'
+		Invoke-PatchRegistry
+	}
+
 	# Block Microsoft telemetry
 	if (Test-Feature common.blockMicrosoftTelemetry) {
 		Write-Host 'Removing telemetry services...'
@@ -474,12 +480,6 @@ function Invoke-Debloat {
 	if (Test-Feature common.patchHosts) {
 		Write-Host 'Patching hosts... (Windows Defender may false positive)'
 		Invoke-PatchHosts
-	}
-
-	# Patch registry
-	if (Test-Feature common.patchRegistry) {
-		Write-Host 'Patching registry...'
-		Invoke-PatchRegistry
 	}
 
 	# Disable Focus Assist automatic rules
@@ -499,13 +499,13 @@ function Invoke-Debloat {
 		Write-Host 'Uninstalling OneDrive...'
 		Remove-OneDrive
 	}
-	
+
 	# Remove Edge shortcut from Desktop
 	if (Test-Feature common.removeEdgeShortcut) {
 		Write-Host 'Removing Edge shortcut from desktop...'
 		Remove-EdgeShortcut
 	}
-	
+
 	# Clean start menu & taskbar
 	if (Test-Feature common.cleanStartAndTaskbar) {
 		Write-Host 'Cleaning taskbar & start menu...'
@@ -531,6 +531,12 @@ function Invoke-Install {
 		Invoke-RenameComputer
 	}
 
+	# Patch registry
+	if (Test-Feature common.patchRegistry) {
+		Write-Host 'Patching registry...'
+		Invoke-PatchRegistry
+	}
+
 	# Block Microsoft telemetry
 	if (Test-Feature common.blockMicrosoftTelemetry) {
 		Write-Host 'Removing telemetry services...'
@@ -541,12 +547,6 @@ function Invoke-Install {
 	if (Test-Feature common.patchHosts) {
 		Write-Host 'Patching hosts... (Windows Defender may false positive)'
 		Invoke-PatchHosts
-	}
-
-	# Patch registry
-	if (Test-Feature common.patchRegistry) {
-		Write-Host 'Patching registry...'
-		Invoke-PatchRegistry
 	}
 
 	# Disable Focus Assist automatic rules
@@ -1134,6 +1134,9 @@ function Install-JPEGView {
 	Move-Item "$JPEGViewZipExtractPath\JPEGView64\*" $JPEGViewInstallPath
 	Remove-Item $JPEGViewZipExtractPath -Recurse
 
+	# Fix permissions for all users
+	icacls $JPEGViewInstallPath /inheritance:e /grant "*S-1-5-32-545:(OI)(CI)RX" /T /C | Out-Null
+
 	New-Shortcut "$StartMenuPath\JPEGView.lnk" "$JPEGViewInstallPath\JPEGView.exe"
 
 	$MachinePath = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ";$JPEGViewInstallPath"
@@ -1304,12 +1307,16 @@ function Invoke-CleanShortcuts {
 }
 
 function Invoke-CleanStartAndTaskbar {
+	$IsWindows11 = [System.Environment]::OSVersion.Version.Build -ge 22000
 	$PreviousLocation = Get-Location
 
 	$TempLayoutPath = 'C:\LayoutModification.xml'
 	Get-Asset LayoutModificationXml $TempLayoutPath | Out-Null
 	Set-Location C:\
-	Import-StartLayout -LayoutPath $TempLayoutPath -MountPath C:
+
+	if (! $IsWindows11) {
+		Import-StartLayout -LayoutPath $TempLayoutPath -MountPath C:
+	}
 
 	$KeyPathRelative = 'Software\Policies\Microsoft\Windows\Explorer'
 
@@ -1341,8 +1348,6 @@ function Invoke-CleanStartAndTaskbar {
 }
 
 function Invoke-PatchHosts {
-	Add-MpPreference -ExclusionPath 'C:\Windows\System32\drivers\etc\hosts'
-
 	$HostsPath = "$env:WINDIR\System32\drivers\etc\hosts"
 	$Hosts = Get-Content $HostsPath
 	$NewHosts = [System.Collections.Generic.List[string]]::new()
@@ -1351,7 +1356,7 @@ function Invoke-PatchHosts {
 	$Ignore = $false
 	for ($i = 0; $i -lt $Hosts.Length; $i++) {
 		$Line = $Hosts[$i]
-		
+
 		if ($Line -eq '#< Added by Bro (https://pauw.io/bro.git)') {
 			$Ignore = $true
 		} elseif ($Line -eq '#> Added by Bro (https://pauw.io/bro.git)') {
