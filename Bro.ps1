@@ -1,8 +1,8 @@
 # This file was automatically generated.
 [CmdletBinding()] param() # this line adds support for $VerbosePreference
 
-$Script:BuildNumber = 10
-$Script:BuildDate = '2026-02-23 05:19:43'
+$Script:BuildNumber = 11
+$Script:BuildDate = '2026-10-26 11:34:53'
 
 # <config placeholder>
 
@@ -900,114 +900,6 @@ function Test-WinGetInstalled {
 	return $false
 }
 
-function Get-BackupOutputPath {
-
-	Param(
-		[Parameter(Mandatory = $true)]
-		[String]
-		$Name
-	)
-
-	$OutputPath = "$env:TMP\$Name"
-
-	$i = 0
-	while (Test-Path $OutputPath) {
-		$i++
-		$OutputPath = "$env:TMP\$Name ($i)"
-	}
-
-	New-Item $OutputPath -ItemType Directory | Out-Null
-	Write-Host "Backup folder created at $OutputPath"
-
-	return $OutputPath
-}
-
-function Invoke-BackupUserFolders {
-
-	Param(
-		[Parameter(Mandatory = $true)]
-		[String]
-		$OutputPath
-	)
-
-	$ShellAppObject = New-Object -ComObject Shell.Application
-	
-	$Desktop	= [Environment]::GetFolderPath('Desktop')
-	$Downloads	= $ShellAppObject.NameSpace('shell:Downloads').Self.Path
-	$Documents	= [Environment]::GetFolderPath('MyDocuments')
-	$Pictures	= [Environment]::GetFolderPath('MyPictures')
-	$Music		= [Environment]::GetFolderPath('MyMusic')
-	$Videos		= [Environment]::GetFolderPath('MyVideos')
-
-	$BackupFolders = @(
-		@{
-			Source = $Desktop
-			Destination = 'Desktop'
-		},
-		@{
-			Source = $Downloads
-			Destination = 'Downloads'
-		},
-		@{
-			Source = $Documents
-			Destination = 'Documents'
-		},
-		@{
-			Source = $Pictures
-			Destination = 'Pictures'
-		},
-		@{
-			Source = $Music
-			Destination = 'Music'
-		},
-		@{
-			Source = $Videos
-			Destination = 'Videos'
-		}
-	)
-
-	$BackupFolders | ForEach-Object {
-		$destination = $_.Destination.ToLower()
-
-		if ($Config.backupFolders.$destination -eq $true) {
-			Write-Host "Saving user $destination..."
-			$Destination = "$OutputPath\" + $_.Destination
-			Copy-Item $_.Source $Destination -Force -Recurse
-		}
-	}
-}
-
-# From https://stackoverflow.com/questions/59996907/how-to-take-a-remote-screenshot-with-powershell
-Add-Type -AssemblyName System.Windows.Forms
-Add-type -AssemblyName System.Drawing
-
-function Invoke-TakeScreenshot {
-
-	Param(
-		[Parameter(Mandatory = $true)]
-		[String]
-		$OutputPath
-	)
-
-	$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
-
-	$Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
-
-	$Graphic = [System.Drawing.Graphics]::FromImage($Bitmap)
-
-	# Show the desktop
-	$ShellAppObject = New-Object -ComObject Shell.Application
-	$ShellAppObject.toggleDesktop()
-	$ShellScriptObject = New-Object -ComObject WScript.Shell
-	$ShellScriptObject.SendKeys("^{ESC}")
-
-	Start-Sleep 1
-
-	$Graphic.CopyFromScreen($Screen.Left, $Screen.Top, 0, 0, $Bitmap.Size)
-	
-	$Bitmap.Save("$OutputPath\Screenshot.png")
-}
-
 function Update-Software {
 
 	if (Test-Feature update.updateChocolateyPackages) {
@@ -1616,6 +1508,114 @@ function Set-Wallpaper {
 	[Wallpaper]::SetWallpaper($FilePath)
 
 	Remove-Item $FilePath
+}
+
+function Get-BackupOutputPath {
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$Name
+	)
+
+	$OutputPath = "$env:TMP\$Name"
+
+	$i = 0
+	while (Test-Path $OutputPath) {
+		$i++
+		$OutputPath = "$env:TMP\$Name ($i)"
+	}
+
+	New-Item $OutputPath -ItemType Directory | Out-Null
+	Write-Host "Backup folder created at $OutputPath"
+
+	return $OutputPath
+}
+
+function Invoke-BackupUserFolders {
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$OutputPath
+	)
+
+	$ShellAppObject = New-Object -ComObject Shell.Application
+	
+	$Desktop	= [Environment]::GetFolderPath('Desktop')
+	$Downloads	= $ShellAppObject.NameSpace('shell:Downloads').Self.Path
+	$Documents	= [Environment]::GetFolderPath('MyDocuments')
+	$Pictures	= [Environment]::GetFolderPath('MyPictures')
+	$Music		= [Environment]::GetFolderPath('MyMusic')
+	$Videos		= [Environment]::GetFolderPath('MyVideos')
+
+	$BackupFolders = @(
+		@{
+			Source = $Desktop
+			Destination = 'Desktop'
+		},
+		@{
+			Source = $Downloads
+			Destination = 'Downloads'
+		},
+		@{
+			Source = $Documents
+			Destination = 'Documents'
+		},
+		@{
+			Source = $Pictures
+			Destination = 'Pictures'
+		},
+		@{
+			Source = $Music
+			Destination = 'Music'
+		},
+		@{
+			Source = $Videos
+			Destination = 'Videos'
+		}
+	)
+
+	$BackupFolders | ForEach-Object {
+		$destination = $_.Destination.ToLower()
+
+		if ($Config.backupFolders.$destination -eq $true) {
+			Write-Host "Saving user $destination..."
+			$Destination = "$OutputPath\" + $_.Destination
+			Copy-Item $_.Source $Destination -Force -Recurse
+		}
+	}
+}
+
+# From https://stackoverflow.com/questions/59996907/how-to-take-a-remote-screenshot-with-powershell
+Add-Type -AssemblyName System.Windows.Forms
+Add-type -AssemblyName System.Drawing
+
+function Invoke-TakeScreenshot {
+
+	Param(
+		[Parameter(Mandatory = $true)]
+		[String]
+		$OutputPath
+	)
+
+	$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+
+	$Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
+
+	$Graphic = [System.Drawing.Graphics]::FromImage($Bitmap)
+
+	# Show the desktop
+	$ShellAppObject = New-Object -ComObject Shell.Application
+	$ShellAppObject.toggleDesktop()
+	$ShellScriptObject = New-Object -ComObject WScript.Shell
+	$ShellScriptObject.SendKeys("^{ESC}")
+
+	Start-Sleep 1
+
+	$Graphic.CopyFromScreen($Screen.Left, $Screen.Top, 0, 0, $Bitmap.Size)
+	
+	$Bitmap.Save("$OutputPath\Screenshot.png")
 }
 
 Grant-AdministratorPrivileges $MyInvocation
