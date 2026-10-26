@@ -204,7 +204,6 @@
 0.0.0.0 geover-prod.do.dsp.mp.microsoft.com
 0.0.0.0 gfe.nvidia.com
 0.0.0.0 gfswl.geforce.com
-0.0.0.0 go.microsoft.com
 0.0.0.0 googleads4.g.doubleclick.net
 0.0.0.0 gpla1.wac.v2cdn.net
 0.0.0.0 gprs-clients-85.26.155.145.misp.ru
